@@ -583,3 +583,5 @@ gSpecials::
 	def_special CheckMonDefensiveEVs
 	def_special CheckMonOffensiveIVs
 	def_special CheckMonDefensiveIVs
+	def_special LoadVarTilemap
+	
