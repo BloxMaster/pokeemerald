@@ -1313,15 +1313,15 @@ static bool8 WaitStairExitMovementFinished(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s
     {
         *a2 += *a0;
         *a3 += *a1;
-        sprite->pos2.x = *a2 >> 5;
-        sprite->pos2.y = *a3 >> 5;
+        sprite->oam.x = *a2 >> 5;
+        sprite->oam.y = *a3 >> 5;
         (*a4)--;
         return TRUE;
     }
     else
     {
-        sprite->pos2.x = 0;
-        sprite->pos2.y = 0;
+        sprite->oam.x = 0;
+        sprite->oam.y = 0;
         return FALSE;
     }
 }
@@ -1332,22 +1332,22 @@ static void ExitStairsMovement(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
     u8 behavior;
     s32 r1;
     struct Sprite *sprite;
-    
+
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
     if (MetatileBehavior_IsDirectionalDownRightStairWarp(behavior) || MetatileBehavior_IsDirectionalUpRightStairWarp(behavior))
         r1 = 3;
     else
         r1 = 4;
-    
+
     ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceSlowMovementAction(r1));
     GetStairsMovementDirection(behavior, a0, a1);
     *a2 = *a0 * 16;
     *a3 = *a1 * 16;
     *a4 = 16;
     sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->pos2.x = *a2 >> 5;
-    sprite->pos2.y = *a3 >> 5;
+    sprite->oam.x = *a2 >> 5;
+    sprite->oam.y = *a3 >> 5;
     *a0 *= -1;
     *a1 *= -1;
 }
@@ -1409,14 +1409,14 @@ static void UpdateStairsMovement(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
 {
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
     struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
-    
+
     if (a1 > 0 || *a4 > 6)
         *a3 += a1;
-    
+
     *a2 += a0;
     (*a4)++;
-    playerSpr->pos2.x = *a2 >> 5;
-    playerSpr->pos2.y = *a3 >> 5;
+    playerSpr->oam.x = *a2 >> 5;
+    playerSpr->oam.y = *a3 >> 5;
     if (playerObj->heldMovementFinished)
         ObjectEventForceSetHeldMovement(playerObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
 }
@@ -1426,7 +1426,7 @@ static void Task_StairWarp(u8 taskId)
     s16 * data = gTasks[taskId].data;
     struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
-    
+
     switch (data[0])
     {
     case 0:
@@ -1481,4 +1481,3 @@ void DoStairWarp(u16 metatileBehavior, u16 delay)
     gTasks[taskId].data[15] = delay;
     Task_StairWarp(taskId);
 }
-
