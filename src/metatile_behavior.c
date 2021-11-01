@@ -83,13 +83,13 @@ static const u8 sTileBitAttributes[] =
     [MB_SLIDE_NORTH] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_SLIDE_SOUTH] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_TRICK_HOUSE_PUZZLE_8_FLOOR] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_UNUSED_49] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_UNUSED_4A] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_UNUSED_4B] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_4C] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_4D] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_4E] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_4F] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_STAIRS_RIGHT_SIDE] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_STAIRS_LEFT_SIDE] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_STAIRS_RIGHT_SIDE_TOP] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_STAIRS_LEFT_SIDE_TOP] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_ROCK_STAIRS] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
     [MB_EASTWARD_CURRENT] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
     [MB_WESTWARD_CURRENT] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
     [MB_NORTHWARD_CURRENT] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
@@ -122,18 +122,18 @@ static const u8 sTileBitAttributes[] =
     [MB_WATER_SOUTH_ARROW_WARP] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
     [MB_DEEP_SOUTH_WARP] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_6F] = TILE_ATTRIBUTES(TRUE, TRUE, FALSE),
-    [MB_WARP_OR_BRIDGE] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_UNUSED_71] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_NORTH_BRIDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_NORTH_BRIDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_OCEAN] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_LOW] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_MED] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_HIGH] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_VERTICAL_LOG_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_VERTICAL_LOG_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_HORIZONTAL_LOG_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_PACIFIDLOG_HORIZONTAL_LOG_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_FORTREE_BRIDGE] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_79] = TILE_ATTRIBUTES(FALSE, FALSE, FALSE),
-    [MB_ROUTE120_SOUTH_BRIDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
-    [MB_ROUTE120_SOUTH_BRIDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_MED_EDGE_1] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
+    [MB_BRIDGE_OVER_POND_MED_EDGE_2] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_ROUTE120_NORTH_BRIDGE_3] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_ROUTE120_NORTH_BRIDGE_4] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
     [MB_UNUSED_7E] = TILE_ATTRIBUTES(TRUE, FALSE, FALSE),
@@ -631,11 +631,11 @@ bool8 MetatileBehavior_IsCableBoxResults1(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsOpenSecretBaseDoor(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN 
+    if (metatileBehavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_BROWN_CAVE_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE_OPEN 
+     || metatileBehavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_LEFT_OPEN
-     || metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN 
+     || metatileBehavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_BLUE_CAVE_OPEN
      || metatileBehavior == MB_SECRET_BASE_SPOT_TREE_RIGHT_OPEN)
         return TRUE;
@@ -890,7 +890,7 @@ bool8 MetatileBehavior_IsFootprints(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsBridge(u8 metatileBehavior)
 {
-    if ((metatileBehavior == MB_WARP_OR_BRIDGE || metatileBehavior == MB_UNUSED_71 || metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_1 || metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_2)
+    if ((metatileBehavior == MB_BRIDGE_OVER_OCEAN || metatileBehavior == MB_BRIDGE_OVER_POND_LOW || metatileBehavior == MB_BRIDGE_OVER_POND_MED || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH)
         || (metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_3 || metatileBehavior == MB_ROUTE120_NORTH_BRIDGE_4 || metatileBehavior == MB_UNUSED_7E || metatileBehavior == MB_ROUTE110_BRIDGE))
         return TRUE;
     else
@@ -899,11 +899,11 @@ bool8 MetatileBehavior_IsBridge(u8 metatileBehavior)
 
 u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
 {
-    u8 result = metatileBehavior - MB_WARP_OR_BRIDGE;
+    u8 result = metatileBehavior - MB_BRIDGE_OVER_OCEAN;
     if (result < 4)
         return result;
 
-    result = metatileBehavior - MB_ROUTE120_SOUTH_BRIDGE_1;
+    result = metatileBehavior - MB_BRIDGE_OVER_POND_MED_EDGE_1;
     if (result < 2)
         return 2;
 
@@ -916,7 +916,7 @@ u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
 
 u8 MetatileBehavior_8089510(u8 metatileBehavior)
 {
-    u8 result = metatileBehavior - MB_WARP_OR_BRIDGE;
+    u8 result = metatileBehavior - MB_BRIDGE_OVER_OCEAN;
 
     if (result < 4)
         return 1;
@@ -1243,9 +1243,13 @@ bool8 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWarpOrBridge(u8 metatileBehavior)
+// Very odd, used to initiate a teleport-style warp.
+// No warp events seem to be on a metatile of this kind, and it's
+// used by log bridges over ocean-style water, which wouldn't make
+// sense to have a warp like this.
+bool8 MetatileBehavior_IsBridgeOverOcean(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_WARP_OR_BRIDGE)
+    if (metatileBehavior == MB_BRIDGE_OVER_OCEAN)
         return TRUE;
     else
         return FALSE;
@@ -1262,9 +1266,15 @@ bool8 MetatileBehavior_IsMossdeepGymWarp(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsSurfableFishableWater(u8 metatileBehavior)
 {
-    if (metatileBehavior == MB_POND_WATER || metatileBehavior == MB_OCEAN_WATER || metatileBehavior == MB_SEMI_DEEP_WATER || metatileBehavior == MB_DEEP_WATER
-        || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER || (metatileBehavior == MB_EASTWARD_CURRENT || metatileBehavior == MB_WESTWARD_CURRENT
-        || metatileBehavior == MB_NORTHWARD_CURRENT || metatileBehavior == MB_SOUTHWARD_CURRENT))
+    if (metatileBehavior == MB_POND_WATER
+       || metatileBehavior == MB_OCEAN_WATER
+        || metatileBehavior == MB_SEMI_DEEP_WATER
+         || metatileBehavior == MB_DEEP_WATER
+        || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER
+         || (metatileBehavior == MB_EASTWARD_CURRENT
+            || metatileBehavior == MB_WESTWARD_CURRENT
+        || metatileBehavior == MB_NORTHWARD_CURRENT
+         || metatileBehavior == MB_SOUTHWARD_CURRENT))
         return TRUE;
     else
         return FALSE;
@@ -1491,6 +1501,82 @@ bool8 MetatileBehavior_IsLongGrassSouthEdge(u8 metatileBehavior)
 bool8 MetatileBehavior_IsTrainerHillTimer(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_TRAINER_HILL_TIMER)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE || metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsLeftSide(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE || metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsRightSideTop(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_TOP)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsLeftSideTop(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_TOP)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsRightSideBottom(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsLeftSideBottom(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsRightSideAny(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE
+     || metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_BOTTOM
+     || metatileBehavior == MB_SIDEWAYS_STAIRS_RIGHT_SIDE_TOP)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE
+     || metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_BOTTOM
+     || metatileBehavior == MB_SIDEWAYS_STAIRS_LEFT_SIDE_TOP)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsRockStairs(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_ROCK_STAIRS)
         return TRUE;
     else
         return FALSE;

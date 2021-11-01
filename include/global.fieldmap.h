@@ -11,6 +11,11 @@
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
+// Rows of metatiles do not actually have a strict width.
+// This constant is used for calculations for finding the next row of metatiles
+// for constructing large tiles, such as the Battle Pike's curtain tile.
+#define METATILE_ROW_WIDTH 8
+
 enum
 {
     CONNECTION_INVALID = -1,
@@ -44,6 +49,8 @@ struct MapLayout
     /*0x0c*/ u16 *map;
     /*0x10*/ struct Tileset *primaryTileset;
     /*0x14*/ struct Tileset *secondaryTileset;
+             u8 borderWidth;
+             u8 borderHeight;
 };
 
 struct BackupMapLayout
@@ -146,7 +153,7 @@ struct MapHeader
     /* 0x1A */ bool8 allowCycling:1;
                bool8 allowEscaping:1; // Escape Rope and Dig
                bool8 allowRunning:1;
-               bool8 showMapName:5; // the last 4 bits are unused 
+               bool8 showMapName:5; // the last 4 bits are unused
                                     // but the 5 bit sized bitfield is required to match
     /* 0x1B */ u8 battleType;
 };
@@ -203,7 +210,8 @@ struct ObjectEvent
     /*0x1D*/ u8 trainerRange_berryTreeId;
     /*0x1E*/ u8 currentMetatileBehavior;
     /*0x1F*/ u8 previousMetatileBehavior;
-    /*0x20*/ u8 previousMovementDirection;
+    /*0x20*/ u8 previousMovementDirection:4;
+             u8 directionOverwrite:4;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ u8 playerCopyableMovement;
     /*0x23*/ u8 spriteId;
@@ -277,6 +285,9 @@ enum
     COLLISION_ISOLATED_HORIZONTAL_RAIL,
     COLLISION_VERTICAL_RAIL,
     COLLISION_HORIZONTAL_RAIL,
+    //sideways_stairs
+    COLLISION_SIDEWAYS_STAIRS_TO_RIGHT,
+    COLLISION_SIDEWAYS_STAIRS_TO_LEFT
 };
 
 // player running states

@@ -81,6 +81,7 @@ bool8 TryGetObjectEventIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetObjectEventIdByXY(s16, s16);
 void SetObjectEventDirection(struct ObjectEvent *, u8);
 u8 GetFirstInactiveObjectEventId(void);
+void RemoveObjectEvent(struct ObjectEvent *objectEvent);
 void RemoveObjectEventByLocalIdAndMap(u8, u8, u8);
 void LoadPlayerObjectReflectionPalette(u16, u8);
 void LoadSpecialObjectReflectionPalette(u16, u8);
@@ -124,6 +125,7 @@ u8 GetWalkInPlaceFastMovementAction(u32);
 u8 GetWalkInPlaceNormalMovementAction(u32);
 u8 GetWalkInPlaceSlowMovementAction(u32);
 u8 GetCollisionAtCoords(struct ObjectEvent *, s16, s16, u32);
+u8 GetCollisionInDirection(struct ObjectEvent *objectEvent, u8 direction);
 void MoveCoords(u8, s16 *, s16 *);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *);
 u8 ObjectEventClearHeldMovementIfFinished(struct ObjectEvent *);
@@ -417,5 +419,12 @@ bool32 IsObjectEventSpriteInvisible(u8 objectEventId);
 void SetObjectEventSpriteGraphics(u8 objectEventId, u16 graphicsId);
 void SetObjectEventSpriteAnim(u8 objectEventId, u8 animNum);
 bool32 IsObjectEventSpriteAnimating(u8 objectEventId);
+
+// run slow
+u8 GetPlayerRunSlowMovementAction(u32);
+//sideways stairs
+u8 GetSidewaysStairsToRightDirection(s16, s16, u8);
+u8 GetSidewaysStairsToLeftDirection(s16, s16, u8);
+u8 GetSidewaysStairsCollision(struct ObjectEvent *objectEvent, u8 dir, u8 currentBehavior, u8 nextBehavior, u8 collision);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H
