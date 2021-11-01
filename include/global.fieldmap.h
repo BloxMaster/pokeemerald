@@ -288,6 +288,7 @@ enum
     //sideways_stairs
     COLLISION_SIDEWAYS_STAIRS_TO_RIGHT,
     COLLISION_SIDEWAYS_STAIRS_TO_LEFT
+    COLLISION_STAIR_WARP,
 };
 
 // player running states
