@@ -60,14 +60,14 @@ struct PokemonSubstruct3
  /* 0x05 */ u32 spAttackIV:5;
  /* 0x06 */ u32 spDefenseIV:5;
  /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 UnusedBit:1; 
+ /* 0x07 */ u32 UnusedBit:1;
 
  /* 0x08 */	u32 pokeball:5;
  /* 0x08 */	u32 abilityNum:2;
  /* 0x09 */	u32 coolRibbon:3;
- /* 0x09 */	u32 beautyRibbon:3; 
- /* 0x09 */	u32 cuteRibbon:3; 
- /* 0x0A */	u32 smartRibbon:3; 
+ /* 0x09 */	u32 beautyRibbon:3;
+ /* 0x09 */	u32 cuteRibbon:3;
+ /* 0x0A */	u32 smartRibbon:3;
  /* 0x0A */	u32 toughRibbon:3;
  /* 0x0A */	u32 championRibbon:1;
  /* 0x0A */	u32 winningRibbon:1;
@@ -78,13 +78,22 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 eventLegal:1;
 }; /* size = 12 */
 
+// Number of bytes in the largest Pokémon substruct.
+// They are assumed to be the same size, and will be padded to
+// the largest size by the union.
+// By default they are all 12 bytes.
+#define NUM_SUBSTRUCT_BYTES (max(sizeof(struct PokemonSubstruct0),     \
+                             max(sizeof(struct PokemonSubstruct1),     \
+                             max(sizeof(struct PokemonSubstruct2),     \
+                                 sizeof(struct PokemonSubstruct3)))))
+
 union PokemonSubstruct
 {
     struct PokemonSubstruct0 type0;
     struct PokemonSubstruct1 type1;
     struct PokemonSubstruct2 type2;
     struct PokemonSubstruct3 type3;
-    u16 raw[6];
+    u16 raw[NUM_SUBSTRUCT_BYTES / 2]; // /2 because it's u16, not u8
 };
 
 struct BoxPokemon
@@ -104,8 +113,8 @@ struct BoxPokemon
 
     union
     {
-        u32 raw[12];
-        union PokemonSubstruct substructs[4];
+      u32 raw[(NUM_SUBSTRUCT_BYTES * 4) / 4]; // *4 because there are 4 substructs, /4 because it's u32, not u8
+      union PokemonSubstruct substructs[4];
     } secure;
 };
 
@@ -124,18 +133,27 @@ struct Pokemon
     u16 spDefense;
 };
 
-struct Unknown_806F160_Struct
+struct MonSpritesGfxManager
 {
-    u32 field_0_0:4;
-    u32 field_0_1:4;
-    u32 field_1:8;
-    u16 magic:8;
-    u32 field_3_0:4;
-    u32 field_3_1:4;
-    void *bytes;
-    u8 **byteArrays;
+    u8 numSprites;
+    u8 numFrames;
+    bool16 active;
+    void *spriteBuffer;
+    u8 **spritePointers;
     struct SpriteTemplate *templates;
     struct SpriteFrameImage *frameImages;
+};
+
+enum {
+    MON_SPR_GFX_MODE_NORMAL,
+    MON_SPR_GFX_MODE_BATTLE,
+    MON_SPR_GFX_MODE_FULL_PARTY,
+};
+
+enum {
+    MON_SPR_GFX_MANAGER_A,
+    MON_SPR_GFX_MANAGER_B, // Nothing ever sets up this manager.
+    MON_SPR_GFX_MANAGERS_COUNT
 };
 
 struct BattlePokemon
@@ -241,7 +259,7 @@ struct TrainerMonSpread
 {
     u8 EVs[6];
     u8 IVs[6];
-    u8 nature; 
+    u8 nature;
 };
 
 struct Evolution
@@ -441,8 +459,8 @@ void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, 
 void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneFrame);
 void StopPokemonAnimationDelayTask(void);
 void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
-u8 sub_806EF08(u8 arg0);
-u8 sub_806EF84(u8 arg0, u8 arg1);
+u8 GetOwnOpposingLinkMultiBattlerId(u8 arg0);
+u8 GetOpposingLinkMultiBattlerId(u8 arg0, u8 arg1);
 u16 sub_806EFF0(u16 arg0);
 u16 FacilityClassToPicIndex(u16 facilityClass);
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
@@ -450,9 +468,9 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 const u8 *GetTrainerClassNameFromId(u16 trainerId);
 const u8 *GetTrainerNameFromId(u16 trainerId);
 bool8 HasTwoFramesAnimation(u16 species);
-struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1);
-void sub_806F47C(u8 id);
-u8 *sub_806F4F8(u8 id, u8 arg1);
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void);
+void DestroyMonSpritesGfxManager(void);
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum);
 u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);

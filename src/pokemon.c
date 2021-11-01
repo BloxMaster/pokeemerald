@@ -75,7 +75,7 @@ EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
-EWRAM_DATA struct Unknown_806F160_Struct *gUnknown_020249B4[2] = {NULL};
+EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 
 // const rom data
 #include "data/battle_moves.h"
@@ -3180,7 +3180,7 @@ static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
     {SPECIES_SMEARGLE,  ITEM_SALAC_BERRY},
 };
 
-static const struct OamData sOamData_8329F20 =
+static const struct OamData sOamData_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -3197,11 +3197,11 @@ static const struct OamData sOamData_8329F20 =
     .affineParam = 0
 };
 
-static const struct SpriteTemplate gUnknown_08329F28 =
+static const struct SpriteTemplate sSpriteTemplate_64x64 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0xFFFF,
-    .oam = &sOamData_8329F20,
+    .oam = &sOamData_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -3297,7 +3297,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
               | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
               | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-        
+
         if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
         {
             u32 shinyValue;
@@ -4252,12 +4252,8 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
-    else if (gUnknown_020249B4[0])
-        gMultiuseSpriteTemplate = gUnknown_020249B4[0]->templates[battlerPosition];
-    else if (gUnknown_020249B4[1])
-        gMultiuseSpriteTemplate = gUnknown_020249B4[1]->templates[battlerPosition];
-    else
-        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
+    else if (sMonSpritesGfxManager)
+        gMultiuseSpriteTemplate = sMonSpritesGfxManager->templates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
@@ -4286,15 +4282,15 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     }
 }
 
-void SetMultiuseSpriteTemplateToTrainerFront(u16 arg0, u8 battlerPosition)
+void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerSpriteId, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
     else
         gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
-    gMultiuseSpriteTemplate.paletteTag = arg0;
-    gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[arg0];
+    gMultiuseSpriteTemplate.paletteTag = trainerSpriteId;
+    gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerSpriteId];
 }
 
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
@@ -5771,7 +5767,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         temp2 = itemEffect[itemEffectParam];
                         dataSigned = GetMonData(mon, sGetMonDataIVConstants[temp1], NULL);
                         evChange = temp2;
-     
+
                         if (evChange > 0) // Increasing IV (HP or Atk)
                         {
                                 ivMax = MAX_IV_MASK;
@@ -5873,7 +5869,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         {
                             if (!usedByAI)
                             {
-                                // Restore HP 
+                                // Restore HP
                                 dataUnsigned = GetMonData(mon, MON_DATA_HP, NULL) + dataUnsigned;
                                 if (dataUnsigned > GetMonData(mon, MON_DATA_MAX_HP, NULL))
                                     dataUnsigned = GetMonData(mon, MON_DATA_MAX_HP, NULL);
@@ -5952,7 +5948,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                     dataUnsigned = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES, NULL), moveIndex);
                                 }
                                 SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
-                                
+
                                 // Heal battler PP too (if applicable)
                                 if (gMain.inBattle
                                  && battlerId != MAX_BATTLERS_COUNT && !(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED)
@@ -5989,7 +5985,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         case 5:
             effectFlags = itemEffect[i];
             temp1 = 0;
-            
+
             // Loop through and try each of the ITEM5 effects
             while (effectFlags != 0)
             {
@@ -6004,7 +6000,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         temp2 = itemEffect[itemEffectParam];
                         dataSigned = GetMonData(mon, sGetMonDataIVConstants[temp1 + 2], NULL);
                         evChange = temp2;
-     
+
                         if (evChange > 0) // Increasing IV
                         {
                             ivMax = MAX_IV_MASK;
@@ -6779,7 +6775,18 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 
 u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex)
 {
-    u16 retVal;
+  // Because this is a u16 it will be unable to store the
+  // result of the multiplication for any stat > 595 for a
+  // positive nature and > 728 for a negative nature.
+  // Neither occur in the base game, but this can happen if
+  // any Nature-affected base stat is increased to a value
+  // above 248. The closest by default is Shuckle at 230.
+  #ifdef BUGFIX
+      u32 retVal;
+  #else
+      u16 retVal;
+  #endif
+
     // Don't modify HP, Accuracy, or Evasion by nature
     if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
     {
@@ -6902,7 +6909,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     }
 
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    
+
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
@@ -6927,7 +6934,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
             multiplier = 2;
         else
             multiplier = 1;
-        
+
         // Power items prevent EV gain from Pokemon
         if (holdEffect == HOLD_EFFECT_POWER_ITEM)
         {
@@ -7870,7 +7877,7 @@ void BattleAnimateBackSprite(struct Sprite* sprite, u16 species)
     }
 }
 
-u8 sub_806EF08(u8 arg0)
+u8 GetOwnOpposingLinkMultiBattlerId(u8 arg0)
 {
     s32 i;
     s32 var = 0;
@@ -7894,7 +7901,7 @@ u8 sub_806EF08(u8 arg0)
     return i;
 }
 
-u8 sub_806EF84(u8 arg0, u8 arg1)
+u8 GetOpposingLinkMultiBattlerId(u8 arg0, u8 arg1)
 {
     s32 i;
     s32 var = 0;
@@ -7974,176 +7981,151 @@ static bool8 ShouldSkipFriendshipChange(void)
     return FALSE;
 }
 
-static void sub_806F160(struct Unknown_806F160_Struct* structPtr)
+// The below functions are for the 'MonSpritesGfxManager', a method of allocating
+// space for Pokémon sprites. These are only used for the summary screen Pokémon
+// sprites (unless gMonSpritesGfxPtr is in use), but were set up for more general use.
+// Only the 'default' mode (MON_SPR_GFX_MODE_NORMAL) is used, which is set
+// up to allocate 4 sprites using the battler sprite templates (gBattlerSpriteTemplates).
+// MON_SPR_GFX_MODE_BATTLE is identical but never used.
+// MON_SPR_GFX_MODE_FULL_PARTY is set up to allocate 7 sprites (party + trainer?)
+// using a generic 64x64 template, and is also never used.
+
+// Between the unnecessarily large sizes below, a mistake allocating the spritePointers
+// field, and the fact that ultimately only 1 of the 4 sprite positions is used, this
+// system wastes a good deal of memory.
+
+#define ALLOC_FAIL_BUFFER (1 << 0)
+#define ALLOC_FAIL_STRUCT (1 << 1)
+#define GFX_MANAGER_ACTIVE 0xA3 // Arbitrary value
+#define GFX_MANAGER_SPR_SIZE (MON_PIC_SIZE * 4) // Only Castform uses more than MON_PIC_SIZE, despite not displaying its forms.
+#define GFX_MANAGER_NUM_FRAMES 2  // Only 2 frames are needed
+
+static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
 {
-    u16 i, j;
-    for (i = 0; i < structPtr->field_0_0; i++)
+    u32 i, j;
+    for (i = 0; i < gfx->numSprites; i++)
     {
-        structPtr->templates[i] = gBattlerSpriteTemplates[i];
-        for (j = 0; j < structPtr->field_1; j++)
-        {
-            structPtr->frameImages[i * structPtr->field_1 + j].data = &structPtr->byteArrays[i][j * 0x800];
-        }
-        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_1];
+        gfx->templates[i] = gBattlerSpriteTemplates[i];
+        for (j = 0; j < gfx->numFrames; j++)
+            gfx->frameImages[i * gfx->numFrames + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
+
+        gfx->templates[i].images = &gfx->frameImages[i * gfx->numFrames];
     }
 }
 
-static void sub_806F1FC(struct Unknown_806F160_Struct* structPtr)
+static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
 {
     u16 i, j;
-    for (i = 0; i < structPtr->field_0_0; i++)
+    for (i = 0; i < gfx->numSprites; i++)
     {
-        structPtr->templates[i] = gUnknown_08329F28;
-        for (j = 0; j < structPtr->field_1; j++)
-        {
-            structPtr->frameImages[i * structPtr->field_0_0 + j].data = &structPtr->byteArrays[i][j * 0x800];
-        }
-        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->field_0_0];
-        structPtr->templates[i].anims = gAnims_MonPic;
-        structPtr->templates[i].paletteTag = i;
+        gfx->templates[i] = sSpriteTemplate_64x64;
+        for (j = 0; j < gfx->numFrames; j++)
+            gfx->frameImages[i * gfx->numSprites + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
+
+        gfx->templates[i].images = &gfx->frameImages[i * gfx->numSprites];
+        gfx->templates[i].anims = gAnims_MonPic;
+        gfx->templates[i].paletteTag = i;
     }
 }
 
-struct Unknown_806F160_Struct *sub_806F2AC(u8 id, u8 arg1)
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void)
 {
     u8 i;
-    u8 flags;
-    struct Unknown_806F160_Struct *structPtr;
+    u8 failureFlags;
+    struct MonSpritesGfxManager *gfx;
 
-    flags = 0;
-    id %= 2;
-    structPtr = AllocZeroed(sizeof(*structPtr));
-    if (structPtr == NULL)
+    failureFlags = 0;
+    gfx = AllocZeroed(sizeof(*gfx));
+    if (gfx == NULL)
         return NULL;
 
-    switch (arg1)
+    gfx->numSprites = MAX_BATTLERS_COUNT;
+    gfx->numFrames = GFX_MANAGER_NUM_FRAMES;
+    gfx->spriteBuffer = AllocZeroed(GFX_MANAGER_SPR_SIZE * gfx->numSprites);
+    gfx->spritePointers = AllocZeroed(gfx->numSprites * 4);
+    if (gfx->spriteBuffer == NULL || gfx->spritePointers == NULL)
     {
-    case 2:
-        structPtr->field_0_0 = 7;
-        structPtr->field_0_1 = 7;
-        structPtr->field_1 = 4;
-        structPtr->field_3_0 = 1;
-        structPtr->field_3_1 = 2;
-        break;
-    case 0:
-    default:
-        structPtr->field_0_0 = 4;
-        structPtr->field_0_1 = 4;
-        structPtr->field_1 = 4;
-        structPtr->field_3_0 = 1;
-        structPtr->field_3_1 = 0;
-        break;
-    }
-
-    structPtr->bytes = AllocZeroed(structPtr->field_3_0 * 0x800 * 4 * structPtr->field_0_0);
-    structPtr->byteArrays = AllocZeroed(structPtr->field_0_0 * 32);
-    if (structPtr->bytes == NULL || structPtr->byteArrays == NULL)
-    {
-        flags |= 1;
+        failureFlags |= ALLOC_FAIL_BUFFER;
     }
     else
     {
-        for (i = 0; i < structPtr->field_0_0; i++)
-            structPtr->byteArrays[i] = structPtr->bytes + (structPtr->field_3_0 * (i << 13));
+        for (i = 0; i < gfx->numSprites; i++)
+            gfx->spritePointers[i] = gfx->spriteBuffer + (GFX_MANAGER_SPR_SIZE * i);
     }
 
-    structPtr->templates = AllocZeroed(sizeof(struct SpriteTemplate) * structPtr->field_0_0);
-    structPtr->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * structPtr->field_0_0 * structPtr->field_1);
-    if (structPtr->templates == NULL || structPtr->frameImages == NULL)
+    // Set up sprite structs
+    gfx->templates = AllocZeroed(sizeof(struct SpriteTemplate) * gfx->numSprites);
+    gfx->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * gfx->numSprites * gfx->numFrames);
+    if (gfx->templates == NULL || gfx->frameImages == NULL)
     {
-        flags |= 2;
+        failureFlags |= ALLOC_FAIL_STRUCT;
     }
     else
     {
-        for (i = 0; i < structPtr->field_1 * structPtr->field_0_0; i++)
-            structPtr->frameImages[i].size = 0x800;
-
-        switch (structPtr->field_3_1)
-        {
-        case 2:
-            sub_806F1FC(structPtr);
-            break;
-        case 0:
-        case 1:
-        default:
-            sub_806F160(structPtr);
-            break;
-        }
+        for (i = 0; i < gfx->numFrames * gfx->numSprites; i++)
+            gfx->frameImages[i].size = MON_PIC_SIZE;
+        InitMonSpritesGfx_Battle(gfx);
     }
 
-    if (flags & 2)
+    // If either of the allocations failed free their respective members
+    if (failureFlags & ALLOC_FAIL_STRUCT)
     {
-        if (structPtr->frameImages != NULL)
-            FREE_AND_SET_NULL(structPtr->frameImages);
-        if (structPtr->templates != NULL)
-            FREE_AND_SET_NULL(structPtr->templates);
+        TRY_FREE_AND_SET_NULL(gfx->frameImages);
+        TRY_FREE_AND_SET_NULL(gfx->templates);
     }
-    if (flags & 1)
+    if (failureFlags & ALLOC_FAIL_BUFFER)
     {
-        if (structPtr->byteArrays != NULL)
-            FREE_AND_SET_NULL(structPtr->byteArrays);
-        if (structPtr->bytes != NULL)
-            FREE_AND_SET_NULL(structPtr->bytes);
+        TRY_FREE_AND_SET_NULL(gfx->spritePointers);
+        TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
     }
 
-    if (flags)
+    if (failureFlags)
     {
-        memset(structPtr, 0, sizeof(*structPtr));
-        Free(structPtr);
+        // Clear, something failed to allocate
+        memset(gfx, 0, sizeof(*gfx));
+        Free(gfx);
     }
     else
     {
-        structPtr->magic = 0xA3;
-        gUnknown_020249B4[id] = structPtr;
+        gfx->active = TRUE;
+        sMonSpritesGfxManager = gfx;
     }
 
-    return gUnknown_020249B4[id];
+    return sMonSpritesGfxManager;
 }
 
-void sub_806F47C(u8 id)
+void DestroyMonSpritesGfxManager(void)
 {
-    struct Unknown_806F160_Struct *structPtr;
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManager;
 
-    id %= 2;
-    structPtr = gUnknown_020249B4[id];
-    if (structPtr == NULL)
+    if (gfx == NULL)
         return;
 
-    if (structPtr->magic != 0xA3)
+    if (gfx->active)
     {
-        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
+        TRY_FREE_AND_SET_NULL(gfx->frameImages);
+        TRY_FREE_AND_SET_NULL(gfx->templates);
+        TRY_FREE_AND_SET_NULL(gfx->spritePointers);
+        TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
+        memset(gfx, 0, sizeof(*gfx));
+        Free(gfx);
     }
     else
-    {
-
-        if (structPtr->frameImages != NULL)
-            FREE_AND_SET_NULL(structPtr->frameImages);
-        if (structPtr->templates != NULL)
-            FREE_AND_SET_NULL(structPtr->templates);
-        if (structPtr->byteArrays != NULL)
-            FREE_AND_SET_NULL(structPtr->byteArrays);
-        if (structPtr->bytes != NULL)
-            FREE_AND_SET_NULL(structPtr->bytes);
-
-        memset(structPtr, 0, sizeof(struct Unknown_806F160_Struct));
-        Free(structPtr);
-    }
+        memset(gfx, 0, sizeof(*gfx));
 }
 
-u8 *sub_806F4F8(u8 id, u8 arg1)
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
 {
-    struct Unknown_806F160_Struct *structPtr = gUnknown_020249B4[id % 2];
-    if (structPtr->magic != 0xA3)
-    {
-        return NULL;
-    }
-    else
-    {
-        if (arg1 >= structPtr->field_0_0)
-            arg1 = 0;
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManager;
 
-        return structPtr->byteArrays[arg1];
+    if (gfx->active)
+    {
+        if (spriteNum >= gfx->numSprites)
+            spriteNum = 0;
+
+        return gfx->spritePointers[spriteNum];
     }
+    return NULL;
 }
 
 u16 GetFormSpeciesId(u16 speciesId, u8 formId)
@@ -8235,7 +8217,7 @@ static void ShuffleStatArray(u8* statArray)
 }
 
 // returns SPECIES_NONE if no form change is possible
-u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
 {
     u32 i;
     u16 targetSpecies = SPECIES_NONE;
