@@ -991,7 +991,7 @@ void ItemUseOutOfBattle_Honey(u8 taskId)
     PlayerGetDestCoords(&x, &y);
 
     if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE // Player is on land encounter tile
-        && headerId != 0xFFFF // Map has wild Pokemon 
+        && headerId != 0xFFFF // Map has wild Pokemon
         && gWildMonHeaders[headerId].honeyMonsInfo != NULL) // Map has honey encounters
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
@@ -1024,7 +1024,7 @@ static void ItemUseOnFieldCB_HoneyFail(u8 taskId)
 u32 CanThrowBall(void)
 {
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
-        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) 
+        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
     {
         return 1;   // There are two present pokemon.
     }
@@ -1038,15 +1038,19 @@ u32 CanThrowBall(void)
         return 3;   // in semi-invulnerable state
     }
     #endif
-    
-    return 0;   // usable 
+
+    return 0;   // usable
 }
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    switch (CanThrowBall())
+    if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
+        static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, BagMenu_InitListsMenu);
+    }
+    else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
     case 0: // usable
     default:
@@ -1244,7 +1248,7 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
     }
 }
 
-void ItemUseOutOfBattle_FormChange(u8 taskId) 
+void ItemUseOutOfBattle_FormChange(u8 taskId)
 {
     gItemUseCB = ItemUseCB_FormChange;
     gTasks[taskId].data[0] = FALSE;
