@@ -34,4 +34,8 @@
 #endif
 #endif
 
+#if DEBUGGING
+#define DEBUG
+#endif
+
 #endif // GUARD_CONFIG_H

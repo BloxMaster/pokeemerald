@@ -2,8 +2,9 @@
 #define GUARD_DEBUG_H
 
 #if DEBUG
-void CB2_StartSoundCheckMenu(void);
 void Debug_ShowMainMenu(void);
 #endif
+
+void CB2_StartSoundCheckMenu(void);
 
 #endif // GUARD_DEBUG_H

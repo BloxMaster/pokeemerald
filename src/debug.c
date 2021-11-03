@@ -1153,7 +1153,7 @@ static void DebugAction_Flags_CatchingOnOff(u8 taskId)
         PlaySE(SE_PC_LOGIN);
     }
 }
-  
+
 // *******************************
 // Actions Variables
 static void DebugAction_Vars_Vars(u8 taskId)
@@ -1360,8 +1360,8 @@ static void DebugAction_Give_Item(u8 taskId)
     gTasks[taskId].data[3] = 1;            //Current ID
     gTasks[taskId].data[4] = 0;            //Digit Selected
     gTasks[taskId].data[6] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].data[3]);
-    gSprites[gTasks[taskId].data[6]].pos2.x = DEBUG_NUMBER_ICON_X+10;
-    gSprites[gTasks[taskId].data[6]].pos2.y = DEBUG_NUMBER_ICON_Y+10;
+    gSprites[gTasks[taskId].data[6]].oam.x = DEBUG_NUMBER_ICON_X+10;
+    gSprites[gTasks[taskId].data[6]].oam.y = DEBUG_NUMBER_ICON_Y+10;
     gSprites[gTasks[taskId].data[6]].oam.priority = 0;
 }
 static void DebugAction_Give_Item_SelectId(u8 taskId)
@@ -1405,8 +1405,8 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[6]]); //Destroy item icon
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
         gTasks[taskId].data[6] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].data[3]);
-        gSprites[gTasks[taskId].data[6]].pos2.x = DEBUG_NUMBER_ICON_X+10;
-        gSprites[gTasks[taskId].data[6]].pos2.y = DEBUG_NUMBER_ICON_Y+10;
+        gSprites[gTasks[taskId].data[6]].oam.x = DEBUG_NUMBER_ICON_X+10;
+        gSprites[gTasks[taskId].data[6]].oam.y = DEBUG_NUMBER_ICON_Y+10;
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
 
@@ -1499,7 +1499,7 @@ static void DebugAction_Give_AllTMs(u8 taskId)
 {
     u16 i;
     PlayFanfare(MUS_OBTAIN_TMHM);
-    for (i = ITEM_TM01; i <= ITEM_TM50; i++)
+    for (i = ITEM_TM01_FOCUS_PUNCH; i <= ITEM_HM08_DIVE; i++)
         if(!CheckBagHasItem(i, 1))
             AddBagItem(i, 1);
 }
@@ -1535,7 +1535,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     gTasks[taskId].data[5] = 1;             //Species ID
     FreeMonIconPalettes(); //Free space for new pallete
     LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
+    gTasks[taskId].data[6] = CreateMonIconNoPersonality(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
     gTasks[taskId].data[7] = 1; //Level
 }
@@ -1569,7 +1569,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     gTasks[taskId].data[5] = 1;             //Species ID
     FreeMonIconPalettes(); //Free space for new palletes
     LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
+    CreateMonIconNoPersonality(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
     gTasks[taskId].data[7] = 0; //Level
     gTasks[taskId].data[8] = 0; //Shiny: no 0, yes 1
@@ -1622,7 +1622,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]);
         FreeMonIconPalettes(); //Free space for new pallete
         LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create new pokemon sprite
+        gTasks[taskId].data[6] = CreateMonIconNoPersonality(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4); //Create new pokemon sprite
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
 
@@ -1825,7 +1825,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
     if (gBaseStats[gTasks[taskId].data[5]].abilities[1] != ABILITY_NONE)
         abilityCount++;
     #ifdef POKEMON_EXPANSION
-        if (gBaseStats[gTasks[taskId].data[5]].abilityHidden != ABILITY_NONE)
+        if (gBaseStats[gTasks[taskId].data[5]].abilities[2] != ABILITY_NONE)
             abilityCount++;
     #endif
     if (gMain.newKeys & DPAD_ANY)
@@ -2035,7 +2035,7 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
             PlaySE(MUS_LEVEL_UP);
             gTasks[taskId].func = DebugAction_Give_Pokemon_ComplexCreateMon;
         }
-        
+
 
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -2154,7 +2154,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     }
 
     //Pokedex entry
-    nationalDexNum = SpeciesToNationalPokedexNum(species); 
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
     switch(sentToPc)
     {
         case MON_GIVEN_TO_PARTY:

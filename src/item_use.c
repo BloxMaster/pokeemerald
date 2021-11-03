@@ -1038,19 +1038,18 @@ u32 CanThrowBall(void)
         return 3;   // in semi-invulnerable state
     }
     #endif
-
+    else if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
+      return 4;
+    }
     return 0;   // usable
 }
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
-    if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
-        static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
-        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, BagMenu_InitListsMenu);
-    }
-    else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    switch (CanThrowBall())
     {
     case 0: // usable
     default:
@@ -1078,6 +1077,9 @@ void ItemUseInBattle_PokeBall(u8 taskId)
             DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
+        break;
+    case 4: //Debug can't catch flag
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
         break;
     #endif
     }

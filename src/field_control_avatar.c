@@ -137,28 +137,15 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
 
     //DEBUG
-    if (heldKeys & R_BUTTON) 
+    if (heldKeys & L_BUTTON)
     {
         if(input->pressedSelectButton)
         {
             input->input_field_1_0 = TRUE;
-            input->pressedSelectButton = FALSE;
-        }else if(input->pressedStartButton) 
-        {
-            input->input_field_1_2 = TRUE;
-            input->pressedStartButton = FALSE;
-        }
-    }
-    if (heldKeys & L_BUTTON) 
-    {
-        if(input->pressedSelectButton)
-        {
             input->input_field_1_1 = TRUE;
-            input->pressedSelectButton = FALSE;
-        }else if(input->pressedStartButton) 
-        {
+            input->input_field_1_2 = TRUE;
             input->input_field_1_3 = TRUE;
-            input->pressedStartButton = FALSE;
+            input->pressedSelectButton = FALSE;
         }
     }
     //
@@ -221,19 +208,18 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
-    
+
     if (input->pressedRButton && EnableAutoRun())
         return TRUE;
 
-#if DEBUG
-    if (input->input_field_1_2)
-    {
+    #if DEBUG
+      if (input->input_field_1_2)
+      {
         PlaySE(SE_WIN_OPEN);
         Debug_ShowMainMenu();
         return TRUE;
-    }
-#endif
-
+      }
+    #endif
     return FALSE;
 }
 
@@ -732,7 +718,7 @@ static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
     }
 
     sPreviousPlayerMetatileBehavior = metatileBehavior;
-    return FALSE;   
+    return FALSE;
 }
 
 static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8 direction)
@@ -757,7 +743,7 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8
                 SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
                 delay = 12;
             }
-            
+
             StoreInitialPlayerAvatarState();
             SetupWarp(&gMapHeader, warpEventId, position);
             DoStairWarp(metatileBehavior, delay);
@@ -1087,7 +1073,6 @@ static bool8 EnableAutoRun(void)
         gSaveBlock2Ptr->autoRun = TRUE;
         ScriptContext1_SetupScript(EventScript_EnableAutoRun);
     }
-    
+
     return TRUE;
 }
-
