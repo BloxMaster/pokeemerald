@@ -128,6 +128,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId);
 static void DebugAction_Give_Pokemon_Move(u8 taskId);
 static void DebugAction_Give_CHEAT(u8 taskId);
 static void DebugAction_AccessPC(u8 taskId);
+static void DebugAction_Util_Inclement_Difficulty_Check(u8 taskId);
 
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
@@ -160,6 +161,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME,
     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER,
     DEBUG_UTIL_MENU_ITEM_TRAINER_ID,
+    DEBUG_UTIL_MENU_ITEM_DIFF_CHECK,
 };
 enum { // Flags
     DEBUG_FLAG_MENU_ITEM_FLAGS,
@@ -214,6 +216,7 @@ static const u8 gDebugText_Util_WatchCredits[] =            _("Watch Credits");
 static const u8 gDebugText_Util_Trainer_Name[] =            _("Trainer name");
 static const u8 gDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
 static const u8 gDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
+static const u8 gDebugText_Util_Difficulty[] =              _("Difficulty: {STR_VAR_1}          \n                 Level Cap:\n{STR_VAR_2}     ");
 // Flags Menu
 static const u8 gDebugText_Flags_Flags[] =                _("Set Flag XXXX");
 static const u8 gDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
@@ -255,6 +258,7 @@ static const u8 gDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}  
 static const u8 gDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT start");
 // static const u8 gDebugText_Give_AccessPC[] =         _("Access PC");
+static const u8 gDebugText_Util_CheckDiff[] =           _("Check Difficulty");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -312,6 +316,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = {gDebugText_Util_Trainer_Name,     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = {gDebugText_Util_Trainer_Gender,   DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = {gDebugText_Util_Trainer_Id,       DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
+    [DEBUG_UTIL_MENU_ITEM_DIFF_CHECK]       = {gDebugText_Util_CheckDiff,        DEBUG_UTIL_MENU_ITEM_DIFF_CHECK},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
@@ -365,6 +370,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = DebugAction_Util_Trainer_Name,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = DebugAction_Util_Trainer_Gender,
     [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = DebugAction_Util_Trainer_Id,
+    [DEBUG_UTIL_MENU_ITEM_DIFF_CHECK]       = DebugAction_Util_Inclement_Difficulty_Check,
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
@@ -2183,8 +2189,39 @@ static void DebugAction_Give_CHEAT(u8 taskId)
 //     ScriptContext1_SetupScript(EventScript_PC);
 // }
 
-
-
+static void DebugAction_Util_Inclement_Difficulty_Check(u8 taskId)
+{
+    switch(gSaveBlock2Ptr->gameDifficulty)
+    {
+      case 0:
+        StringExpandPlaceholders(gStringVar1,gText_SavingNormalMode);
+        break;
+      case 1:
+        StringExpandPlaceholders(gStringVar1,gText_SavingHardMode);
+        break;
+      case 2:
+        StringExpandPlaceholders(gStringVar1,gText_SavingChallengeMode);
+        break;
+      case 3:
+        StringExpandPlaceholders(gStringVar1,gText_SavingInsanityMode);
+    }
+    switch(gSaveBlock2Ptr->levelCaps)
+    {
+      case 0:
+        StringExpandPlaceholders(gStringVar2,gText_BirchDefaultCaps);
+        break;
+      case 1:
+        StringExpandPlaceholders(gStringVar2,gText_BirchMoreCaps);
+        break;
+      case 2:
+        StringExpandPlaceholders(gStringVar2,gText_BirchStrictCaps);
+        break;
+    }
+    StringExpandPlaceholders(gStringVar4,gDebugText_Util_Difficulty);
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_ShowFieldMessageStringVar4);
+}
 
 
 // Additional functions
