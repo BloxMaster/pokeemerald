@@ -216,7 +216,7 @@ static const u8 gDebugText_Util_WatchCredits[] =            _("Watch Credits");
 static const u8 gDebugText_Util_Trainer_Name[] =            _("Trainer name");
 static const u8 gDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
 static const u8 gDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
-static const u8 gDebugText_Util_Difficulty[] =              _("Difficulty: {STR_VAR_1}          \n                 Level Cap:\n{STR_VAR_2}     ");
+static const u8 gDebugText_Util_Difficulty[] =              _("Difficulty: {STR_VAR_1}          \nLevel Cap: {STR_VAR_2}");
 // Flags Menu
 static const u8 gDebugText_Flags_Flags[] =                _("Set Flag XXXX");
 static const u8 gDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
