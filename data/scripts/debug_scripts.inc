@@ -275,6 +275,7 @@ EventScript_ForcedEggHatch_Text_NotAnEgg:
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+
 EventScript_Inclement_Difficulty::
 	lockall
 	faceplayer
@@ -283,4 +284,4 @@ EventScript_Inclement_Difficulty::
 	end
 
 EventScript_Inclement_Difficulty_Text:
-.string "Difficulty: {STR_VAR_1}          \nLevel Cap: {STR_VAR_2}"
+.string "Difficulty: {STR_VAR_1}          \nLevel Cap: {STR_VAR_2}$"
