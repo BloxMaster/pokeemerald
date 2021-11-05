@@ -1038,7 +1038,7 @@ u32 CanThrowBall(void)
         return 3;   // in semi-invulnerable state
     }
     #endif
-    else if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
+    else if (FlagGet(FLAG_DISABLE_BALL_THROWS)){ //DEBUG
       return 4;
     }
     return 0;   // usable

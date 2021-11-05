@@ -2,6 +2,7 @@
 #define GUARD_DEBUG_H
 
 #if DEBUG
+#define DEBUG_MODE_ENABLED
 void Debug_ShowMainMenu(void);
 #endif
 

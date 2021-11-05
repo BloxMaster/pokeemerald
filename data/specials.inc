@@ -578,3 +578,8 @@ gSpecials::
 	def_special HoneyWildEncounter
 	def_special GetStaticEncounterLevel
 	def_special GetMysteryGiftSpecies
+	def_special CheckSavefileSize
+	def_special CheckMonOffensiveEVs
+	def_special CheckMonDefensiveEVs
+	def_special CheckMonOffensiveIVs
+	def_special CheckMonDefensiveIVs

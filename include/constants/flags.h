@@ -722,11 +722,11 @@
 #define FLAG_UNUSED_0x2AD  0x2AD // Unused Flag
 #define FLAG_UNUSED_0x2AE  0x2AE // Unused Flag
 #define FLAG_UNUSED_0x2AF  0x2AF // Unused Flag
-#define FLAG_SYS_NO_COLLISION       0x2B0 // Unused Flag //DEBUG
-#define FLAG_SYS_NO_ENCOUNTER       0x2B1 // Unused Flag //DEBUG
-#define FLAG_SYS_NO_TRAINER_SEE     0x2B2 // Unused Flag //DEBUG
-#define FLAG_SYS_NO_BAG_USE         0xB23 // Unused Flag //DEBUG
-#define FLAG_SYS_NO_CATCHING        0x2B4 // Unused Flag //DEBUG
+#define FLAG_DISABLE_COLLISIONS          0x2B0 // Unused Flag //DEBUG
+#define FLAG_DISABLE_WILD_ENCOUNTERS     0x2B1 // Unused Flag //DEBUG
+#define FLAG_DISABLE_TRAINER_ENCOUNTERS  0x2B2 // Unused Flag //DEBUG
+#define FLAG_DISABLE_BATTLE_BAG_ACCESS   0x2B3 // Unused Flag //DEBUG
+#define FLAG_DISABLE_BALL_THROWS         0x2B4 // Unused Flag //DEBUG
 #define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
 #define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
 #define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
@@ -1337,7 +1337,7 @@
 #define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
-#define FLAG_UNUSED_0x863                            (SYSTEM_FLAGS + 0x3) // Unused Flag
+#define FLAG_SYS_ENABLE_DEBUG_MENU                   (SYSTEM_FLAGS + 0x3) // Originally Unused Flag
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
 #define FLAG_SYS_CHAT_USED                           (SYSTEM_FLAGS + 0x5)
 #define FLAG_SYS_HIPSTER_MEET                        (SYSTEM_FLAGS + 0x6)

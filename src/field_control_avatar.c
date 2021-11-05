@@ -37,6 +37,8 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 
+#define OPEN_DEBUG_MENU (R_BUTTON | SELECT_BUTTON)
+
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
 
@@ -137,7 +139,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
 
     //DEBUG
-    if (heldKeys & L_BUTTON)
+    #if DEBUG
+    if (heldKeys & R_BUTTON)
     {
         if(input->pressedSelectButton)
         {
@@ -149,6 +152,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         }
     }
     //
+    #endif
 
 }
 
@@ -200,6 +204,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
+    //
+    #if DEBUG
+    if (JOY_HELD(OPEN_DEBUG_MENU) == OPEN_DEBUG_MENU)
+    {
+        PlaySE(SE_WIN_OPEN);
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+    #endif
+    //
     if (input->pressedStartButton)
     {
         PlaySE(SE_WIN_OPEN);
@@ -208,18 +222,6 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
-
-    if (input->pressedRButton && EnableAutoRun())
-        return TRUE;
-
-    #if DEBUG
-      if (input->input_field_1_2)
-      {
-        PlaySE(SE_WIN_OPEN);
-        Debug_ShowMainMenu();
-        return TRUE;
-      }
-    #endif
     return FALSE;
 }
 
@@ -700,8 +702,8 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
-    if (FlagGet(FLAG_SYS_NO_ENCOUNTER)) //DEBUG
-        return FALSE;//
+    if (FlagGet(FLAG_DISABLE_WILD_ENCOUNTERS))
+        return FALSE;
 
     if (sWildEncounterImmunitySteps < 4)
     {
