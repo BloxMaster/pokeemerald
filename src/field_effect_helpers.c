@@ -42,7 +42,7 @@ extern u16 gReflectionPaletteBuffer[];
 
 #define sReflectionObjEventId       data[0]
 #define sReflectionObjEventLocalId  data[1]
-#define sReflectionVerticalOffset   data[2] 
+#define sReflectionVerticalOffset   data[2]
 #define sIsStillReflection          data[7]
 
 void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 stillReflection)
@@ -97,11 +97,11 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
 
 void LoadSpecialReflectionPalette(struct Sprite *sprite)
 {
-    u32 R, G, B, i;
+  u32 R, G, B, i;
 	u16 color;
 	u16* pal;
 	struct SpritePalette reflectionPalette;
-	
+
 	CpuCopy16(&gPlttBufferUnfaded[0x100 + sprite->oam.paletteNum * 16], gReflectionPaletteBuffer, 32);
 	pal = gReflectionPaletteBuffer;
 	for (i = 0; i < 16; ++i)
@@ -340,8 +340,8 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
     mapGroup = sprite->sMapGroup;
     metatileBehavior = MapGridGetMetatileBehaviorAt(sprite->sX, sprite->sY);
 
-    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId) 
-     || !MetatileBehavior_IsTallGrass(metatileBehavior) 
+    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId)
+     || !MetatileBehavior_IsTallGrass(metatileBehavior)
      || (sprite->sObjectMoved && sprite->animEnded))
     {
         FieldEffectStop(sprite, FLDEFF_TALL_GRASS);
@@ -350,8 +350,8 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
     {
         // Check if the object that triggered the effect has moved away
         objectEvent = &gObjectEvents[objectEventId];
-        if ((objectEvent->currentCoords.x != sprite->sX 
-          || objectEvent->currentCoords.y != sprite->sY) 
+        if ((objectEvent->currentCoords.x != sprite->sX
+          || objectEvent->currentCoords.y != sprite->sY)
         && (objectEvent->previousCoords.x != sprite->sX
          || objectEvent->previousCoords.y != sprite->sY))
             sprite->sObjectMoved = TRUE;
@@ -394,10 +394,10 @@ u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s
         if (gSprites[i].inUse)
         {
             sprite = &gSprites[i];
-            if (sprite->callback == UpdateTallGrassFieldEffect 
-                && (x == sprite->sX && y == sprite->sY) 
-                && localId == (u8)(sprite->sLocalId) 
-                && mapNum == (sprite->sMapNum & 0xFF) 
+            if (sprite->callback == UpdateTallGrassFieldEffect
+                && (x == sprite->sX && y == sprite->sY)
+                && localId == (u8)(sprite->sLocalId)
+                && mapNum == (sprite->sMapNum & 0xFF)
                 && mapGroup == sprite->sMapGroup)
                 return i;
         }
@@ -455,8 +455,8 @@ void UpdateLongGrassFieldEffect(struct Sprite *sprite)
     mapNum = sprite->sMapNum;
     mapGroup = sprite->sMapGroup;
     metatileBehavior = MapGridGetMetatileBehaviorAt(sprite->data[1], sprite->data[2]);
-    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId) 
-     || !MetatileBehavior_IsLongGrass(metatileBehavior) 
+    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId)
+     || !MetatileBehavior_IsLongGrass(metatileBehavior)
      || (sprite->sObjectMoved && sprite->animEnded))
     {
         FieldEffectStop(sprite, FLDEFF_LONG_GRASS);
@@ -465,9 +465,9 @@ void UpdateLongGrassFieldEffect(struct Sprite *sprite)
     {
         // Check if the object that triggered the effect has moved away
         objectEvent = &gObjectEvents[objectEventId];
-        if ((objectEvent->currentCoords.x != sprite->data[1] 
-          || objectEvent->currentCoords.y != sprite->data[2]) 
-        && (objectEvent->previousCoords.x != sprite->data[1] 
+        if ((objectEvent->currentCoords.x != sprite->data[1]
+          || objectEvent->currentCoords.y != sprite->data[2])
+        && (objectEvent->previousCoords.x != sprite->data[1]
          || objectEvent->previousCoords.y != sprite->data[2]))
             sprite->sObjectMoved = TRUE;
 
