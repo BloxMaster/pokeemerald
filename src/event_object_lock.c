@@ -39,7 +39,6 @@ bool8 IsFreezePlayerFinished(void)
     }
 }
 
-
 void FreezeObjects_WaitForPlayer(void)
 {
     FreezeObjectEvents();
@@ -200,6 +199,18 @@ bool8 IsFreezeObjectAndPlayerFinished(void)
     {
         sub_808BCF4();
         return TRUE;
+    }
+}
+
+void ScriptFreezeTargetObjectEvent(void)
+{
+    u8 taskId;
+
+    taskId = CreateTask(Task_FreezeSelectedObjectAndPlayer, 80);
+    if (!gObjectEvents[gSelectedObjectEvent].singleMovementActive)
+    {
+        FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
+        gTasks[taskId].tObjectFrozen = TRUE;
     }
 }
 

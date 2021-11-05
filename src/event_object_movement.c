@@ -4841,9 +4841,15 @@ u8 GetSidewaysStairsCollision(struct ObjectEvent *objectEvent, u8 dir, u8 curren
 
 static u8 GetVanillaCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction)
 {
-    #if DEBUG //DEBUG
-        if (FlagGet(FLAG_SYS_NO_COLLISION))
+    #if DEBUG
+        if (FlagGet(FLAG_SYS_NO_COLLISION) && objectEvent->isPlayer)
+        {
+          if (GetMapBorderIdAt(x, y) != -1)
+          {
             return COLLISION_NONE;
+          }
+        }
+
     #endif
 
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
