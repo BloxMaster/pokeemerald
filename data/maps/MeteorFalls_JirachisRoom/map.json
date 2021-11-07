@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -47,7 +48,8 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_COMET_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_JIRACHIS_ROOM_COMET_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_JIRACHIS_ROOM_COMET_SHARD",
+      "quantity": 0
     }
   ]
 }

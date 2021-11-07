@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -443,7 +444,8 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_ETHER"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_ETHER",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -451,7 +453,8 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_TM32_DOUBLE_TEAM",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_TM_32"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_TM_32",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -459,7 +462,8 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET",
+      "quantity": 0
     }
   ]
 }

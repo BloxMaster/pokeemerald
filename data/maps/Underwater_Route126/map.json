@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -51,7 +52,8 @@
       "y": 17,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BOTTLE_CAP",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -59,7 +61,8 @@
       "y": 19,
       "elevation": 3,
       "item": "ITEM_ULTRA_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_ULTRA_BALL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_ULTRA_BALL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -67,7 +70,8 @@
       "y": 19,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_STARDUST"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_STARDUST",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -75,7 +79,8 @@
       "y": 36,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -83,7 +88,8 @@
       "y": 39,
       "elevation": 3,
       "item": "ITEM_IRON",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -91,7 +97,8 @@
       "y": 35,
       "elevation": 3,
       "item": "ITEM_YELLOW_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_YELLOW_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_YELLOW_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -99,7 +106,8 @@
       "y": 60,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BIG_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BIG_PEARL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -107,7 +115,8 @@
       "y": 77,
       "elevation": 3,
       "item": "ITEM_BLUE_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BLUE_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BLUE_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -115,7 +124,8 @@
       "y": 37,
       "elevation": 3,
       "item": "ITEM_IRON_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON_PLATE",
+      "quantity": 0
     }
   ]
 }

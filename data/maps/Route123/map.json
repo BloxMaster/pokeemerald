@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -787,7 +788,8 @@
       "y": 1,
       "elevation": 3,
       "item": "ITEM_BLACK_SLUDGE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_BLACK_SLUDGE"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_BLACK_SLUDGE",
+      "quantity": 0
     },
     {
       "type": "sign",
@@ -810,7 +812,8 @@
       "y": 1,
       "elevation": 3,
       "item": "ITEM_FOCUS_SASH",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_FOCUS_SASH"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_FOCUS_SASH",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -818,7 +821,8 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_HYPER_POTION",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_HYPER_POTION"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_HYPER_POTION",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -826,7 +830,8 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_PP_MAX",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_PP_MAX"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_PP_MAX",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -834,7 +839,8 @@
       "y": 18,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY",
+      "quantity": 0
     }
   ]
 }

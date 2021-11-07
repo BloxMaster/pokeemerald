@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -475,7 +476,8 @@
       "y": 31,
       "elevation": 3,
       "item": "ITEM_PROTECTOR",
-      "flag": "FLAG_SANDSTREWN_RUINS_PROTECTOR"
+      "flag": "FLAG_SANDSTREWN_RUINS_PROTECTOR",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -483,7 +485,8 @@
       "y": 89,
       "elevation": 3,
       "item": "ITEM_BIG_NUGGET",
-      "flag": "FLAG_SANDSTREWN_RUINS_BIG_NUGGET"
+      "flag": "FLAG_SANDSTREWN_RUINS_BIG_NUGGET",
+      "quantity": 0
     }
   ]
 }

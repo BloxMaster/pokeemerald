@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -40,7 +41,8 @@
       "y": 51,
       "elevation": 0,
       "item": "ITEM_CARBOS",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CARBOS"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CARBOS",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -48,7 +50,8 @@
       "y": 40,
       "elevation": 0,
       "item": "ITEM_GREEN_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_GREEN_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_GREEN_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -56,7 +59,8 @@
       "y": 34,
       "elevation": 3,
       "item": "ITEM_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -64,7 +68,8 @@
       "y": 54,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -72,7 +77,8 @@
       "y": 64,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_1"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_1",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -80,7 +86,8 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_CALCIUM",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -88,7 +95,8 @@
       "y": 36,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_2"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_2",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -96,7 +104,8 @@
       "y": 33,
       "elevation": 3,
       "item": "ITEM_PIXIE_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PIXIE_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PIXIE_PLATE",
+      "quantity": 0
     }
   ]
 }

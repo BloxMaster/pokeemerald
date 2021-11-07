@@ -58,4 +58,3 @@ NewMauville_Entrance_Text_UseBasementKey: @ 8237396
 NewMauville_Entrance_Text_UsedBasementKey: @ 82373AC
 	.string "{PLAYER} used the Basement Key.\p"
 	.string "The door opened!$"
-

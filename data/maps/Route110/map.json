@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -727,7 +728,8 @@
       "y": 39,
       "elevation": 3,
       "item": "ITEM_REVIVE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_REVIVE"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_REVIVE",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -735,7 +737,8 @@
       "y": 45,
       "elevation": 3,
       "item": "ITEM_GREAT_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_GREAT_BALL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_GREAT_BALL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -743,7 +746,8 @@
       "y": 35,
       "elevation": 3,
       "item": "ITEM_POKE_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_POKE_BALL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_POKE_BALL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -751,7 +755,8 @@
       "y": 67,
       "elevation": 3,
       "item": "ITEM_FULL_HEAL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_FULL_HEAL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_FULL_HEAL",
+      "quantity": 0
     },
     {
       "type": "sign",
@@ -767,7 +772,8 @@
       "y": 41,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE110_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE110_BOTTLE_CAP",
+      "quantity": 0
     }
   ]
 }

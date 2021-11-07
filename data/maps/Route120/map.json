@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -821,7 +822,8 @@
       "y": 1,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -829,7 +831,8 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_TOXIC_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_TOXIC_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_TOXIC_PLATE",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -837,7 +840,8 @@
       "y": 86,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -845,7 +849,8 @@
       "y": 42,
       "elevation": 3,
       "item": "ITEM_ZINC",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_ZINC"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_ZINC",
+      "quantity": 0
     },
     {
       "type": "secret_base",

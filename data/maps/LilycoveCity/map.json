@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -515,7 +516,8 @@
       "y": 31,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_BOTTLE_CAP",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -523,7 +525,8 @@
       "y": 7,
       "elevation": 0,
       "item": "ITEM_PP_UP",
-      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP"
+      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -531,7 +534,8 @@
       "y": 31,
       "elevation": 0,
       "item": "ITEM_DREAM_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_DREAM_BALL"
+      "flag": "FLAG_HIDDEN_ITEM_LILYCOVE_CITY_DREAM_BALL",
+      "quantity": 0
     }
   ]
 }

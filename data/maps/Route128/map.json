@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -166,8 +167,12 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "hidden_item",
@@ -175,7 +180,8 @@
       "y": 9,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -183,7 +189,8 @@
       "y": 21,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -191,7 +198,8 @@
       "y": 33,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3",
+      "quantity": 0
     }
   ]
 }

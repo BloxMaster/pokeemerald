@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -146,7 +147,8 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_ELIXIR",
-      "flag": "FLAG_HIDDEN_ITEM_VICTORY_ROAD_B2F_ELIXIR"
+      "flag": "FLAG_HIDDEN_ITEM_VICTORY_ROAD_B2F_ELIXIR",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -154,7 +156,8 @@
       "y": 1,
       "elevation": 3,
       "item": "ITEM_MAX_REPEL",
-      "flag": "FLAG_HIDDEN_ITEM_VICTORY_ROAD_B2F_MAX_REPEL"
+      "flag": "FLAG_HIDDEN_ITEM_VICTORY_ROAD_B2F_MAX_REPEL",
+      "quantity": 0
     }
   ]
 }

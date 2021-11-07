@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -196,7 +197,8 @@
       "y": 39,
       "elevation": 4,
       "item": "ITEM_PP_MAX",
-      "flag": "FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_PP_MAX"
+      "flag": "FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_PP_MAX",
+      "quantity": 0
     }
   ]
 }

@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -324,7 +325,8 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY",
+      "quantity": 0
     }
   ]
 }

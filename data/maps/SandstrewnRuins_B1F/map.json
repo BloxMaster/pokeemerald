@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -42,7 +43,8 @@
       "y": 2,
       "elevation": 3,
       "item": "ITEM_RED_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_RED_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_RED_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -50,7 +52,8 @@
       "y": 6,
       "elevation": 3,
       "item": "ITEM_GREEN_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_GREEN_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_GREEN_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -58,7 +61,8 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_BLUE_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BLUE_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BLUE_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -66,7 +70,8 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_YELLOW_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_YELLOW_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_YELLOW_SHARD",
+      "quantity": 0
     }
   ]
 }

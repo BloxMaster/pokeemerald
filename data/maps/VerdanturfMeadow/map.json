@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -60,7 +61,8 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_PINK_NECTAR",
-      "flag": "FLAG_HIDDEN_ITEM_PINK_NECTAR"
+      "flag": "FLAG_HIDDEN_ITEM_PINK_NECTAR",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -68,7 +70,8 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_PURPLE_NECTAR",
-      "flag": "FLAG_HIDDEN_ITEM_PURPLE_NECTAR"
+      "flag": "FLAG_HIDDEN_ITEM_PURPLE_NECTAR",
+      "quantity": 0
     }
   ]
 }

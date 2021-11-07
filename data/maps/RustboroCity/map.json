@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -625,7 +626,8 @@
       "y": 40,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_RUSTBORO_CITY_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_RUSTBORO_CITY_BOTTLE_CAP",
+      "quantity": 0
     }
   ]
 }

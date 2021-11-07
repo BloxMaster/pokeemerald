@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -394,7 +395,8 @@
       "y": 19,
       "elevation": 3,
       "item": "ITEM_BRIGHT_POWDER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_117_BRIGHT_POWDER"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_117_BRIGHT_POWDER",
+      "quantity": 0
     }
   ]
 }

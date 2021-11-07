@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -58,7 +59,8 @@
       "y": 42,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_STAR_PIECE"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_STAR_PIECE",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -66,7 +68,8 @@
       "y": 36,
       "elevation": 3,
       "item": "ITEM_HP_UP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_HP_UP"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_HP_UP",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -74,7 +77,8 @@
       "y": 72,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_BOTTLE_CAP",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -82,7 +86,8 @@
       "y": 20,
       "elevation": 3,
       "item": "ITEM_RED_SHARD",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_RED_SHARD"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_RED_SHARD",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -90,7 +95,8 @@
       "y": 17,
       "elevation": 3,
       "item": "ITEM_MIND_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_MIND_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_MIND_PLATE",
+      "quantity": 0
     }
   ]
 }

@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -252,7 +253,8 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_FULL_HEAL",
-      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL"
+      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -260,7 +262,8 @@
       "y": 32,
       "elevation": 3,
       "item": "ITEM_LEVEL_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_LEVEL_BALL"
+      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_LEVEL_BALL",
+      "quantity": 0
     }
   ]
 }

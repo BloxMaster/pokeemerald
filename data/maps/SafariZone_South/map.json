@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -27,13 +28,18 @@
       "direction": "right",
       "offset": 0,
       "map": "MAP_SAFARI_ZONE_SOUTHEAST"
+    },
+    {
+      "direction": "down",
+      "offset": 5,
+      "map": "MAP_ROUTE121"
     }
   ],
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 32,
-      "y": 34,
+      "y": 36,
       "elevation": 4,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -99,7 +105,7 @@
   "warp_events": [
     {
       "x": 32,
-      "y": 33,
+      "y": 35,
       "elevation": 0,
       "dest_map": "MAP_ROUTE121_SAFARI_ZONE_ENTRANCE",
       "dest_warp_id": 0

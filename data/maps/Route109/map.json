@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -412,7 +413,8 @@
       "y": 23,
       "elevation": 3,
       "item": "ITEM_REVIVE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_REVIVE"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_REVIVE",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -420,7 +422,8 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_1"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_1",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -428,7 +431,8 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_GREAT_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_GREAT_BALL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_GREAT_BALL",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -436,7 +440,8 @@
       "y": 20,
       "elevation": 3,
       "item": "ITEM_ETHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_ETHER"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_ETHER",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -444,7 +449,8 @@
       "y": 16,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_2"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_2",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -452,7 +458,8 @@
       "y": 42,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_3"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_3",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -460,7 +467,8 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_4"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_4",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -468,7 +476,8 @@
       "y": 14,
       "elevation": 4,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_5"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_5",
+      "quantity": 0
     }
   ]
 }

@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -110,8 +111,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
-      "x": 20,
-      "y": 37,
+      "x": 21,
+      "y": 38,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -553,7 +554,7 @@
   ],
   "warp_events": [
     {
-      "x": 19,
+      "x": 13,
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_POKEMON_CENTER_1F",
@@ -623,7 +624,7 @@
       "dest_warp_id": 2
     },
     {
-      "x": 21,
+      "x": 22,
       "y": 44,
       "elevation": 0,
       "dest_map": "MAP_SLATEPORT_CITY_HOUSE",
@@ -652,7 +653,7 @@
     },
     {
       "type": "sign",
-      "x": 20,
+      "x": 14,
       "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
@@ -660,7 +661,7 @@
     },
     {
       "type": "sign",
-      "x": 21,
+      "x": 15,
       "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",

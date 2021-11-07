@@ -11,6 +11,7 @@
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
@@ -458,7 +459,8 @@
       "y": 49,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_115_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_115_BOTTLE_CAP",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -466,7 +468,8 @@
       "y": 21,
       "elevation": 5,
       "item": "ITEM_FIST_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_115_FIST_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_115_FIST_PLATE",
+      "quantity": 0
     }
   ]
 }

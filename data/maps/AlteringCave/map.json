@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -161,7 +162,8 @@
       "y": 11,
       "elevation": 4,
       "item": "ITEM_MAX_REVIVE",
-      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_MAX_REVIVE"
+      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_MAX_REVIVE",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -169,7 +171,8 @@
       "y": 1,
       "elevation": 3,
       "item": "ITEM_GOLD_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_GOLD_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_GOLD_BOTTLE_CAP",
+      "quantity": 0
     }
   ]
 }
