@@ -192,9 +192,14 @@ bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
 
+#if DEBUG //DEBUG
+    if (FlagGet(FLAG_DISABLE_TRAINER_ENCOUNTERS))
+        return FALSE;
+#endif //
+
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
-
+    
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         u8 numTrainers;

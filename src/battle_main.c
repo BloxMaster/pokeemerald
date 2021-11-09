@@ -2010,7 +2010,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
 
                 CalculateMonStats(&party[i]); // called twice; fix in future
-                
+
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
                     SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
@@ -3050,7 +3050,7 @@ static void BattleStartClearSetData(void)
     gBattleStruct->arenaLostOpponentMons = 0;
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
-    
+
     for (i = 0; i < PARTY_SIZE; i++)
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 }
@@ -3101,7 +3101,7 @@ void SwitchInClearSetData(void)
         gBattleMons[gActiveBattler].status2 = 0;
         gStatuses3[gActiveBattler] = 0;
     }
-    
+
     gStatuses4[gActiveBattler] = 0;
 
     for (i = 0; i < gBattlersCount; i++)
@@ -3157,7 +3157,7 @@ void SwitchInClearSetData(void)
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = 0;
     gBattleStruct->arenaTurnCounter = 0xFF;
-    
+
     // Reset damage to prevent things like red card activating if the switched-in mon is holding it
     gSpecialStatuses[gActiveBattler].physicalDmg = 0;
     gSpecialStatuses[gActiveBattler].specialDmg = 0;
@@ -3995,7 +3995,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if (gBattleTypeFlags & (BATTLE_TYPE_LINK
+                    if (FlagGet(FLAG_DISABLE_BATTLE_BAG_ACCESS) || gBattleTypeFlags & (BATTLE_TYPE_LINK //DEBUG
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
                                             | BATTLE_TYPE_RECORDED_LINK)
@@ -4334,13 +4334,13 @@ static void HandleTurnActionSelectionState(void)
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
         sub_818603C(1);
-        
+
         if (WILD_DOUBLE_BATTLE && gBattleStruct->throwingPokeBall) {
             // if we choose to throw a ball with our second mon, skip the action of the first
             // (if we have chosen throw ball with first, second's is already skipped)
             gChosenActionByBattler[B_POSITION_PLAYER_LEFT] = B_ACTION_NOTHING_FAINTED;
         }
-        
+
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
@@ -4558,7 +4558,7 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         // QUICK CLAW / CUSTAP - always first
         // LAGGING TAIL - always last
         // STALL - always last
-        
+
         if (gProtectStructs[battler1].quickDraw && !gProtectStructs[battler2].quickDraw)
             strikesFirst = 0;
         else if (!gProtectStructs[battler1].quickDraw && gProtectStructs[battler2].quickDraw)

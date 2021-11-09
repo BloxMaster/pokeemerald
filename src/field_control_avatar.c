@@ -3,6 +3,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -35,6 +36,8 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
+
+#define OPEN_DEBUG_MENU (R_BUTTON | SELECT_BUTTON)
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -133,6 +136,24 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+
+
+    //DEBUG
+    #if DEBUG
+    if (heldKeys & R_BUTTON)
+    {
+        if(input->pressedSelectButton)
+        {
+            input->input_field_1_0 = TRUE;
+            input->input_field_1_1 = TRUE;
+            input->input_field_1_2 = TRUE;
+            input->input_field_1_3 = TRUE;
+            input->pressedSelectButton = FALSE;
+        }
+    }
+    //
+    #endif
+
 }
 
 int ProcessPlayerFieldInput(struct FieldInput *input)
@@ -183,6 +204,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
+    //
+    #if DEBUG
+    if (JOY_HELD(OPEN_DEBUG_MENU) == OPEN_DEBUG_MENU)
+    {
+        PlaySE(SE_WIN_OPEN);
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+    #endif
+    //
     if (input->pressedStartButton)
     {
         PlaySE(SE_WIN_OPEN);
@@ -191,10 +222,6 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
-    
-    if (input->pressedRButton && EnableAutoRun())
-        return TRUE;
-
     return FALSE;
 }
 
@@ -675,6 +702,9 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
+    if (FlagGet(FLAG_DISABLE_WILD_ENCOUNTERS))
+        return FALSE;
+
     if (sWildEncounterImmunitySteps < 4)
     {
         sWildEncounterImmunitySteps++;
@@ -696,13 +726,31 @@ static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
     s8 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
+    u16 delay;
 
-    if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE && warpEventId != -1)
+    if (warpEventId != -1)
     {
-        StoreInitialPlayerAvatarState();
-        SetupWarp(&gMapHeader, warpEventId, position);
-        DoWarp();
-        return TRUE;
+        if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
+        {
+            StoreInitialPlayerAvatarState();
+            SetupWarp(&gMapHeader, warpEventId, position);
+            DoWarp();
+            return TRUE;
+        }
+        else if (IsDirectionalStairWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
+        {
+            delay = 0;
+            if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+            {
+                SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+                delay = 12;
+            }
+
+            StoreInitialPlayerAvatarState();
+            SetupWarp(&gMapHeader, warpEventId, position);
+            DoStairWarp(metatileBehavior, delay);
+            return TRUE;
+        }
     }
     return FALSE;
 }
@@ -735,7 +783,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
             DoTeleportTileWarp();
             return TRUE;
         }
-        if (MetatileBehavior_IsWarpOrBridge(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsBridgeOverOcean(metatileBehavior) == TRUE)
         {
             // Maybe unused? This MB is used by log bridges, but there's never a warp event on them
             DoSpinExitWarp();
@@ -768,7 +816,7 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
      && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
      && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
      && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsWarpOrBridge(metatileBehavior) != TRUE)
+     && MetatileBehavior_IsBridgeOverOcean(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }
@@ -1027,7 +1075,6 @@ static bool8 EnableAutoRun(void)
         gSaveBlock2Ptr->autoRun = TRUE;
         ScriptContext1_SetupScript(EventScript_EnableAutoRun);
     }
-    
+
     return TRUE;
 }
-

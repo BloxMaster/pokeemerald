@@ -97,6 +97,7 @@ SECTIONS {
         src/random.o(.text);
         src/util.o(.text);
         src/daycare.o(.text);
+        src/debug.o(.text);
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         src/battle_anim_smokescreen.o(.text);
@@ -212,7 +213,7 @@ SECTIONS {
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
         src/battle_ai_main.o(.text);
-		src/battle_ai_util.o(.text);
+		    src/battle_ai_util.o(.text);
         src/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
@@ -484,6 +485,7 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);
+        src/debug.o(.rodata);
         src/egg_hatch.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);
@@ -694,6 +696,7 @@ SECTIONS {
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event.o(.rodata);
+        src/debug.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
         src/rhh_copyright.o(.rodata);

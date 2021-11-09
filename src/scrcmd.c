@@ -463,7 +463,7 @@ bool8 ScrCmd_compare_var_to_var(struct ScriptContext *ctx)
     return FALSE;
 }
 
-// Note: addvar doesn't support adding from a variable in vanilla. If you were to 
+// Note: addvar doesn't support adding from a variable in vanilla. If you were to
 // add a VarGet() to the above, make sure you change the `addvar VAR_*, -1`
 // in the contest scripts to `subvar VAR_*, 1`, else contests will break.
 bool8 ScrCmd_addvar(struct ScriptContext *ctx)
@@ -653,7 +653,7 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
     switch (mode)
     {
         case FADE_TO_BLACK:
-        case FADE_TO_WHITE:   
+        case FADE_TO_WHITE:
         default:
             CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_DECOMP_BUFFER_SIZE);
             FadeScreen(mode, 0);
@@ -1890,7 +1890,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
         gIsScriptedWildDouble = FALSE;
     }
     else
-    { 
+    {
         CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
         gIsScriptedWildDouble = TRUE;
     }
@@ -2347,7 +2347,7 @@ bool8 ScrCmd_checkPartyHasSpecies(struct ScriptContext *ctx)
     u16 partySpecies;
     int i = 0;
     u8 partyCount = CalculatePlayerPartyCount();
-    
+
     gSpecialVar_Result = FALSE;
 
     for (i = 0; i < partyCount; i++)
@@ -2374,4 +2374,18 @@ bool8 ScrCmd_isChosenMonSpecies(struct ScriptContext *ctx)
         gSpecialVar_Result = TRUE;
     }
     return FALSE;
+}
+
+bool8 ScrCmd_locktarget(struct ScriptContext *ctx)
+{
+    if (IsUpdateLinkStateCBActive())
+    {
+        return FALSE;
+    }
+    else
+    {
+        ScriptFreezeTargetObjectEvent();
+        SetupNativeScript(ctx, IsFreezePlayerFinished);
+        return TRUE;
+    }
 }

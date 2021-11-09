@@ -523,9 +523,9 @@ void SpawnLinkPartnerObjectEvent(void)
     s16 x = 0;
     s16 y = 0;
     u8 movementTypes[] = {
-        MOVEMENT_TYPE_FACE_UP, 
-        MOVEMENT_TYPE_FACE_LEFT, 
-        MOVEMENT_TYPE_FACE_DOWN, 
+        MOVEMENT_TYPE_FACE_UP,
+        MOVEMENT_TYPE_FACE_LEFT,
+        MOVEMENT_TYPE_FACE_DOWN,
         MOVEMENT_TYPE_FACE_RIGHT
     };
     s8 coordOffsets[][2] = {
@@ -1424,8 +1424,8 @@ bool8 Special_AreLeadMonEVsMaxedOut(void)
 
 u8 TryUpdateRusturfTunnelState(void)
 {
-    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) 
-        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) 
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED)
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
@@ -1712,7 +1712,7 @@ void OffsetCameraForBattle(void)
     SetCameraPanning(8, 0);
 }
 
-const struct WindowTemplate gElevatorFloor_WindowTemplate = 
+const struct WindowTemplate gElevatorFloor_WindowTemplate =
 {
     .bg = 0,
     .tilemapLeft = 21,
@@ -2022,27 +2022,27 @@ void BufferVarsForIVRater(void)
 
 bool8 UsedPokemonCenterWarp(void)
 {
-    static const u16 sPokemonCenters[] = 
-    { 
-        MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 
-        MAP_DEWFORD_TOWN_POKEMON_CENTER_1F, 
-        MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F, 
-        MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F, 
-        MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F, 
-        MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F, 
-        MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 
-        MAP_SLATEPORT_CITY_POKEMON_CENTER_1F, 
-        MAP_MAUVILLE_CITY_POKEMON_CENTER_1F, 
-        MAP_RUSTBORO_CITY_POKEMON_CENTER_1F, 
-        MAP_FORTREE_CITY_POKEMON_CENTER_1F, 
-        MAP_LILYCOVE_CITY_POKEMON_CENTER_1F, 
-        MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F, 
-        MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F, 
-        MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F, 
-        MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F, 
-        MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F, 
-        MAP_UNION_ROOM, 
-        0xFFFF 
+    static const u16 sPokemonCenters[] =
+    {
+        MAP_OLDALE_TOWN_POKEMON_CENTER_1F,
+        MAP_DEWFORD_TOWN_POKEMON_CENTER_1F,
+        MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F,
+        MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,
+        MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F,
+        MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F,
+        MAP_PETALBURG_CITY_POKEMON_CENTER_1F,
+        MAP_SLATEPORT_CITY_POKEMON_CENTER_1F,
+        MAP_MAUVILLE_CITY_POKEMON_CENTER_1F,
+        MAP_RUSTBORO_CITY_POKEMON_CENTER_1F,
+        MAP_FORTREE_CITY_POKEMON_CENTER_1F,
+        MAP_LILYCOVE_CITY_POKEMON_CENTER_1F,
+        MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F,
+        MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F,
+        MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,
+        MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
+        MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
+        MAP_UNION_ROOM,
+        0xFFFF
     };
 
     int i;
@@ -2075,71 +2075,71 @@ void UpdateFrontierManiac(u16 daysSince)
 
 void ShowFrontierManiacMessage(void)
 {
-    static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] = 
+    static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] =
     {
         [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] =
-        { 
-            BattleFrontier_Lounge2_Text_SalonMaidenIsThere, 
-            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons, 
-            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons 
+        {
+            BattleFrontier_Lounge2_Text_SalonMaidenIsThere,
+            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons,
+            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] =
-        { 
-            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1, 
-            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2, 
-            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3 
+        {
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1,
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2,
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3
         },
-        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS] = 
-        { 
-            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_MultiBattleAdvice 
+        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS] =
+        {
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice
         },
         [FRONTIER_MANIAC_BATTLE_TOWER_LINK] =
-        { 
-            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice 
+        {
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice
         },
         [FRONTIER_MANIAC_BATTLE_DOME] =
-        { 
-            BattleFrontier_Lounge2_Text_DomeAceIsThere, 
-            BattleFrontier_Lounge2_Text_DomeAceSilverMons, 
-            BattleFrontier_Lounge2_Text_DomeAceGoldMons 
+        {
+            BattleFrontier_Lounge2_Text_DomeAceIsThere,
+            BattleFrontier_Lounge2_Text_DomeAceSilverMons,
+            BattleFrontier_Lounge2_Text_DomeAceGoldMons
         },
         [FRONTIER_MANIAC_BATTLE_FACTORY] =
-        { 
-            BattleFrontier_Lounge2_Text_FactoryHeadIsThere, 
-            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons, 
-            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons 
+        {
+            BattleFrontier_Lounge2_Text_FactoryHeadIsThere,
+            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons,
+            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons
         },
         [FRONTIER_MANIAC_BATTLE_PALACE] =
-        { 
-            BattleFrontier_Lounge2_Text_PalaceMavenIsThere, 
-            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons, 
-            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons 
+        {
+            BattleFrontier_Lounge2_Text_PalaceMavenIsThere,
+            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons,
+            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons
         },
         [FRONTIER_MANIAC_BATTLE_ARENA] =
-        { 
-            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere, 
-            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons, 
-            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons 
+        {
+            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere,
+            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons,
+            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_PIKE] = 
-        { 
-            BattleFrontier_Lounge2_Text_PikeQueenIsThere, 
-            BattleFrontier_Lounge2_Text_PikeQueenSilverMons, 
-            BattleFrontier_Lounge2_Text_PikeQueenGoldMons 
+        [FRONTIER_MANIAC_BATTLE_PIKE] =
+        {
+            BattleFrontier_Lounge2_Text_PikeQueenIsThere,
+            BattleFrontier_Lounge2_Text_PikeQueenSilverMons,
+            BattleFrontier_Lounge2_Text_PikeQueenGoldMons
         },
         [FRONTIER_MANIAC_BATTLE_PYRAMID] =
-        { 
-            BattleFrontier_Lounge2_Text_PyramidKingIsThere, 
-            BattleFrontier_Lounge2_Text_PyramidKingSilverMons, 
-            BattleFrontier_Lounge2_Text_PyramidKingGoldMons 
+        {
+            BattleFrontier_Lounge2_Text_PyramidKingIsThere,
+            BattleFrontier_Lounge2_Text_PyramidKingSilverMons,
+            BattleFrontier_Lounge2_Text_PyramidKingGoldMons
         },
     };
 
-    static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] = 
+    static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] =
     {
         [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] = { 21, 56 },
         [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] = { 21, 35 },
@@ -2163,7 +2163,7 @@ void ShowFrontierManiacMessage(void)
         case FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES:
         case FRONTIER_MANIAC_BATTLE_TOWER_MULTIS:
         case FRONTIER_MANIAC_BATTLE_TOWER_LINK:
-            if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50];
@@ -2174,7 +2174,7 @@ void ShowFrontierManiacMessage(void)
             }
             break;
         case FRONTIER_MANIAC_BATTLE_DOME:
-            if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
@@ -2185,7 +2185,7 @@ void ShowFrontierManiacMessage(void)
             }
             break;
         case FRONTIER_MANIAC_BATTLE_FACTORY:
-            if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
@@ -2196,7 +2196,7 @@ void ShowFrontierManiacMessage(void)
             }
             break;
         case FRONTIER_MANIAC_BATTLE_PALACE:
-            if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
@@ -2207,7 +2207,7 @@ void ShowFrontierManiacMessage(void)
             }
             break;
         case FRONTIER_MANIAC_BATTLE_ARENA:
-            if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50];
@@ -2218,7 +2218,7 @@ void ShowFrontierManiacMessage(void)
             }
             break;
         case FRONTIER_MANIAC_BATTLE_PIKE:
-            if (gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50];
@@ -2229,7 +2229,7 @@ void ShowFrontierManiacMessage(void)
             }
             break;
         case FRONTIER_MANIAC_BATTLE_PYRAMID:
-            if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50] 
+            if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50]
                 >= gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN])
             {
                 winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
@@ -2537,13 +2537,13 @@ void ShowScrollableMultichoice(void)
     }
 }
 
-static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] = 
+static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] =
 {
-    [SCROLL_MULTI_NONE] = 
+    [SCROLL_MULTI_NONE] =
     {
         gText_Exit
     },
-    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] = 
+    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
     {
         gText_BlueFlute,
         gText_YellowFlute,
@@ -2554,7 +2554,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_PrettyDesk,
         gText_Exit
     },
-    [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] = 
+    [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] =
     {
         gText_0Pts,
         gText_10Pts,
@@ -2569,7 +2569,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_100Pts,
         gText_QuestionMark
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] = 
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] =
     {
         gText_KissPoster16BP,
         gText_KissCushion32BP,
@@ -2643,7 +2643,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_ExchangeService,
         gText_Exit
     },
-    [SCROLL_MULTI_BF_MOVE_TUTOR_1] = 
+    [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
         gText_Softboiled16BP,
         gText_SeismicToss24BP,
@@ -2657,7 +2657,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_SwordsDance48BP,
         gText_Exit
     },
-    [SCROLL_MULTI_BF_MOVE_TUTOR_2] = 
+    [SCROLL_MULTI_BF_MOVE_TUTOR_2] =
     {
         gText_DefenseCurl16BP,
         gText_Snore24BP,
@@ -2691,7 +2691,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_WhenInDanger,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_1] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_1] =
     {
         gText_FuryCutter,
         gText_Rollout,
@@ -2715,7 +2715,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Infestation,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_2] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_2] =
     {
         gText_Counter,
         gText_Endeavor,
@@ -2737,7 +2737,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Agility,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_3] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_3] =
     {
         gText_SignalBeam,
         gText_Gravity,
@@ -2759,7 +2759,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Teleport,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_4] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_4] =
     {
         gText_ThunderPunch,
         gText_FirePunch,
@@ -2781,7 +2781,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_StompingTantrum,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_5] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_5] =
     {
         gText_IronHead,
         gText_AquaTail,
@@ -2803,7 +2803,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_HighHorsepower,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_6] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_6] =
     {
         gText_Megahorn,
         gText_AuraSphere,
@@ -2825,7 +2825,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_PowerUpPunch,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_7] = 
+    [SCROLL_MULTI_PC_TUTOR_SET_7] =
     {
         gText_DoubleEdge,
         gText_PlayRough,
@@ -2904,7 +2904,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_GameCornerPopplio,
         gText_Exit
     },
-    [SCROLL_MULTI_REGION_NAMES] = 
+    [SCROLL_MULTI_REGION_NAMES] =
     {
         gText_Kanto,
         gText_Johto,
@@ -2915,21 +2915,21 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Alola,
         // gText_Galar,
     },
-    [SCROLL_MULTI_FURFROU_TRIMS] = 
+    [SCROLL_MULTI_FURFROU_TRIMS] =
     {
         gText_HeartTrim,
         gText_StarTrim,
         gText_DiamondTrim,
         gText_DebutanteTrim,
         gText_MatronTrim,
-        gText_DandyTrim, 
+        gText_DandyTrim,
         gText_LaReineTrim,
         gText_KabukiTrim,
         gText_PharaohTrim,
         gText_BackToNatural,
         gText_Exit
     },
-    [SCROLL_MULTI_POKE_CENTER_TUTOR] = 
+    [SCROLL_MULTI_POKE_CENTER_TUTOR] =
     {
         gText_RememberAMove,
         gText_ForgetAMove,
@@ -2939,7 +2939,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_ResetEvents,
         gText_Exit
     },
-    [SCROLL_MULTI_HIDDEN_POWER] = 
+    [SCROLL_MULTI_HIDDEN_POWER] =
     {
         gText_HPFighting,
         gText_HPFlying,
@@ -3272,7 +3272,7 @@ void UpdateFrontierGambler(u16 daysSince)
 
 void ShowFrontierGamblerLookingMessage(void)
 {
-    static const u8 *const sFrontierGamblerLookingMessages[] = 
+    static const u8 *const sFrontierGamblerLookingMessages[] =
     {
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle,
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerDouble,
@@ -3295,7 +3295,7 @@ void ShowFrontierGamblerLookingMessage(void)
 
 void ShowFrontierGamblerGoMessage(void)
 {
-    static const u8 *const sFrontierGamblerGoMessages[] = 
+    static const u8 *const sFrontierGamblerGoMessages[] =
     {
         BattleFrontier_Lounge3_Text_GetToBattleTowerSingle,
         BattleFrontier_Lounge3_Text_GetToBattleTowerDouble,
@@ -3316,19 +3316,19 @@ void ShowFrontierGamblerGoMessage(void)
 
 void FrontierGamblerSetWonOrLost(bool8 won)
 {
-    static const u16 sFrontierChallenges[] = 
+    static const u16 sFrontierChallenges[] =
     {
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_DOUBLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_MULTIS),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_DOME,    FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_DOME,    FRONTIER_MODE_DOUBLES),
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PYRAMID, FRONTIER_MODE_SINGLES)
     };
 
@@ -3698,7 +3698,7 @@ void BufferBattleFrontierTutorMoveName(void)
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 {
-    static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate = 
+    static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate =
     {
         .bg = 0,
         .tilemapLeft = 1,
@@ -3722,8 +3722,8 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 
 static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions1[] = 
-    {        
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions1[] =
+    {
 		PokemonCenterMoveTutor_Text_FuryCutterDesc,
         PokemonCenterMoveTutor_Text_RolloutDesc,
         PokemonCenterMoveTutor_Text_SeismicTossDesc,
@@ -3746,9 +3746,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         PokemonCenterMoveTutor_Text_InfestationDesc,
         gText_Exit,
 	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions2[] = 
-    {        
+
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions2[] =
+    {
 		PokemonCenterMoveTutor_Text_CounterDesc,
         PokemonCenterMoveTutor_Text_EndeavorDesc,
         PokemonCenterMoveTutor_Text_WorrySeedDesc,
@@ -3769,9 +3769,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         PokemonCenterMoveTutor_Text_AgilityDesc,
         gText_Exit,
 	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions3[] = 
-    {        
+
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions3[] =
+    {
 		PokemonCenterMoveTutor_Text_SignalBeamDesc,
         PokemonCenterMoveTutor_Text_GravityDesc,
         PokemonCenterMoveTutor_Text_SeedBombDesc,
@@ -3792,9 +3792,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         PokemonCenterMoveTutor_Text_TeleportDesc,
         gText_Exit,
 	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions4[] = 
-    {        
+
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions4[] =
+    {
         PokemonCenterMoveTutor_Text_ThunderPunchDesc,
         PokemonCenterMoveTutor_Text_FirePunchDesc,
         PokemonCenterMoveTutor_Text_IcePunchDesc,
@@ -3815,9 +3815,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         PokemonCenterMoveTutor_Text_StompingTantrumDesc,
         gText_Exit,
 	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions5[] = 
-    {        
+
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions5[] =
+    {
         PokemonCenterMoveTutor_Text_IronHeadDesc,
         PokemonCenterMoveTutor_Text_AquaTailDesc,
         PokemonCenterMoveTutor_Text_PowerGemDesc,
@@ -3838,9 +3838,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         PokemonCenterMoveTutor_Text_HighHorsepowerDesc,
         gText_Exit,
 	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions6[] = 
-    {        
+
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions6[] =
+    {
         PokemonCenterMoveTutor_Text_MegahornDesc,
         PokemonCenterMoveTutor_Text_AuraSphereDesc,
         PokemonCenterMoveTutor_Text_ThroatChopDesc,
@@ -3861,9 +3861,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         PokemonCenterMoveTutor_Text_PowerUpPunchDesc,
         gText_Exit,
 	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions7[] = 
-    {        
+
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions7[] =
+    {
         PokemonCenterMoveTutor_Text_DoubleEdgeDesc,
         PokemonCenterMoveTutor_Text_PlayRoughDesc,
         PokemonCenterMoveTutor_Text_NastyPlotDesc,
@@ -3884,7 +3884,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 
     if  ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
     {
-        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 120, 48);                                                            
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 120, 48);
         switch (menu)
         {
             case SCROLL_MULTI_PC_TUTOR_SET_1:
@@ -3907,7 +3907,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
                 break;
             case SCROLL_MULTI_PC_TUTOR_SET_7:
                 AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions7[selection], 0, 1, 0, NULL);
-                break;        
+                break;
         }
     }
 }
@@ -4059,20 +4059,20 @@ void sub_813AF48(void)
 }
 
 // Undefine Scrollable Multichoice task data macros
-#undef tMaxItemsOnScreen  
-#undef tNumItems           
-#undef tLeft               
-#undef tTop                 
-#undef tWidth              
-#undef tHeight             
-#undef tKeepOpenAfterSelect 
-#undef tScrollOffset      
-#undef tSelectedRow        
-#undef tScrollMultiId       
-#undef tScrollArrowId       
-#undef tWindowId            
-#undef tListTaskId         
-#undef tTaskId              
+#undef tMaxItemsOnScreen
+#undef tNumItems
+#undef tLeft
+#undef tTop
+#undef tWidth
+#undef tHeight
+#undef tKeepOpenAfterSelect
+#undef tScrollOffset
+#undef tSelectedRow
+#undef tScrollMultiId
+#undef tScrollArrowId
+#undef tWindowId
+#undef tListTaskId
+#undef tTaskId
 
 void DoDeoxysRockInteraction(void)
 {
@@ -4454,7 +4454,7 @@ bool32 ShouldDistributeEonTicket(void)
 {
     if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
-    
+
     return TRUE;
 }
 
@@ -4518,17 +4518,17 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
                 gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
                 ResetBlockReceivedFlag(1);
 
-                if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE
                  && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
                 {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_BOTH_RETIRE;
                 }
-                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE 
+                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE
                       && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
                 {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_MEMBER_RETIRE;
                 }
-                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE
                       && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_CONTINUE)
                 {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_LEADER_RETIRE;
@@ -4750,13 +4750,13 @@ bool8 InPokemonCenter(void)
 }
 
 /*  Summary of the Lilycove Trainer Fan Club, because it's a little messy
-    
+
     ## The Fan Club room itself
     There are initially 4 members of the Fan Club (+ an interviewer), none of whom are fans of the player
     After becoming the champion there will be 8 members of the Fan Club, 3 of whom are automatically fans of the player
     After this point, if a club member is a fan of the player they will sit at the front table and comment on the player
     If they are not fans of the player, they will sit at the far table and can make comments about a different trainer (see BufferFanClubTrainerName)
-    
+
     ## Gaining/losing fans
     After every link battle the player will gain a fan if they won, or lose a fan if they lost
     If the player has at least 3 fans, this is the only way to gain fans
@@ -4825,16 +4825,16 @@ void UpdateTrainerFanClubGameClear(void)
 }
 
 // If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
-// Defeating Drake or participating in a Contest increments the counter by 2 
+// Defeating Drake or participating in a Contest increments the counter by 2
 // Participating at Battle Tower or in a Secret Base battle increments the counter by 1
 u8 TryGainNewFanFromCounter(u8 incrementId)
 {
-    static const u8 sCounterIncrements[] = 
-    { 
-        [FANCOUNTER_DEFEATED_DRAKE]    = 2, 
-        [FANCOUNTER_BATTLED_AT_BASE]   = 1, 
-        [FANCOUNTER_FINISHED_CONTEST]  = 2, 
-        [FANCOUNTER_USED_BATTLE_TOWER] = 1 
+    static const u8 sCounterIncrements[] =
+    {
+        [FANCOUNTER_DEFEATED_DRAKE]    = 2,
+        [FANCOUNTER_BATTLED_AT_BASE]   = 1,
+        [FANCOUNTER_FINISHED_CONTEST]  = 2,
+        [FANCOUNTER_USED_BATTLE_TOWER] = 1
     };
 
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
@@ -4867,16 +4867,16 @@ u8 TryGainNewFanFromCounter(u8 incrementId)
 // If all the members are already fans of the player then this redundantly sets the first fan in the list to be a fan
 static u16 PlayerGainRandomTrainerFan(void)
 {
-    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
-    { 
-        FANCLUB_MEMBER1, 
-        FANCLUB_MEMBER2, 
-        FANCLUB_MEMBER3, 
-        FANCLUB_MEMBER4, 
-        FANCLUB_MEMBER5, 
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] =
+    {
+        FANCLUB_MEMBER1,
+        FANCLUB_MEMBER2,
+        FANCLUB_MEMBER3,
+        FANCLUB_MEMBER4,
+        FANCLUB_MEMBER5,
         FANCLUB_MEMBER6,
-        FANCLUB_MEMBER7, 
-        FANCLUB_MEMBER8 
+        FANCLUB_MEMBER7,
+        FANCLUB_MEMBER8
     };
 
     u8 i;
@@ -4903,16 +4903,16 @@ static u16 PlayerGainRandomTrainerFan(void)
 // If no fan was lost while looping, the last current fan in the list will stop being a fan
 static u16 PlayerLoseRandomTrainerFan(void)
 {
-    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
-    { 
-        FANCLUB_MEMBER1, 
-        FANCLUB_MEMBER6, 
-        FANCLUB_MEMBER7, 
-        FANCLUB_MEMBER4, 
-        FANCLUB_MEMBER3, 
-        FANCLUB_MEMBER5, 
-        FANCLUB_MEMBER8, 
-        FANCLUB_MEMBER2 
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] =
+    {
+        FANCLUB_MEMBER1,
+        FANCLUB_MEMBER6,
+        FANCLUB_MEMBER7,
+        FANCLUB_MEMBER4,
+        FANCLUB_MEMBER3,
+        FANCLUB_MEMBER5,
+        FANCLUB_MEMBER8,
+        FANCLUB_MEMBER2
     };
 
     u8 i;
@@ -5187,7 +5187,7 @@ void IncreaseChosenMonEVs (void)
     {
         newEV = oldEV + increment;
     }
-    
+
     switch (statToChange)
     {
     case STAT_HP: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, &newEV);
@@ -5202,7 +5202,7 @@ void IncreaseChosenMonEVs (void)
        break;
     case STAT_SPDEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, &newEV);
        break;
-    }   
+    }
 
     CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
 
@@ -5314,7 +5314,7 @@ void ResetChosenMonEVs (void)
  * gSpecialVar_0x8007 must be set to the type of Hidden Power to change to (see table below,
  * or search ChangeChosenMonHiddenPower for a usage example)
  */
-void ChangeChosenMonHiddenPower (void) 
+void ChangeChosenMonHiddenPower (void)
 {
     int i;
     u8 hiddenPowerType = gSpecialVar_0x8007;
@@ -5338,7 +5338,7 @@ void ChangeChosenMonHiddenPower (void)
         {31,  0, 31, 31, 31, 31}, // TYPE_DRAGON
         {31, 31, 31, 31, 31, 31}, // TYPE_DARK
     };
-  
+
     for (i = 0; i < NUM_STATS; i++)
     {
         SetMonData(&gPlayerParty[gSpecialVar_0x800A], MON_DATA_HP_IV + i, &hiddenPowerSpreads[hiddenPowerType][i]);
@@ -5487,7 +5487,7 @@ u8 CountRotomInParty (void)
     u32 species;
 
     partyCount = CalculatePlayerPartyCount();
-    
+
     for (i = 0; i < partyCount; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
@@ -5577,7 +5577,7 @@ void RotomForgetSpecialMove (void)
 void ChangeMonSpecies (void)
 {
     u16 newSpecies;
-    
+
     newSpecies = gSpecialVar_0x8005;
 
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, &newSpecies);
@@ -5700,7 +5700,7 @@ void ResetDailyHiddenItemFlags(void)
     u16 *specVar = &gSpecialVar_0x8004;
     u16 flag;
     u32 i = 0;
-    static const u16 dailyItemflags[] = 
+    static const u16 dailyItemflags[] =
     {
         FLAG_HIDDEN_ITEM_ASHEN_WOODS_BALM_MUSHROOM_1,
         FLAG_HIDDEN_ITEM_ASHEN_WOODS_BALM_MUSHROOM_2,
@@ -5829,3 +5829,61 @@ u16 GetMysteryGiftSpecies (void)
 #undef MYSTERY_GIFT_RECEIVED_FLAG
 #undef MYSTERY_GIFT_REQ_FLAG
 #undef MYSTERY_GIFT_ITEM
+
+// used to check saveblock space
+void CheckSavefileSize(void)
+{
+    u32 size = (sizeof(struct SaveBlock1));
+    u32 size2 = (sizeof(struct SaveBlock2));
+    u32 size3 = (sizeof(struct PokemonStorage));
+    ConvertIntToDecimalStringN(gStringVar1, size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, size2, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, size3, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
+// Checks the Atk, Spd and SpAtk EVs of a Pokémon in gSpecialVar_0x8004 and stores them in the 3 text buffers
+void CheckMonOffensiveEVs(void)
+{
+    u8 attackEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, &attackEV);
+    u8 speedEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, &speedEV);
+    u8 spAttackEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, &spAttackEV);
+
+    ConvertIntToDecimalStringN(gStringVar1, attackEV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, speedEV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, spAttackEV, STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+// Checks the HP, Def and SpDef EVs of a Pokémon in gSpecialVar_0x8004 and stores them in the 3 text buffers
+void CheckMonDefensiveEVs(void)
+{
+    u8 hpEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, &hpEV);
+    u8 defenseEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, &defenseEV);
+    u8 spDefenseEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, &spDefenseEV);
+
+    ConvertIntToDecimalStringN(gStringVar1, hpEV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, defenseEV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, spDefenseEV, STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+// Checks the IVs of a Pokémon in gSpecialVar_0x8004 and stores them in the 6 text buffers
+void CheckMonOffensiveIVs(void)
+{
+    u8 attackIV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV, &attackIV);
+    u8 speedIV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV, &speedIV);
+    u8 spAttackIV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV, &spAttackIV);
+
+    ConvertIntToDecimalStringN(gStringVar1, attackIV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, speedIV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, spAttackIV, STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+void CheckMonDefensiveIVs(void)
+{
+    u8 hpIV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV, &hpIV);
+    u8 defenseIV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV, &defenseIV);
+    u8 spDefenseIV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV, &spDefenseIV);
+
+    ConvertIntToDecimalStringN(gStringVar1, hpIV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, defenseIV, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, spDefenseIV, STR_CONV_MODE_LEFT_ALIGN, 3);
+}

@@ -991,7 +991,7 @@ void ItemUseOutOfBattle_Honey(u8 taskId)
     PlayerGetDestCoords(&x, &y);
 
     if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE // Player is on land encounter tile
-        && headerId != 0xFFFF // Map has wild Pokemon 
+        && headerId != 0xFFFF // Map has wild Pokemon
         && gWildMonHeaders[headerId].honeyMonsInfo != NULL) // Map has honey encounters
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
@@ -1024,7 +1024,7 @@ static void ItemUseOnFieldCB_HoneyFail(u8 taskId)
 u32 CanThrowBall(void)
 {
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
-        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) 
+        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
     {
         return 1;   // There are two present pokemon.
     }
@@ -1038,12 +1038,15 @@ u32 CanThrowBall(void)
         return 3;   // in semi-invulnerable state
     }
     #endif
-    
-    return 0;   // usable 
+    else if (FlagGet(FLAG_DISABLE_BALL_THROWS)){ //DEBUG
+      return 4;
+    }
+    return 0;   // usable
 }
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
     switch (CanThrowBall())
@@ -1074,6 +1077,9 @@ void ItemUseInBattle_PokeBall(u8 taskId)
             DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
+        break;
+    case 4: //Debug can't catch flag
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
         break;
     #endif
     }
@@ -1244,7 +1250,7 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
     }
 }
 
-void ItemUseOutOfBattle_FormChange(u8 taskId) 
+void ItemUseOutOfBattle_FormChange(u8 taskId)
 {
     gItemUseCB = ItemUseCB_FormChange;
     gTasks[taskId].data[0] = FALSE;

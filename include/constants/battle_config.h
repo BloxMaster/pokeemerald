@@ -143,6 +143,10 @@
 #define B_NEW_IMPACT_PALETTE            FALSE    // If set to TRUE, it updates the basic 'hit' palette.
 #define B_NEW_SURF_PARTICLE_PALETTE     FALSE    // If set to TRUE, it updates Surf's wave palette.
 
-#define B_ENABLE_DEBUG                  FALSE     // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
+#if DEBUG
+#define B_ENABLE_DEBUG                  TRUE     // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
+#else
+#define B_ENABLE_DEBUG                  FALSE
+#endif
 
 #endif // GUARD_CONSTANTS_BATTLE_CONFIG_H

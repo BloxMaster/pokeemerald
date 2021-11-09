@@ -45,6 +45,7 @@
 #include "constants/songs.h"
 #include "union_room.h"
 #include "constants/rgb.h"
+#include "debug.h"
 
 // Menu actions
 enum
@@ -52,6 +53,7 @@ enum
     MENU_ACTION_POKEDEX,
     MENU_ACTION_POKEMON,
     MENU_ACTION_BAG,
+    MENU_ACTION_DEBUG,
     MENU_ACTION_POKENAV,
     MENU_ACTION_PLAYER,
     MENU_ACTION_SAVE,
@@ -97,6 +99,7 @@ static bool8 StartMenuPokeNavCallback(void);
 static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
+static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
@@ -162,6 +165,7 @@ static const struct MenuAction sStartMenuItems[] =
     {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
     {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
+    {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
     {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
     {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
     {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
@@ -198,12 +202,12 @@ static const struct WindowTemplate sWindowTemplates_LinkBattleSave[] =
 };
 
 static const struct WindowTemplate sSaveInfoWindowTemplate = {
-    .bg = 0, 
-    .tilemapLeft = 1, 
-    .tilemapTop = 1, 
-    .width = 16, 
-    .height = 12, 
-    .paletteNum = 15, 
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 16,
+    .height = 12,
+    .paletteNum = 15,
     .baseBlock = 8
 };
 
@@ -289,24 +293,23 @@ static void AddStartMenuAction(u8 action)
 static void BuildNormalStartMenu(void)
 {
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
-    }
+
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKEMON);
-    }
 
     AddStartMenuAction(MENU_ACTION_BAG);
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKENAV);
-    }
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
+
+    if (FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU) == TRUE)
+        AddStartMenuAction(MENU_ACTION_DEBUG);
+
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
@@ -590,11 +593,22 @@ static bool8 HandleStartMenuInput(void)
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
 
         if (gMenuCallback != StartMenuSaveCallback
-            && gMenuCallback != StartMenuExitCallback
-            && gMenuCallback != StartMenuSafariZoneRetireCallback
-            && gMenuCallback != StartMenuBattlePyramidRetireCallback)
+         && gMenuCallback != StartMenuExitCallback
+         && gMenuCallback != StartMenuSafariZoneRetireCallback
+         && gMenuCallback != StartMenuBattlePyramidRetireCallback)
         {
-           FadeScreen(FADE_TO_BLACK, 0);
+            if (gMenuCallback == StartMenuDebugCallback)
+            {
+                PlayerFreeze();
+                sub_808BCF4();
+                ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
+                RemoveStartMenuWindow();
+                ScriptContext2_Enable();
+            }
+            else
+            {
+                FadeScreen(FADE_TO_BLACK, 0);
+            }
         }
 
         return FALSE;
@@ -716,6 +730,14 @@ static bool8 StartMenuOptionCallback(void)
     }
 
     return FALSE;
+}
+
+static bool8 StartMenuDebugCallback(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    Debug_ShowMainMenu();
+
+    return TRUE;
 }
 
 static bool8 StartMenuExitCallback(void)
