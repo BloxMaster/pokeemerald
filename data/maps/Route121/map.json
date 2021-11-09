@@ -518,8 +518,8 @@
     },
     {
       "type": "sign",
-      "x": 41,
-      "y": 8,
+      "x": 40,
+      "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route121_EventScript_SafariZoneSign"
