@@ -11151,7 +11151,7 @@ static const struct LevelUpMove sGigalithLevelUpLearnset[] = {
     #ifdef REBALANCED_VERSION
         LEVEL_UP_MOVE( 0, MOVE_MORNING_SUN),
     #endif
-	LEVEL_UP_MOVE( 1, MOVE_ROCK_SLIDE),
+    LEVEL_UP_MOVE( 1, MOVE_POWER_GEM),
 	LEVEL_UP_MOVE( 1, MOVE_TACKLE),
 	LEVEL_UP_MOVE( 1, MOVE_HARDEN),
 	LEVEL_UP_MOVE( 1, MOVE_SAND_ATTACK),
@@ -13824,6 +13824,7 @@ static const struct LevelUpMove sMeloettaLevelUpLearnset[] = {
 	LEVEL_UP_MOVE(71, MOVE_ROLE_PLAY),
 	LEVEL_UP_MOVE(78, MOVE_CLOSE_COMBAT),
 	LEVEL_UP_MOVE(85, MOVE_PERISH_SONG),
+    LEVEL_UP_MOVE(92, MOVE_RELIC_SONG),
 	LEVEL_UP_END
 };
 
@@ -19597,7 +19598,7 @@ static const struct LevelUpMove sShayminSkyLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sKyuremWhiteLevelUpLearnset[] = {
+static const struct LevelUpMove sKyuremBlackLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE( 8, MOVE_IMPRISON),
@@ -19616,7 +19617,7 @@ static const struct LevelUpMove sKyuremWhiteLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sKyuremBlackLevelUpLearnset[] = {
+static const struct LevelUpMove sKyuremWhiteLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE( 8, MOVE_IMPRISON),
