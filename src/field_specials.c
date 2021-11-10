@@ -5928,7 +5928,7 @@ static void Task_TilemapLoaderFadeOut(u8 taskId)
         Free(sTilemapPtr);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
-        SetMainCallback2(sub_80861E8);
+        SetMainCallback2(CB2_ReturnToFieldFadeFromBlack);
     }
 }
 
@@ -6026,7 +6026,7 @@ static void CB2_ShowVarBasedTilemap(void)
 
     if (index > NELEMS(sVarBasedTileData) || sVarBasedTileData[index].tiles == NULL || sVarBasedTileData[index].tilemap == NULL)
     {
-        SetMainCallback2(sub_80861E8);
+        SetMainCallback2(CB2_ReturnToFieldFadeFromBlack);
         return;
     }
 
