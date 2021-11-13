@@ -344,7 +344,7 @@ static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 static void CreateTypeIconSprites(void);
 //Stats screen HGSS_Ui
 #define SCROLLING_MON_X 146
-#define HGSS_DECAPPED 0 //0 false, 1 true
+#define HGSS_DECAPPED 1 //0 false, 1 true
 #define HGSS_DARK_MODE 0 //0 false, 1 true
 #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES 0 //0 false, 1 true
 static void LoadTilesetTilemapHGSS(u8 page);
@@ -2763,7 +2763,7 @@ static void CreateMonSpritesAtPos(u16 selectedMon, u16 ignored)
 
     // Create top mon sprite
     dexNum = GetPokemonSpriteToDisplay(selectedMon - 1);
-    if (dexNum != 0xFFFF)
+    if (dexNum != 0xFFFF && dexNum != 0)
     {
         spriteId = CreatePokedexMonSprite(dexNum, SCROLLING_MON_X, 0x50);
         gSprites[spriteId].callback = SpriteCB_PokedexListMonSprite;
@@ -2772,7 +2772,7 @@ static void CreateMonSpritesAtPos(u16 selectedMon, u16 ignored)
 
     // Create mid mon sprite
     dexNum = GetPokemonSpriteToDisplay(selectedMon);
-    if (dexNum != 0xFFFF)
+    if (dexNum != 0xFFFF && dexNum != 0)
     {
         spriteId = CreatePokedexMonSprite(dexNum, SCROLLING_MON_X, 0x50);
         gSprites[spriteId].callback = SpriteCB_PokedexListMonSprite;
@@ -2781,7 +2781,7 @@ static void CreateMonSpritesAtPos(u16 selectedMon, u16 ignored)
 
     // Create bottom mon sprite
     dexNum = GetPokemonSpriteToDisplay(selectedMon + 1);
-    if (dexNum != 0xFFFF)
+    if (dexNum != 0xFFFF && dexNum != 0)
     {
         spriteId = CreatePokedexMonSprite(dexNum, SCROLLING_MON_X, 0x50);
         gSprites[spriteId].callback = SpriteCB_PokedexListMonSprite;
@@ -2847,7 +2847,7 @@ static void CreateScrollingPokemonSprite(u8 direction, u16 selectedMon)
     {
     case 1: // up
         dexNum = GetPokemonSpriteToDisplay(selectedMon - 1);
-        if (dexNum != 0xFFFF)
+        if (dexNum != 0xFFFF && dexNum != 0)
         {
             spriteId = CreatePokedexMonSprite(dexNum, SCROLLING_MON_X, 0x50);
             gSprites[spriteId].callback = SpriteCB_PokedexListMonSprite;
@@ -2860,7 +2860,7 @@ static void CreateScrollingPokemonSprite(u8 direction, u16 selectedMon)
         break;
     case 2: // down
         dexNum = GetPokemonSpriteToDisplay(selectedMon + 1);
-        if (dexNum != 0xFFFF)
+        if (dexNum != 0xFFFF && dexNum != 0)
         {
             spriteId = CreatePokedexMonSprite(dexNum, SCROLLING_MON_X, 0x50);
             gSprites[spriteId].callback = SpriteCB_PokedexListMonSprite;
