@@ -11,6 +11,7 @@
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
+  "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -67,7 +68,8 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_DREAD_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_DEWFORD_MANOR_DREAD_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_DEWFORD_MANOR_DREAD_PLATE",
+      "quantity": 0
     },
     {
       "type": "hidden_item",
@@ -75,7 +77,8 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_DEWFORD_MANOR_BOTTLE_CAP"
+      "flag": "FLAG_HIDDEN_ITEM_DEWFORD_MANOR_BOTTLE_CAP",
+      "quantity": 0
     }
   ]
 }
