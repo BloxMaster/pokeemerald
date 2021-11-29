@@ -290,7 +290,7 @@ static const u8 gDebugText_VariableValueSet[] =      _("Var: {STR_VAR_1}        
 // Give Menu
 static const u8 gDebugText_Give_GiveItem[] =            _("Give item XXXX");
 static const u8 gDebugText_ItemQuantity[] =             _("Quantity:       \n{STR_VAR_1}    \n\n{STR_VAR_2}");
-static const u8 gDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
+static const u8 gDebugText_ItemID[] =                   _("{STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
 static const u8 gDebugText_Give_AllTMs[] =              _("Give all TMs");
 static const u8 gDebugText_Give_Egg[] =                 _("Give Egg");
 static const u8 gDebugText_Give_GivePokemonSimple[] =   _("Pkm(lvl)");
@@ -715,6 +715,7 @@ static void DebugAction_Util_HealParty(u8 taskId)
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
     Debug_DestroyMenu(taskId);
+    EnableBothScriptContexts();
 }
 
 static void DebugAction_Util_Fly(u8 taskId)
@@ -1441,8 +1442,8 @@ static void DebugAction_Give_Item(u8 taskId)
     gTasks[taskId].data[3] = 1;            //Current ID
     gTasks[taskId].data[4] = 0;            //Digit Selected
     gTasks[taskId].data[6] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].data[3]);
-    gSprites[gTasks[taskId].data[6]].oam.x = DEBUG_NUMBER_ICON_X+10;
-    gSprites[gTasks[taskId].data[6]].oam.y = DEBUG_NUMBER_ICON_Y+10;
+    gSprites[gTasks[taskId].data[6]].x = DEBUG_NUMBER_ICON_X+10;
+    gSprites[gTasks[taskId].data[6]].y = DEBUG_NUMBER_ICON_Y+10;
     gSprites[gTasks[taskId].data[6]].oam.priority = 0;
 }
 static void DebugAction_Give_Item_SelectId(u8 taskId)
@@ -1486,8 +1487,8 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[6]]); //Destroy item icon
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
         gTasks[taskId].data[6] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].data[3]);
-        gSprites[gTasks[taskId].data[6]].oam.x = DEBUG_NUMBER_ICON_X+10;
-        gSprites[gTasks[taskId].data[6]].oam.y = DEBUG_NUMBER_ICON_Y+10;
+        gSprites[gTasks[taskId].data[6]].x = DEBUG_NUMBER_ICON_X+10;
+        gSprites[gTasks[taskId].data[6]].y = DEBUG_NUMBER_ICON_Y+10;
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
 
