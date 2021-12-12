@@ -1,8 +1,6 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
-#include "constants/day_night.h"
-
 #define LAND_WILD_COUNT     12
 #define WATER_WILD_COUNT    5
 #define ROCK_WILD_COUNT     5
@@ -19,7 +17,7 @@ struct WildPokemon
 struct WildPokemonInfo
 {
     u8 encounterRate;
-    const struct WildPokemon *wildPokemon[TIMES_OF_DAY_COUNT];
+    const struct WildPokemon *wildPokemon;
 };
 
 struct WildPokemonHeader
@@ -32,9 +30,6 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *fishingMonsInfo;
     const struct WildPokemonInfo *honeyMonsInfo;
 };
-
-extern bool8 gIsFishingEncounter;
-extern bool8 gIsSurfingEncounter;
 
 extern const struct WildPokemonHeader gWildMonHeaders[];
 extern bool8 gIsFishingEncounter;
@@ -53,5 +48,7 @@ bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
 void HoneyWildEncounter(void);
 u16 GetCurrentMapWildMonHeaderId(void);
+void Debug_StartWildBattle(u16 species, u8 level, u32 flags, bool8 forceShiny);
+
 
 #endif // GUARD_WILD_ENCOUNTER_H
