@@ -2968,7 +2968,7 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32),
                         7, 0,
                         0,
-                        2, 7, 1);
+                        5, 1, 6);
 }
 
 static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
@@ -2978,7 +2978,7 @@ static void PrintAbilityOnAbilityPopUp(u32 ability, u8 spriteId1, u8 spriteId2)
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId2].oam.tileNum * 32) + 256,
                         7, 1,
                         4,
-                        7, 9, 1);
+                        1, 7, 2);
 }
 
 #define PIXEL_COORDS_TO_OFFSET(x, y)(            \
@@ -3162,7 +3162,7 @@ void UpdateAbilityPopup(u8 battlerId)
     u8 spriteId1 = gBattleStruct->abilityPopUpSpriteIds[battlerId][0];
     u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battlerId][1];
     u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
-    
+
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
 }
@@ -3264,13 +3264,13 @@ static const struct SpriteSheet sSpriteSheet_LastUsedBallWindow =
     sLastUsedBallWindowGfx, sizeof(sLastUsedBallWindowGfx), LAST_BALL_WINDOW_TAG
 };
 
-#define LAST_USED_BALL_X_F    15
-#define LAST_USED_BALL_X_0    -15
-#define LAST_USED_BALL_Y      ((IsDoubleBattle()) ? 78 : 68)
+#define LAST_USED_BALL_X_F    14
+#define LAST_USED_BALL_X_0    -16
+#define LAST_USED_BALL_Y      ((IsDoubleBattle()) ? 81 : 71)
 
-#define LAST_BALL_WIN_X_F       (LAST_USED_BALL_X_F - 1)
+#define LAST_BALL_WIN_X_F       (LAST_USED_BALL_X_F - 0)
 #define LAST_BALL_WIN_X_0       (LAST_USED_BALL_X_0 - 0)
-#define LAST_USED_WIN_Y         (LAST_USED_BALL_Y - 8)
+#define LAST_USED_WIN_Y         (LAST_USED_BALL_Y - 9)
 
 #define sHide  data[0]
 
@@ -3297,7 +3297,7 @@ void TryAddLastUsedBallItemSprites(void)
         CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
         gLastThrownBall = gBagPockets[BALLS_POCKET].itemSlots[0].itemId;
     }
-    
+
     if (CanThrowBall() != 0
      || (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      || !CheckBagHasItem(gLastThrownBall, 1))
@@ -3345,7 +3345,7 @@ static void DestroyLastUsedBallGfx(struct Sprite *sprite)
 }
 
 static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
-{    
+{
     if (sprite->sHide)
     {
         if (sprite->x != LAST_BALL_WIN_X_0)
@@ -3362,7 +3362,7 @@ static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
 }
 
 static void SpriteCB_LastUsedBall(struct Sprite *sprite)
-{    
+{
     if (sprite->sHide)
     {
         if (sprite->x != LAST_USED_BALL_X_0)
@@ -3418,4 +3418,3 @@ void TryRestoreLastUsedBall(void)
         TryAddLastUsedBallItemSprites();
     #endif
 }
-
