@@ -1198,7 +1198,7 @@ void Task_HandleChooseMonInput(u8 taskId)
             HandleChooseMonCancel(taskId, slotPtr);
             break;
         case 3: // Quick Swap
-            if (gPartyMenu.action != PARTY_ACTION_SWITCH && *slotPtr != PARTY_SIZE + 1)
+            if (gPartyMenu.action != PARTY_MENU_TYPE_IN_BATTLE && *slotPtr != PARTY_SIZE + 1)
               gTasks[taskId].func = CursorCb_Switch;
               break;
         case 8: // Start button
@@ -1420,8 +1420,15 @@ static u16 PartyMenuButtonHandler(s8 *slotPtr)
     if (JOY_NEW(START_BUTTON))
         return 8;
 
-    if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(SELECT_BUTTON)){
+      if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
+        PlaySE(SE_FAILURE);
+      else if (gPartyMenu.action == PARTY_ACTION_SWITCH){
+        return 1;
+      }
+      else
         return 3;
+    }
 
     if (movementDir)
     {
@@ -4966,7 +4973,14 @@ static void CB2_ShowSummaryScreenToForgetMove(void)
 
 static void CB2_ReturnToPartyMenuWhileLearningMove(void)
 {
-    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
+    if (gSpecialVar_ItemId == ITEM_RARE_CANDY && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+    {
+        InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
+    }
+    else
+    {
+        InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_NONE, Task_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
+    }
 }
 
 static void Task_ReturnToPartyMenuWhileLearningMove(u8 taskId)
