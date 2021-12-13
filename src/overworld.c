@@ -540,6 +540,8 @@ static void InitMapView(void)
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();
     InitTilesetAnimations();
+    InvalidateCurrentTint();
+
 }
 
 const struct MapLayout *GetMapLayout(void)

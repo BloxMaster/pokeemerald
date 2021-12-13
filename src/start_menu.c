@@ -599,11 +599,15 @@ static bool8 HandleStartMenuInput(void)
         {
             if (gMenuCallback == StartMenuDebugCallback)
             {
+#if DEBUG
                 PlayerFreeze();
                 sub_808BCF4();
                 ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
                 RemoveStartMenuWindow();
                 ScriptContext2_Enable();
+#else
+                return FALSE;
+#endif
             }
             else
             {
@@ -734,10 +738,16 @@ static bool8 StartMenuOptionCallback(void)
 
 static bool8 StartMenuDebugCallback(void)
 {
+#if DEBUG
     PlaySE(SE_WIN_OPEN);
     Debug_ShowMainMenu();
-
     return TRUE;
+#else
+    PlaySE(SE_FAILURE);
+    RemoveExtraStartMenuWindows();
+    HideStartMenu();
+    return TRUE;
+#endif
 }
 
 static bool8 StartMenuExitCallback(void)

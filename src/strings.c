@@ -1385,6 +1385,7 @@ const u8 gText_BattleFactoryDesc[] = _("Aim for victory using rental Pokémon!\n
 const u8 gText_BattlePikeDesc[] = _("Select one of three paths to battle!\nYour luck will be tested.");
 const u8 gText_BattlePyramidDesc[] = _("Aim for the top with exploration!\nYour bravery will be tested.");
 const u8 gText_ContinueMenuPlayer[] = _("Player:");
+const u8 gText_ContinueMenuMap[] = _("Location:");
 const u8 gText_ContinueMenuTime[] = _("Time:");
 const u8 gText_ContinueMenuPokedex[] = _("Pokédex:");
 const u8 gText_ContinueMenuBadges[] = _("Badges:");

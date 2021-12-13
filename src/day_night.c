@@ -213,6 +213,10 @@ static void TintPaletteForDayNight(u16 offset, u16 size)
 #endif
 
         period = (hour * TINT_PERIODS_PER_HOUR) + hourPhase;
+        if (sDNSystemControl.prevTintPeriod == 0xFFFF)
+        {
+          CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
+        }
         if (!sDNSystemControl.initialized || sDNSystemControl.currTintPeriod != period)
         {
           sDNSystemControl.initialized = TRUE;
@@ -259,6 +263,7 @@ void CheckClockForImmediateTimeEvents(void)
 
 void InvalidateCurrentTint(void)
 {
+  sDNSystemControl.prevTintPeriod = 0xFFFF;
   ProcessImmediateTimeEvents();
 }
 

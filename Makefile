@@ -63,15 +63,32 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM_NAME := pokeemerald.gba
+ROM_NAME := inclementemerald.gba
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
-OBJ_DIR_NAME := build/emerald
+OBJ_DIR_NAME := build/inclementemerald
 
-MODERN_ROM_NAME := pokeemerald_modern.gba
+MODERN_ROM_NAME := inclementemerald_modern.gba
 MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
 MODERN_MAP_NAME := $(MODERN_ROM_NAME:.gba=.map)
 MODERN_OBJ_DIR_NAME := build/modern
+
+# Change output based on whether we're building debug.
+#
+# If DEBUG=1 then..
+# ..Else, it isn't, and we're making normal build.
+ifeq ($(DDEBUG),1)
+ROM_NAME := inclementemerald-debug.gba
+ELF_NAME := $(ROM_NAME:.gba=.elf)
+MAP_NAME := $(ROM_NAME:.gba=.map)
+OBJ_DIR_NAME := build/inclementemerald-debug
+else
+ROM_NAME := inclementemerald.gba
+ELF_NAME := $(ROM_NAME:.gba=.elf)
+MAP_NAME := $(ROM_NAME:.gba=.map)
+OBJ_DIR_NAME := build/inclementemerald
+endif
+
 
 SHELL := /bin/bash -o pipefail
 
@@ -229,10 +246,11 @@ endif
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
 
-clean: mostlyclean clean-tools
+# clean: mostlyclean clean-tools
+clean: mostlyclean
 
-clean-tools:
-	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
+#clean-tools:
+#	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 clean-audio: tidynonmodern tidymodern
 	rm -f $(SAMPLE_SUBDIR)/*.bin
