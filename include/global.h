@@ -63,6 +63,9 @@
 // Converts a Q8.8 fixed-point format number to a regular integer
 #define Q_8_8_TO_INT(n) ((int)((n) / 256))
 
+// Gets the fractional part of a Q8.8 fixed-point format number as a regular integer (to four decimal places)
+#define Q_8_8_FRACTIONAL(n) ((int)((((n) & 0xFF) * 1000) / 256))
+
 // Converts a Q4.12 fixed-point format number to a regular integer
 #define Q_4_12_TO_INT(n)  ((int)((n) / 4096))
 #define UQ_4_12_TO_INT(n)  ((int)((n) / 4096))
@@ -184,6 +187,7 @@ struct Time
     /*0x02*/ s8 hours;
     /*0x03*/ s8 minutes;
     /*0x04*/ s8 seconds;
+    /*0x05*/ s8 dayOfWeek;
 };
 
 struct Pokedex
@@ -493,6 +497,7 @@ struct SaveBlock2
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
              u16 gameDifficulty:4; // Which difficulty the player chose (Normal/Hard/Challenge/Insanity, with Normal being 0)
+             u16 twentyFourHourClock:1;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x6];
              u8 levelCaps; // Various options for level caps

@@ -48,7 +48,7 @@ bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
 void HoneyWildEncounter(void);
 u16 GetCurrentMapWildMonHeaderId(void);
-void Debug_StartWildBattle(u16 species, u8 level, u32 flags, bool8 forceShiny);
+void Debug_StartWildBattle(u16 species, u8 level, u32 flags);
 
 
 #endif // GUARD_WILD_ENCOUNTER_H

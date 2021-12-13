@@ -10,6 +10,8 @@
 #include "berry.h"
 #include "main.h"
 #include "overworld.h"
+#include "string_util.h"
+#include "text.h"
 #include "wallclock.h"
 
 static void UpdatePerDay(struct Time *localTime);
@@ -84,4 +86,56 @@ void StartWallClock(void)
 {
     SetMainCallback2(CB2_StartWallClock);
     gMain.savedCallback = ReturnFromStartWallClock;
+}
+
+u8* WriteTimeString(u8 *dest, u8 hours, u8 minutes, bool8 twentyFourHourMode, bool8 shouldWriteAMPM)
+{
+    bool8 isPM = FALSE;
+
+    if (!twentyFourHourMode)
+    {
+        if (hours == 0)
+        {
+            hours = 12;
+        }
+        else if (hours == 12)
+        {
+            isPM = TRUE;
+        }
+        else if (hours > 12)
+        {
+            isPM = TRUE;
+            hours -= 12;
+        }
+    }
+
+    dest = ConvertIntToDecimalStringN(dest, hours, STR_CONV_MODE_LEFT_ALIGN, (hours >= 10) ? 2 : 1);
+    *dest++ = CHAR_COLON;
+    dest = ConvertIntToDecimalStringN(dest, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+    if (!twentyFourHourMode && shouldWriteAMPM)
+    {
+        *dest++ = CHAR_SPACE;
+
+        if (isPM)
+            *dest++ = CHAR_P;
+        else
+            *dest++ = CHAR_A;
+
+        *dest++ = CHAR_M;
+    }
+    *dest = EOS;
+
+    return dest;
+}
+
+void WriteCurrentTimeStringToStrVar1(void)
+{
+    WriteTimeString(gStringVar1, gLocalTime.hours, gLocalTime.minutes, gSaveBlock2Ptr->twentyFourHourClock, TRUE);
+}
+
+void SetDayOfWeek(void)
+{
+    RtcSetDayOfWeek(gSpecialVar_0x8004);
+    InitTimeBasedEvents();
 }

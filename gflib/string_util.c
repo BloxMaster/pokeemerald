@@ -335,6 +335,15 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
     return dest;
 }
 
+u8 *ConvertQ88ToDecimalStringN(u8 *dest, s16 value, enum StringConvertMode mode, u8 n)
+{
+    dest = ConvertIntToDecimalStringN(dest, Q_8_8_TO_INT(value), mode, n);
+    *dest++ = CHAR_PERIOD;
+    dest = ConvertIntToDecimalStringN(dest, Q_8_8_FRACTIONAL(value), STR_CONV_MODE_LEADING_ZEROS, 3);
+    *dest = EOS;
+    return dest;
+}
+
 u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 {
     for (;;)
@@ -387,18 +396,18 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
-    const u8 setBrailleFont[] = { 
-        EXT_CTRL_CODE_BEGIN, 
-        EXT_CTRL_CODE_SIZE, 
-        6, 
-        EOS 
+    const u8 setBrailleFont[] = {
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SIZE,
+        6,
+        EOS
     };
-    const u8 gotoLine2[] = { 
-        CHAR_NEWLINE, 
-        EXT_CTRL_CODE_BEGIN, 
-        EXT_CTRL_CODE_SHIFT_DOWN, 
-        2, 
-        EOS 
+    const u8 gotoLine2[] = {
+        CHAR_NEWLINE,
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SHIFT_DOWN,
+        2,
+        EOS
     };
 
     dest = StringCopy(dest, setBrailleFont);

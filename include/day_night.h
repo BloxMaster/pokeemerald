@@ -19,6 +19,7 @@ u8 GetTimeOfDay(s8 hours);
 void LoadCompressedPaletteDayNight(const void *src, u16 offset, u16 size);
 void LoadPaletteDayNight(const void *src, u16 offset, u16 size);
 void CheckClockForImmediateTimeEvents(void);
+void InvalidateCurrentTint(void);
 void ProcessImmediateTimeEvents(void);
 void DoLoadSpritePaletteDayNight(const u16 *src, u16 paletteOffset);
 

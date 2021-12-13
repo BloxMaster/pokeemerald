@@ -86,6 +86,13 @@ bool8 SetUpFieldMove_Flash(void)
         gPostMenuFieldCallback = FieldCallback_Flash;
         return TRUE;
     }
+    else if (IsMapTypeUnderground(gMapHeader.mapType) && !FlagGet(FLAG_SYS_USE_FLASH))
+    {
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_Flash;
+        return TRUE;
+    }
+
 
     return FALSE;
 }

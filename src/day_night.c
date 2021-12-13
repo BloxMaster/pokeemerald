@@ -7,6 +7,8 @@
 #include "overworld.h"
 #include "palette.h"
 #include "rtc.h"
+#include "strings.h"
+#include "string_util.h"
 #include "constants/day_night.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
@@ -14,6 +16,11 @@
 #define TINT_MORNING Q_8_8(0.7), Q_8_8(0.7), Q_8_8(0.9)
 #define TINT_DAY Q_8_8(1.0), Q_8_8(1.0), Q_8_8(1.0)
 #define TINT_NIGHT Q_8_8(0.6), Q_8_8(0.6), Q_8_8(0.92)
+
+#define TINT_MORNING_CAVE Q_8_8(0.60), Q_8_8(0.66), Q_8_8(0.83)
+#define TINT_DAY_CAVE Q_8_8(0.62), Q_8_8(0.62), Q_8_8(0.72)
+#define TINT_NIGHT_CAVE Q_8_8(0.55), Q_8_8(0.59), Q_8_8(0.62)
+#define TINT_DARK_CAVE Q_8_8(0.15), Q_8_8(0.16), Q_8_8(0.24)
 
 EWRAM_DATA u16 gPlttBufferPreDN[PLTT_BUFFER_SIZE] = {0};
 EWRAM_DATA struct PaletteOverride *gPaletteOverrides[4] = {NULL};
@@ -46,8 +53,8 @@ static const u16 sTimeOfDayTints[][3] = {
     [9] =   {Q_8_8(1.0), Q_8_8(0.9), Q_8_8(1.0)},
     [10] =  {TINT_DAY},
     [11] =  {TINT_DAY},
-    [12] =  {TINT_DAY},
-    [13] =  {TINT_DAY},
+    [12] =  {Q_8_8(1.2), Q_8_8(1.2), Q_8_8(1.2)},
+    [13] =  {Q_8_8(1.1), Q_8_8(1.1), Q_8_8(1.1)},
     [14] =  {TINT_DAY},
     [15] =  {TINT_DAY},
     [16] =  {TINT_DAY},
@@ -58,6 +65,33 @@ static const u16 sTimeOfDayTints[][3] = {
     [21] =  {TINT_NIGHT},
     [22] =  {TINT_NIGHT},
     [23] =  {TINT_NIGHT},
+};
+
+static const u16 sTimeOfDayTintsCave[][3] = {
+    [0] =   {TINT_NIGHT_CAVE},
+    [1] =   {TINT_NIGHT_CAVE},
+    [2] =   {TINT_NIGHT_CAVE},
+    [3] =   {TINT_NIGHT_CAVE},
+    [4] =   {TINT_NIGHT_CAVE},
+    [5] =   {TINT_MORNING_CAVE},
+    [6] =   {TINT_MORNING_CAVE},
+    [7] =   {TINT_MORNING_CAVE},
+    [8] =   {TINT_MORNING_CAVE},
+    [9] =   {TINT_DAY_CAVE},
+    [10] =  {TINT_DAY_CAVE},
+    [11] =  {TINT_DAY_CAVE},
+    [12] =  {TINT_DAY_CAVE},
+    [13] =  {TINT_DAY_CAVE},
+    [14] =  {TINT_DAY_CAVE},
+    [15] =  {TINT_DAY_CAVE},
+    [16] =  {TINT_DAY_CAVE},
+    [17] =  {TINT_DAY_CAVE},
+    [18] =  {Q_8_8(0.75), Q_8_8(0.62), Q_8_8(0.68)},
+    [19] =  {Q_8_8(0.75), Q_8_8(0.62), Q_8_8(0.68)},
+    [20] =  {TINT_NIGHT_CAVE},
+    [21] =  {TINT_NIGHT_CAVE},
+    [22] =  {TINT_NIGHT_CAVE},
+    [23] =  {TINT_NIGHT_CAVE},
 };
 
 u8 GetCurrentTimeOfDay(void)
@@ -120,9 +154,12 @@ static void LoadPaletteOverrides(void)
 
 static bool8 ShouldTintOverworld(void)
 {
+    if (FlagGet(FLAG_SYS_USE_FLASH))
+      return FALSE;
     if (IsMapTypeOutdoors(gMapHeader.mapType))
-        return TRUE;
-
+      return TRUE;
+    else if (IsMapTypeUnderground(gMapHeader.mapType))
+      return TRUE;
     // more conditions?
     return FALSE;
 }
@@ -176,15 +213,20 @@ static void TintPaletteForDayNight(u16 offset, u16 size)
 #endif
 
         period = (hour * TINT_PERIODS_PER_HOUR) + hourPhase;
-
         if (!sDNSystemControl.initialized || sDNSystemControl.currTintPeriod != period)
         {
-            sDNSystemControl.initialized = TRUE;
-            sDNSystemControl.currTintPeriod = period;
-            nextHour = (hour + 1) % 24;
-            LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTints[hour], sTimeOfDayTints[nextHour], hourPhase);
+          sDNSystemControl.initialized = TRUE;
+          sDNSystemControl.currTintPeriod = period;
+          nextHour = (hour + 1) % 24;
+          if (IsMapTypeOutdoors(gMapHeader.mapType))
+            {
+              LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTints[hour], sTimeOfDayTints[nextHour], hourPhase);
+            }
+          if (IsMapTypeUnderground(gMapHeader.mapType) && !FlagGet(FLAG_SYS_USE_FLASH))
+            {
+              LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTintsCave[hour], sTimeOfDayTintsCave[nextHour], hourPhase);
+            }
         }
-
         TintPalette_CustomToneWithCopy(gPlttBufferPreDN + offset, gPlttBufferUnfaded + offset, size / 2, sDNSystemControl.currRGBTint[0], sDNSystemControl.currRGBTint[1], sDNSystemControl.currRGBTint[2], FALSE);
     }
     else
@@ -215,6 +257,11 @@ void CheckClockForImmediateTimeEvents(void)
         RtcCalcLocalTimeFast();
 }
 
+void InvalidateCurrentTint(void)
+{
+  ProcessImmediateTimeEvents();
+}
+
 void ProcessImmediateTimeEvents(void)
 {
     s8 hour, nextHour;
@@ -240,7 +287,7 @@ void ProcessImmediateTimeEvents(void)
                      gDNTintOverride[2] > 0)
             {
                 sDNSystemControl.prevTintPeriod = 0xFFFF; // invalidate current tint
-            
+
                 if (gDNTintOverride[0] == 0xFFFF) // signal to invalidate when turning off override
                 {
                     gDNTintOverride[0] = 0;
@@ -266,8 +313,15 @@ void ProcessImmediateTimeEvents(void)
                 else
 #endif
                 {
-                    nextHour = (hour + 1) % 24;
-                    LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTints[hour], sTimeOfDayTints[nextHour], hourPhase);
+                  nextHour = (hour + 1) % 24;
+                  if (IsMapTypeOutdoors(gMapHeader.mapType))
+                    {
+                      LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTints[hour], sTimeOfDayTints[nextHour], hourPhase);
+                    }
+                  if (IsMapTypeUnderground(gMapHeader.mapType) && !FlagGet(FLAG_SYS_USE_FLASH))
+                    {
+                      LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTintsCave[hour], sTimeOfDayTintsCave[nextHour], hourPhase);
+                    }
                 }
 
                 TintPalette_CustomToneWithCopy(gPlttBufferPreDN, gPlttBufferUnfaded, BG_PLTT_SIZE / 2, sDNSystemControl.currRGBTint[0], sDNSystemControl.currRGBTint[1], sDNSystemControl.currRGBTint[2], TRUE);
@@ -279,7 +333,7 @@ void ProcessImmediateTimeEvents(void)
             sDNSystemControl.retintPhase = 0;
             TintPalette_CustomToneWithCopy(gPlttBufferPreDN + (BG_PLTT_SIZE / 2), gPlttBufferUnfaded + (BG_PLTT_SIZE / 2), OBJ_PLTT_SIZE / 2, sDNSystemControl.currRGBTint[0], sDNSystemControl.currRGBTint[1], sDNSystemControl.currRGBTint[2], TRUE);
             LoadPaletteOverrides();
-            
+
             if (gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_SCREEN_FADING_IN &&
                 gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_SCREEN_FADING_OUT)
                 CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);

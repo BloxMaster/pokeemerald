@@ -285,6 +285,9 @@ $(FONTGFXDIR)/font2.fwjpnfont: $(FONTGFXDIR)/font2_japanese.png
 
 $(FONTGFXDIR)/font6.fwjpnfont: $(FONTGFXDIR)/font6_braille.png
 	$(GFX) $< $@
+	
+$(FONTGFXDIR)/font9.latfont: $(FONTGFXDIR)/font9_latin.png
+	$(GFX) $< $@
 
 $(FONTGFXDIR)/unused_frlg_male.fwjpnfont: $(FONTGFXDIR)/unused_japanese_frlg_male_font.png
 	$(GFX) $< $@

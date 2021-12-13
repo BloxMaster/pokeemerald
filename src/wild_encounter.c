@@ -199,7 +199,7 @@ static u8 GetMedianLevelOfPlayerParty(void)
         }
         else
         {
-            partyLevels[i] = 1; 
+            partyLevels[i] = 1;
         }
     }
 
@@ -216,7 +216,7 @@ static u8 GetMedianLevelOfPlayerParty(void)
             }
         }
     }
-/* 
+/*
     Get median level of Pokemon that aren't eggs. Examples:
 
     partyLevels = [1, 1, 1, 40, 40, 50]
@@ -230,7 +230,7 @@ static u8 GetMedianLevelOfPlayerParty(void)
     medianIndex = (playerPartyCount / 2) + (PARTY_SIZE - playerPartyCount);
 
     medianLevel = partyLevels[medianIndex];
-    
+
     return medianLevel;
 }
 
@@ -1048,3 +1048,11 @@ void HoneyWildEncounter(void)
     TryGenerateWildMon(wildPokemonInfo, WILD_AREA_HONEY, 0);
     BattleSetup_StartWildBattle();
 }
+
+#if DEBUG
+void Debug_StartWildBattle(u16 species, u8 level, u32 flags)
+{
+    CreateWildMon(species, level);
+    BattleSetup_StartWildBattle();
+}
+#endif

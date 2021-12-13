@@ -828,7 +828,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
 
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER 
+    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER
      || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
 }
@@ -1354,6 +1354,14 @@ bool8 IsMapTypeOutdoors(u8 mapType)
      || mapType == MAP_TYPE_UNDERWATER
      || mapType == MAP_TYPE_CITY
      || mapType == MAP_TYPE_OCEAN_ROUTE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 IsMapTypeUnderground(u8 mapType)
+{
+    if (mapType == MAP_TYPE_UNDERGROUND)
         return TRUE;
     else
         return FALSE;
