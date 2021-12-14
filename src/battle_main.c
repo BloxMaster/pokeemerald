@@ -2610,11 +2610,19 @@ void SpriteCb_WildMon(struct Sprite *sprite)
 
 static void SpriteCb_MoveWildMonToRight(struct Sprite *sprite)
 {
+    if(gSaveBlock2Ptr->battleAnimSpeed > 0)
+    {
+      sprite->invisible = TRUE;
+    }
     if ((gIntroSlideFlags & 1) == 0)
     {
-        sprite->x2 += 2;
+        if(gSaveBlock2Ptr->battleAnimSpeed == 0)
+        {
+          sprite->x2 += 2;
+        }
         if (sprite->x2 == 0)
         {
+            sprite->invisible = FALSE;
             sprite->callback = SpriteCb_WildMonShowHealthbox;
         }
     }

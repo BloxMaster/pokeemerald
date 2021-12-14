@@ -192,14 +192,12 @@ struct Time
 
 struct Pokedex
 {
-    /*0x00*/ u8 order;
-    /*0x01*/ u8 mode;
-    /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
-    /*0x03*/ u8 unknown2;
-    /*0x04*/ u32 unownPersonality; // set when you first see Unown
-    /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
-    /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 filler[0x68]; // Previously Dex Flags, feel free to remove.
+    /*0x00*/ u8 order:4; // pokedex sorting order
+             u8 mode:2; // current mode, same format as below
+             u8 nationalunlocked:2; // 0: only regional, 1: national, 2: reserved
+    /*0x01*/ u32 unownPersonality; // set when you first see Unown  TODO: Replace with form ID
+    /*0x05*/ u32 spindaPersonality; // set when you first see Spinda (needs personality for spots)
+    /*0x09*/ u8 filler[0x6F]; // Previously Dex Flags, feel free to remove.
 };
 
 struct PokemonJumpRecords
@@ -490,18 +488,19 @@ struct SaveBlock2
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
     /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+    /*0x15*/ u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
              u16 gameDifficulty:4; // Which difficulty the player chose (Normal/Hard/Challenge/Insanity, with Normal being 0)
-             u16 twentyFourHourClock:1;
+    /*0x16*/ u16 twentyFourHourClock:1; //whether time is in 12hr or 24hr
+             u16 battleAnimSpeed:2; //whether intro slide is disabled and HP bar drops fast
+             u16 autoRun:1; // Automatically running by default?
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x6];
              u8 levelCaps; // Various options for level caps
-             bool8 autoRun;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD

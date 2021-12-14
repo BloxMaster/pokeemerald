@@ -1129,6 +1129,10 @@ void InitLinkBattleVsScreen(u8 taskId)
 
 void DrawBattleEntryBackground(void)
 {
+    if (gBattleTypeFlags & !BATTLE_TYPE_LINK && gSaveBlock2Ptr->battleAnimSpeed > 0)
+    {
+      return;
+    }
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         LZDecompressVram(gUnknown_08D778F0, (void*)(BG_CHAR_ADDR(1)));
@@ -1441,4 +1445,3 @@ void DrawTerrainTypeBattleBackground(void)
         break;
     }
 }
-
