@@ -250,7 +250,7 @@ static void HandleInputChooseAction(void)
     {
         PlaySE(SE_SELECT);
         TryHideLastUsedBall();
-        
+
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
@@ -326,6 +326,16 @@ static void HandleInputChooseAction(void)
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(1, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
+        }
+        else
+        {
+          if(!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) //if wild, pressing B moves cursor to run
+            {
+              PlaySE(SE_SELECT);
+              ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+              gActionSelectionCursor[gActiveBattler] = 3;
+              ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+            }
         }
     }
     else if (JOY_NEW(START_BUTTON))
@@ -649,7 +659,7 @@ static void HandleInputChooseMove(void)
                     u32 i = 0;
                     for (i = 0; i < gBattlersCount; i++)
                         TryShowAsTarget(i);
-                    
+
                     canSelectTarget = 3;
                 }
                 else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
@@ -662,7 +672,7 @@ static void HandleInputChooseMove(void)
                 }
             }
         }
-        
+
         switch (canSelectTarget)
         {
         case 0:
@@ -2527,6 +2537,10 @@ static void PlayerHandleDrawTrainerPic(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
         gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
+        if(gSaveBlock2Ptr->battleAnimSpeed)
+        {
+            gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = -240;
+        }
         gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     }
 

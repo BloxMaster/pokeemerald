@@ -3109,33 +3109,55 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if ((battlerPosition & BIT_SIDE) == B_SIDE_PLAYER)
     {
+      if(gSaveBlock2Ptr->battleAnimSpeed != 0)
+      {
+        spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp1,
+                                coords[battlerPosition][0],
+                                coords[battlerPosition][1], 0);
+        spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2,
+                                coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF,
+                                coords[battlerPosition][1], 0);
+      }
+      else
+      {
         spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp1,
                                 coords[battlerPosition][0] - ABILITY_POP_UP_POS_X_SLIDE,
                                 coords[battlerPosition][1], 0);
         spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2,
                                 coords[battlerPosition][0] - ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
                                 coords[battlerPosition][1], 0);
+      }
+      gSprites[spriteId1].tOriginalX = coords[battlerPosition][0];
+      gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
 
-        gSprites[spriteId1].tOriginalX = coords[battlerPosition][0];
-        gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
-
-        gSprites[spriteId1].tRightToLeft = TRUE;
-        gSprites[spriteId2].tRightToLeft = TRUE;
+      gSprites[spriteId1].tRightToLeft = TRUE;
+      gSprites[spriteId2].tRightToLeft = TRUE;
     }
     else
     {
+      if(gSaveBlock2Ptr->battleAnimSpeed != 0)
+      {
+        spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp1,
+                                coords[battlerPosition][0],
+                                coords[battlerPosition][1], 0);
+        spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2,
+                                coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF,
+                                coords[battlerPosition][1], 0);
+      }
+      else
+      {
         spriteId1 = CreateSprite(&sSpriteTemplate_AbilityPopUp1,
                                 coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_SLIDE,
                                 coords[battlerPosition][1], 0);
         spriteId2 = CreateSprite(&sSpriteTemplate_AbilityPopUp2,
                                 coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_SLIDE + ABILITY_POP_UP_POS_X_DIFF,
                                 coords[battlerPosition][1], 0);
+      }
+      gSprites[spriteId1].tOriginalX = coords[battlerPosition][0];
+      gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
 
-        gSprites[spriteId1].tOriginalX = coords[battlerPosition][0];
-        gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
-
-        gSprites[spriteId1].tRightToLeft = FALSE;
-        gSprites[spriteId2].tRightToLeft = FALSE;
+      gSprites[spriteId1].tRightToLeft = FALSE;
+      gSprites[spriteId2].tRightToLeft = FALSE;
     }
 
     gBattleStruct->abilityPopUpSpriteIds[battlerId][0] = spriteId1;
@@ -3182,6 +3204,10 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
             sprite->x = sprite->tOriginalX;
             sprite->tHide = TRUE;
             sprite->tFrames = FRAMES_TO_WAIT;
+        }
+        if(gSaveBlock2Ptr->battleAnimSpeed == 0)
+        {
+            sprite->tFrames = 0;
         }
     }
     else // Hide

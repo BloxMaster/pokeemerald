@@ -2620,6 +2620,10 @@ static void SpriteCb_MoveWildMonToRight(struct Sprite *sprite)
         {
           sprite->x2 += 2;
         }
+        else
+        {
+          sprite->x2 = 0;
+        }
         if (sprite->x2 == 0)
         {
             sprite->invisible = FALSE;

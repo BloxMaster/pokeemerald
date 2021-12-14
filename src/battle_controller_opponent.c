@@ -1162,6 +1162,10 @@ static void OpponentHandleLoadMonSprite(void)
                                                GetBattlerSpriteSubpriority(gActiveBattler));
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -DISPLAY_WIDTH;
+    if(gSaveBlock2Ptr->battleAnimSpeed)
+    {
+        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = 0;
+    }
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = species;
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
