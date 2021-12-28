@@ -37,6 +37,8 @@
 #define sILLUSION_NICK_HACK gBattleScripting + 0x32
 #define sFIXED_ABILITY_POPUP gBattleScripting + 0x33
 #define sABILITY_OVERWRITE gBattleScripting + 0x34
+#define sSWITCH_CASE gBattleScripting + 0x36
+#define sBERRY_OVERRIDE gBattleScripting + 0x37
 
 #define cMULTISTRING_CHOOSER gBattleCommunication + 5
 #define cMISS_TYPE gBattleCommunication + 6
@@ -173,6 +175,40 @@
 #define VARIOUS_DESTROY_ABILITY_POPUP           102
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
+#define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_TERRAIN_SEED                    106
+#define VARIOUS_MAKE_INVISIBLE                  107
+#define VARIOUS_ROOM_SERVICE                    108
+#define VARIOUS_JUMP_IF_TERRAIN_AFFECTED        109
+#define VARIOUS_EERIE_SPELL_PP_REDUCE           110
+#define VARIOUS_JUMP_IF_TEAM_HEALTHY            111
+#define VARIOUS_TRY_HEAL_QUARTER_HP             112
+#define VARIOUS_REMOVE_TERRAIN                  113
+#define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED       114
+#define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     115
+#define VARIOUS_GET_ROTOTILLER_TARGETS          116
+#define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED 117
+#define VARIOUS_TRY_ACTIVATE_BATTLE_BOND        118
+#define VARIOUS_CONSUME_BERRY                   119
+#define VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL   120
+#define VARIOUS_HANDLE_PRIMAL_REVERSION         121
+#define VARIOUS_APPLY_PLASMA_FISTS              122
+#define VARIOUS_JUMP_IF_SPECIES                 123
+#define VARIOUS_UPDATE_ABILITY_POPUP            124
+#define VARIOUS_JUMP_IF_WEATHER_AFFECTED        125
+#define VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED    126
+#define VARIOUS_SET_ATTACKER_STICKY_WEB_USER    127
+#define VARIOUS_TRY_TO_APPLY_MIMICRY            128
+#define VARIOUS_PHOTON_GEYSER_CHECK             129
+#define VARIOUS_SHELL_SIDE_ARM_CHECK            130
+#define VARIOUS_TRY_NO_RETREAT                  131
+#define VARIOUS_TRY_TAR_SHOT                    132
+#define VARIOUS_CAN_TAR_SHOT_WORK               133
+#define VARIOUS_CHECK_POLTERGEIST               134
+#define VARIOUS_SET_OCTOLOCK                    135
+#define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
+#define VARIOUS_TRY_END_NEUTRALIZING_GAS        137
+#define VARIOUS_TRY_ACTIVATE_RAMPAGE            138
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
@@ -191,6 +227,7 @@
 // Cmd_statbuffchange
 #define STAT_BUFF_ALLOW_PTR                 (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
 #define STAT_BUFF_NOT_PROTECT_AFFECTED      (1 << 5)
+#define STAT_BUFF_UPDATE_MOVE_EFFECT        (1 << 6)
 
 // stat change flags for Cmd_playstatchangeanimation
 #define STAT_CHANGE_NEGATIVE             (1 << 0)
@@ -211,31 +248,43 @@
 #define PARTY_SCREEN_OPTIONAL (1 << 7) // Flag for first argument to openpartyscreen
 
 // cases for Cmd_moveend
-#define MOVEEND_PROTECT_LIKE_EFFECT               0
-#define MOVEEND_RAGE                              1
-#define MOVEEND_DEFROST                           2
+#define MOVEEND_SUM_DAMAGE                        0
+#define MOVEEND_PROTECT_LIKE_EFFECT               1
+#define MOVEEND_RAGE                              2
 #define MOVEEND_SYNCHRONIZE_TARGET                3
 #define MOVEEND_ABILITIES                         4
 #define MOVEEND_ABILITIES_ATTACKER                5
 #define MOVEEND_STATUS_IMMUNITY_ABILITIES         6
 #define MOVEEND_SYNCHRONIZE_ATTACKER              7
 #define MOVEEND_CHOICE_MOVE                       8
-#define MOVEEND_CHANGED_ITEMS                     9
-#define MOVEEND_ATTACKER_INVISIBLE                10
-#define MOVEEND_ATTACKER_VISIBLE                  11
-#define MOVEEND_TARGET_VISIBLE                    12
-#define MOVEEND_ITEM_EFFECTS_TARGET               13
-#define MOVEEND_MOVE_EFFECTS2                     14
-#define MOVEEND_ITEM_EFFECTS_ALL                  15
-#define MOVEEND_KINGSROCK_SHELLBELL               16
-#define MOVEEND_SUBSTITUTE                        17
-#define MOVEEND_UPDATE_LAST_MOVES                 18
-#define MOVEEND_MIRROR_MOVE                       19
-#define MOVEEND_NEXT_TARGET                       20
-#define MOVEEND_LIFE_ORB                          21
-#define MOVEEND_DANCER                            22
-#define MOVEEND_EMERGENCY_EXIT                    23
-#define MOVEEND_CLEAR_BITS                        24
-#define MOVEEND_COUNT                             25
+#define MOVEEND_ATTACKER_INVISIBLE                9
+#define MOVEEND_ATTACKER_VISIBLE                  10
+#define MOVEEND_TARGET_VISIBLE                    11
+#define MOVEEND_ITEM_EFFECTS_TARGET               12
+#define MOVEEND_ITEM_EFFECTS_ALL                  13
+#define MOVEEND_KINGSROCK                         14
+#define MOVEEND_SUBSTITUTE                        15
+#define MOVEEND_UPDATE_LAST_MOVES                 16
+#define MOVEEND_MIRROR_MOVE                       17
+#define MOVEEND_NEXT_TARGET                       18    // Everything up until here is handled for each strike of a multi-hit move
+#define MOVEEND_MULTIHIT_MOVE                     19
+#define MOVEEND_MOVE_EFFECTS2                     20
+#define MOVEEND_RECOIL                            21
+#define MOVEEND_EJECT_BUTTON                      22
+#define MOVEEND_RED_CARD                          23
+#define MOVEEND_EJECT_PACK                        24
+#define MOVEEND_LIFEORB_SHELLBELL                 25    // Includes shell bell, throat spray, etc
+#define MOVEEND_CHANGED_ITEMS                     26
+#define MOVEEND_DEFROST                           27
+#define MOVEEND_PICKPOCKET                        28
+#define MOVEEND_DANCER                            29
+#define MOVEEND_EMERGENCY_EXIT                    30
+#define MOVEEND_CLEAR_BITS                        31
+#define MOVEEND_COUNT                             32
+
+// switch cases
+#define B_SWITCH_NORMAL     0
+#define B_SWITCH_HIT        1   // dragon tail, circle throw
+#define B_SWITCH_RED_CARD   2
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

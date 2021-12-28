@@ -214,7 +214,14 @@
 #define MAPSEC_ALTERING_CAVE                0xD2
 #define MAPSEC_NAVEL_ROCK                   0xD3
 #define MAPSEC_TRAINER_HILL                 0xD4
-#define MAPSEC_NONE                         0xD5
+#define MAPSEC_SEASPRAY_CAVE                0xD5
+#define MAPSEC_EMBER_PATH                   0xD6
+#define MAPSEC_ASHEN_WOODS                  0xD7
+#define MAPSEC_SANDSTREWN_RUINS             0xD8
+#define MAPSEC_DEWFORD_MEADOW               0xD9
+#define MAPSEC_DEWFORD_MANOR                0xDA
+#define MAPSEC_VERDANTURF_MEADOW            0xDB
+#define MAPSEC_NONE                         0xDC
 
 #define METLOC_SPECIAL_EGG                  0xFD
 #define METLOC_IN_GAME_TRADE                0xFE

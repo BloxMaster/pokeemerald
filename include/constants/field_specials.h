@@ -40,9 +40,25 @@
 #define SCROLL_MULTI_BF_MOVE_TUTOR_2                      10
 #define SCROLL_MULTI_SS_TIDAL_DESTINATION                 11
 #define SCROLL_MULTI_BATTLE_TENT_RULES                    12
+#define SCROLL_MULTI_PC_TUTOR_SET_1                       13
+#define SCROLL_MULTI_PC_TUTOR_SET_2                       14
+#define SCROLL_MULTI_PC_TUTOR_SET_3                       15
+#define SCROLL_MULTI_PC_TUTOR_SET_4                       16
+#define SCROLL_MULTI_PC_TUTOR_SET_5                       17
+#define SCROLL_MULTI_PC_TUTOR_SET_6                       18
+#define SCROLL_MULTI_PC_TUTOR_SET_7                       19
+#define SCROLL_MULTI_PC_TUTOR_SET_SELECT                  20
+#define SCROLL_MULTI_GAMECORNER_POKEMON                   21
+#define SCROLL_MULTI_GAMECORNER_GRASS_STARTERS            22
+#define SCROLL_MULTI_GAMECORNER_FIRE_STARTERS             23
+#define SCROLL_MULTI_GAMECORNER_WATER_STARTERS            24
+#define SCROLL_MULTI_REGION_NAMES                         25
+#define SCROLL_MULTI_FURFROU_TRIMS                        26
+#define SCROLL_MULTI_POKE_CENTER_TUTOR                    27
+#define SCROLL_MULTI_HIDDEN_POWER                         28
 
 #define MAX_SCROLL_MULTI_ON_SCREEN 6
-#define MAX_SCROLL_MULTI_LENGTH 16
+#define MAX_SCROLL_MULTI_LENGTH 21
 
 // Dept Store Floor Numbers
 #define DEPT_STORE_FLOORNUM_B4F       0

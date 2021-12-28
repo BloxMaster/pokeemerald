@@ -164,9 +164,9 @@ struct SoundChannel
     u16 xpc;
 };
 
-#define MAX_DIRECTSOUND_CHANNELS 5
+#define MAX_DIRECTSOUND_CHANNELS 15
 
-#define PCM_DMA_BUF_SIZE 3136 // size of Direct Sound buffer
+#define PCM_DMA_BUF_SIZE 0x620 // size of Direct Sound buffer
 
 struct MusicPlayerInfo;
 

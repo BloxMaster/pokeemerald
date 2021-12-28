@@ -279,6 +279,7 @@ static const struct MenuAction MultichoiceList_GameCornerCoins[] =
 {
     {gText_50CoinsAndPrice},
     {gText_500CoinsAndPrice},
+    {gText_5000CoinsAndPrice},
     {gText_Exit},
 };
 
@@ -771,6 +772,127 @@ static const struct MenuAction MultichoiceList_TagMatchType[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_GrassFireWater[] = 
+{
+    {gText_GrassType},
+    {gText_FireType},
+    {gText_WaterType},
+    {gText_Exit},
+};
+const struct MenuAction MultichoiceList_Flavors[] =
+{
+    {gText_FlavourRed},
+    {gText_FlavourYellow},
+    {gText_FlavourBlue},
+    {gText_FlavourGreen},
+    {gText_FlavourPink},
+    {gText_Exit},
+};
+
+const struct MenuAction MultichoiceList_SuperTrainingMenu[] =
+{
+    {gText_Modify},
+    {gText_ResetEVs},
+    {gText_ExplainEVs},
+    {gText_Exit},
+};
+
+const struct MenuAction MultichoiceList_EVMenu[] =
+{
+    {gText_Add4toEV},
+    {gText_Add8toEV},
+    {gText_Add12toEV},
+    {gText_Add64toEV},
+    {gText_Add128toEV},
+    {gText_Add252toEV},
+};
+
+const struct MenuAction MultichoiceList_IVMenu[] =
+{
+    {gText_ChangeIVto0},
+    {gText_ChangeIVto1},
+    {gText_ChangeIVto14},
+    {gText_ChangeIVto15},
+    {gText_ChangeIVto30},
+    {gText_ChangeIVto31},
+};
+
+const struct MenuAction MultichoiceList_BaseStats[] =
+{
+    {gText_HP_Placeholder},
+    {gText_Attack_Placeholder},
+    {gText_Defense_Placeholder},
+    {gText_Speed_Placeholder},
+    {gText_SpAtk_Placeholder},
+    {gText_SpDef_Placeholder},
+};
+
+const struct MenuAction MultichoiceList_HyperTrainingMenu[] =
+{
+    {gText_ChangeIV},
+    {gText_HiddenPower},
+    {gText_ExplainIVs},
+    {gText_Exit},
+};
+
+const struct MenuAction MultichoiceList_MoomooMilk[] = 
+{
+    {gText_TakeOne},
+    {gText_TakeOneDozen},
+    {gText_IllPass},
+};
+
+const struct MenuAction MultichoiceList_RotomAppliances[] = 
+{
+    {gText_MicrowaveOven},
+    {gText_WashingMachine},
+    {gText_Refrigerator},
+    {gText_ElectricFan},
+    {gText_Lawnmower},
+    {gText_Recall},
+};
+
+const struct MenuAction MultichoiceList_StarterMoves[] = 
+{
+    {gText_GrassPledge},
+    {gText_FirePledge},
+    {gText_WaterPledge},
+    {gText_FrenzyPlant},
+    {gText_BlastBurn},
+    {gText_HydroCannon},
+};
+
+const struct MenuAction MultichoiceList_RematchBattleMode[] = 
+{
+    {gText_SingleBattle},
+    {gText_DoubleBattle},
+    {gText_Exit},
+};
+
+const struct MenuAction MultichoiceList_FurfrouTrims[] = 
+{
+    {gText_HeartTrim},
+    {gText_StarTrim},
+    {gText_DiamondTrim},
+    {gText_DebutanteTrim},
+    {gText_MatronTrim},
+    {gText_DandyTrim}, 
+    {gText_LaReineTrim},
+    {gText_KabukiTrim},
+    {gText_PharaohTrim},
+    {gText_BackToNatural},
+    {gText_Exit},
+};
+
+const struct MenuAction MultichoiceList_DeoxysFormes[] =
+{
+    {gText_Normal},
+    {gText_Attack},
+    {gText_Defense},
+    {gText_Speed},
+    {gText_Exit},
+};
+
 static const struct MenuAction MultichoiceList_Exit[] =
 {
     {gText_Exit},
@@ -898,6 +1020,19 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SLATEPORT_TENT_RULES]       = MULTICHOICE(MultichoiceList_SlateportTentRules),
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
+    [MULTI_PKMN_CENTER_TUTOR_SETS]     = MULTICHOICE(MultichoiceList_Exit),
+    [MULTI_DEOXYS_FORMES]              = MULTICHOICE(MultichoiceList_DeoxysFormes),
+    [MULTI_GRASS_FIRE_WATER]           = MULTICHOICE(MultichoiceList_GrassFireWater),
+    [MULTI_FLAVORS]                    = MULTICHOICE(MultichoiceList_Flavors),
+    [MULTI_SUPER_TRAINING_MENU]        = MULTICHOICE(MultichoiceList_SuperTrainingMenu),
+    [MULTI_IV_MENU]                    = MULTICHOICE(MultichoiceList_IVMenu),
+    [MULTI_EV_MENU]                    = MULTICHOICE(MultichoiceList_EVMenu),
+    [MULTI_BASE_STATS]                 = MULTICHOICE(MultichoiceList_BaseStats),
+    [MULTI_HYPER_TRAINING_MENU]        = MULTICHOICE(MultichoiceList_HyperTrainingMenu),
+    [MULTI_MOOMOO_MILK]                = MULTICHOICE(MultichoiceList_MoomooMilk),
+    [MULTI_ROTOM_APPLIANCES]           = MULTICHOICE(MultichoiceList_RotomAppliances),
+    [MULTI_STARTER_MOVES]              = MULTICHOICE(MultichoiceList_StarterMoves),
+    [MULTI_REMATCH_BATTLE_MODE]        = MULTICHOICE(MultichoiceList_RematchBattleMode),
 };
 
 const u8 *const gStdStrings[] =
@@ -932,6 +1067,9 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_ARENA] = gText_BattleArena,
     [STDSTRING_BATTLE_PIKE] = gText_BattlePike,
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
+    [STDSTRING_BATTLEITEMS] = gText_Battle_Items,
+    [STDSTRING_MEDICINE] = gText_Medicine,
+    [STDSTRING_MEGASTONE] = gText_Mega_Stones,
 };
 
 static const u8 sLinkServicesMultichoiceIds[] = 
@@ -1003,4 +1141,16 @@ static const u8 *const sWirelessOptions_NoRecordMixBerryCrush[] =
     CableClub_Text_YouMayTradeHere,
     CableClub_Text_YouMayBattleHere,
     CableClub_Text_CancelSelectedItem,
+};
+
+static const u8 *const sPKMNCenterTutorListOptions[PKMNCENTER_MOVE_TUTOR_SELECTION_COUNT] =
+{
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_1]     = gText_TutorMoveSet1,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_2]     = gText_TutorMoveSet2,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_3]     = gText_TutorMoveSet3,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_4]     = gText_TutorMoveSet4,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_5]     = gText_TutorMoveSet5,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_6]     = gText_TutorMoveSet6,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_7]     = gText_TutorMoveSet7,
+    [PKMNCENTER_MOVE_TUTOR_SELECTION_EXIT]  = gText_Exit,
 };

@@ -1277,6 +1277,15 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 case PLACEHOLDER_ID_STRING_VAR_3:
                     bufferPointer = gStringVar3;
                     break;
+                case 0x5:
+                    bufferPointer = gExtraStringVar1;
+                    break;
+                case 0x6:
+                    bufferPointer = gExtraStringVar2;
+                    break;
+                case 0x7:
+                    bufferPointer = gExtraStringVar3;
+                    break;
                 default:
                     return 0;
             }

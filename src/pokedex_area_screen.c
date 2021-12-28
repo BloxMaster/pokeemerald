@@ -8,6 +8,7 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "pokedex_area_screen.h"
 #include "region_map.h"
 #include "roamer.h"
@@ -461,13 +462,15 @@ static bool8 MapHasMon(const struct WildPokemonHeader *info, u16 species)
             return FALSE;
     }
 
-    if (MonListHasMon(info->landMonsInfo, species, 12))
+    if (MonListHasMon(info->landMonsInfo, species, LAND_WILD_COUNT))
         return TRUE;
-    if (MonListHasMon(info->waterMonsInfo, species, 5))
+    if (MonListHasMon(info->waterMonsInfo, species, WATER_WILD_COUNT))
         return TRUE;
-    if (MonListHasMon(info->fishingMonsInfo, species, 12))
+    if (MonListHasMon(info->fishingMonsInfo, species, FISH_WILD_COUNT))
         return TRUE;
-    if (MonListHasMon(info->rockSmashMonsInfo, species, 5))
+    if (MonListHasMon(info->rockSmashMonsInfo, species, ROCK_WILD_COUNT))
+        return TRUE;
+    if (MonListHasMon(info->honeyMonsInfo, species, HONEY_WILD_COUNT))
         return TRUE;
     return FALSE;
 }
@@ -725,10 +728,20 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         if (JOY_NEW(B_BUTTON))
         {
             gTasks[taskId].data[1] = 1;
-            PlaySE(SE_PC_OFF);
+            PlaySE(SE_DEX_PAGE);
+        }
+        else if (JOY_NEW(DPAD_LEFT) || (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+        {
+            gTasks[taskId].data[1] = 1;
+            PlaySE(SE_DEX_PAGE);
         }
         else if (JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
         {
+            if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(sPokedexAreaScreen->species), FLAG_GET_CAUGHT))
+            {
+                PlaySE(SE_FAILURE);
+                return;
+            }
             gTasks[taskId].data[1] = 2;
             PlaySE(SE_DEX_PAGE);
         }

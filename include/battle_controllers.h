@@ -63,6 +63,7 @@ enum
     REQUEST_CUTE_RIBBON_BATTLE,
     REQUEST_SMART_RIBBON_BATTLE,
     REQUEST_TOUGH_RIBBON_BATTLE,
+    REQUEST_NATURE_BATTLE,
 };
 
 // Special arguments for Battle Controller functions.
@@ -185,6 +186,7 @@ extern struct UnusedControllerStruct gUnusedControllerStruct;
 void HandleLinkBattleSetup(void);
 void SetUpBattleVarsAndBirchZigzagoon(void);
 void InitBattleControllers(void);
+bool32 IsValidForBattle(struct Pokemon *mon);
 void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 

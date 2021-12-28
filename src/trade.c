@@ -90,6 +90,9 @@ struct InGameTrade {
     /*0x36*/ u8 otGender;
     /*0x37*/ u8 sheen;
     /*0x38*/ u16 requestedSpecies;
+    /*0x3A*/ u8 nature;
+    /*0x3B*/ u8 level;
+
 };
 
 static EWRAM_DATA u8 *sMenuTextAllocBuffer = NULL;
@@ -4511,12 +4514,17 @@ static void BufferInGameTradeMonName(void)
 static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
 {
     const struct InGameTrade *inGameTrade = &sIngameTrades[whichInGameTrade];
-    u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
-
+    u8 level = sIngameTrades[whichInGameTrade].level;
+    u8 playerMonLevel = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
     struct MailStruct mail;
     u8 metLocation = METLOC_IN_GAME_TRADE;
     u8 isMail;
     struct Pokemon *pokemon = &gEnemyParty[0];
+  
+    if (level < playerMonLevel)
+    {
+        level = playerMonLevel;
+    }
 
     CreateMon(pokemon, inGameTrade->species, level, USE_RANDOM_IVS, TRUE, inGameTrade->personality, OT_ID_PRESET, inGameTrade->otId);
 
@@ -4537,6 +4545,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->conditions[4]);
     SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
     SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
+    SetMonData(pokemon, MON_DATA_NATURE, &inGameTrade->nature);
 
     isMail = FALSE;
     if (inGameTrade->heldItem != ITEM_NONE)
@@ -4840,7 +4849,7 @@ static void CheckPartnersMonForRibbons(void)
 {
     u8 i;
     u8 numRibbons = 0;
-    for (i = 0; i < 12; i ++)
+    for (i = 0; i < 5; i ++) // Changed from 12 to 5, fixed trade freeze
     {
         numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
     }

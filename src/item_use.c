@@ -32,11 +32,13 @@
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "script.h"
+#include "script_pokemon_util.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "wild_encounter.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
@@ -68,9 +70,12 @@ static void UseTMHMYesNo(u8 taskId);
 static void UseTMHM(u8 taskId);
 static void Task_StartUseRepel(u8 taskId);
 static void Task_UseRepel(u8 taskId);
+static void ItemUseOnFieldCB_PokeVial(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8 taskId);
 static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 x, s16 y);
 static void CB2_OpenPokeblockFromBag(void);
+static void ItemUseOnFieldCB_Honey(u8 taskId);
+static void ItemUseOnFieldCB_HoneyFail(u8 taskId);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -800,7 +805,7 @@ static void Task_ShowTMHMContainedMessage(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
+        StringCopy(gStringVar1, gMoveNamesLong[ItemIdToBattleMoveId(gSpecialVar_ItemId)]);
         StringExpandPlaceholders(gStringVar4, gText_TMHMContainedVar1);
         DisplayItemMessage(taskId, 1, gStringVar4, UseTMHMYesNo);
     }
@@ -945,42 +950,133 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
-void ItemUseInBattle_PokeBall(u8 taskId)
+void ItemUseOutOfBattle_Nectar(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_Nectar;
+    SetUpItemUseCallback(taskId);
+}
+
+void ItemUseOutOfBattle_PokeVial(u8 taskId)
+{
+    if (VarGet(VAR_POKE_VIAL_CHARGES) == 0)
+    {
+        if (!gTasks[taskId].tUsingRegisteredKeyItem)
+        {
+            DisplayItemMessage(taskId, 1, gText_PokeVialEmpty, CloseItemMessage);
+        }
+        else
+        {
+            DisplayItemMessageOnField(taskId, gText_PokeVialEmpty, Task_CloseCantUseKeyItemMessage);
+        }
+    }
+    else
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_PokeVial;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+}
+
+static void ItemUseOnFieldCB_PokeVial(u8 taskId)
+{
+    PlaySE(SE_USE_ITEM);
+    HealPlayerParty();
+    VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
+    DisplayItemMessageOnField(taskId, gText_UsedPokeVial, Task_CloseCantUseKeyItemMessage);
+}
+
+void ItemUseOutOfBattle_Honey(u8 taskId)
+{
+    s16 x, y;
+    u16 headerId = GetCurrentMapWildMonHeaderId();;
+
+    PlayerGetDestCoords(&x, &y);
+
+    if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE // Player is on land encounter tile
+        && headerId != 0xFFFF // Map has wild Pokemon 
+        && gWildMonHeaders[headerId].honeyMonsInfo != NULL) // Map has honey encounters
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
+    }
+    else // Honey fails to start encounter
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_HoneyFail;
+    }
+    gFieldCallback = FieldCB_UseItemOnField;
+    gBagMenu->newScreenCallback = CB2_ReturnToField;
+    Task_FadeAndCloseBagMenu(taskId);
+}
+
+static void ItemUseOnFieldCB_Honey(u8 taskId)
+{
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_HoneyEncounter);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_HoneyFail(u8 taskId)
+{
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_FailSweetScent);
+    DestroyTask(taskId);
+}
+
+u32 CanThrowBall(void)
 {
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
-        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) // There are two present pokemon.
+        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) 
     {
-        static const u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\nThere are two pokemon out there!\p");
-
-        if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, textCantThrowPokeBall, CloseItemMessage);
-        else
-            DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, Task_CloseBattlePyramidBagMessage);
+        return 1;   // There are two present pokemon.
     }
-    else if (gBattlerInMenuId == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
-             && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) // Attempting to throw a ball with the second pokemon while both are alive.
+    else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
     {
-        static const u8 textCantThrowPokeBall[] = _("Cannot throw a ball!\p");
-
-        if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, textCantThrowPokeBall, CloseItemMessage);
-        else
-            DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, Task_CloseBattlePyramidBagMessage);
+        return 2;   // No room for mon
     }
-    else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
+    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
     {
+        return 3;   // in semi-invulnerable state
+    }
+    #endif
+    
+    return 0;   // usable 
+}
+
+static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
+static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+void ItemUseInBattle_PokeBall(u8 taskId)
+{
+    switch (CanThrowBall())
+    {
+    case 0: // usable
+    default:
         RemoveBagItem(gSpecialVar_ItemId, 1);
         if (!InBattlePyramid())
             Task_FadeAndCloseBagMenu(taskId);
         else
             CloseBattlePyramidBag(taskId);
-    }
-    else
-    {
+        break;
+    case 1:  // There are two present pokemon.
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_TwoMons, Task_CloseBattlePyramidBagMessage);
+        break;
+    case 2: // No room for mon
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, 1, gText_BoxFull, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
+        break;
+    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    case 3: // Semi-Invulnerable
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
+        break;
+    #endif
     }
 }
 
@@ -1147,6 +1243,20 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
         ItemUseOutOfBattle_CannotUse(taskId);
         break;
     }
+}
+
+void ItemUseOutOfBattle_FormChange(u8 taskId) 
+{
+    gItemUseCB = ItemUseCB_FormChange;
+    gTasks[taskId].data[0] = FALSE;
+    SetUpItemUseCallback(taskId);
+}
+
+void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_FormChange_ConsumedOnUse;
+    gTasks[taskId].data[0] = TRUE;
+    SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)

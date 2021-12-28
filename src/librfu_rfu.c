@@ -130,6 +130,9 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
     const u16 *src;
     u16 buffByteSizeMax;
 
+    // is in EWRAM?
+//    if (((uintptr_t)APIBuffer & 0xF000000) == 0x2000000 && copyInterruptToRam)
+//        return ERR_RFU_API_BUFF_ADR;
     // is not 4-byte aligned?
     if ((u32)APIBuffer & 3)
         return ERR_RFU_API_BUFF_ADR;
@@ -158,7 +161,7 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
         gRfuSlotStatusUNI[i] = &gRfuSlotStatusUNI[i - 1][1];
     }
-    // remaining space in API buffer is used for `struct RfuIntrStruct`.
+    // remaining space in API buffer is used for `struct RfuIntrStruct`. 
     gRfuFixed->STWIBuffer = (struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1];
     STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], sioIntrTable_p, copyInterruptToRam);
     rfu_STC_clearAPIVariables();

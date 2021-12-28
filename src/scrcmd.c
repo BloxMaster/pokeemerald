@@ -90,6 +90,9 @@ static u8 * const sScriptStringVars[] =
     gStringVar1,
     gStringVar2,
     gStringVar3,
+    gExtraStringVar1,
+    gExtraStringVar2,
+    gExtraStringVar3,
 };
 
 bool8 ScrCmd_nop(struct ScriptContext *ctx)
@@ -490,7 +493,7 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = AddBagItem(itemId, (u16)quantity);
     return FALSE;
 }
 
@@ -1184,7 +1187,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
 
 bool8 ScrCmd_createvobject(struct ScriptContext *ctx)
 {
-    u8 graphicsId = ScriptReadByte(ctx);
+    u16 graphicsId = ScriptReadHalfword(ctx);
     u8 objectEventId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u32 y = VarGet(ScriptReadHalfword(ctx));
@@ -1615,7 +1618,7 @@ bool8 ScrCmd_buffermovename(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 moveId = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[moveId]);
+    StringCopy(sScriptStringVars[stringVarIndex], gMoveNamesLong[moveId]);
     return FALSE;
 }
 
@@ -1687,7 +1690,7 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext *ctx)
 bool8 ScrCmd_givemon(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
-    u8 level = ScriptReadByte(ctx);
+    u16 level = VarGet(ScriptReadHalfword(ctx));
     u16 item = VarGet(ScriptReadHalfword(ctx));
     u32 unkParam1 = ScriptReadWord(ctx);
     u32 unkParam2 = ScriptReadWord(ctx);
@@ -1748,7 +1751,7 @@ bool8 ScrCmd_addmoney(struct ScriptContext *ctx)
 
 bool8 ScrCmd_removemoney(struct ScriptContext *ctx)
 {
-    u32 amount = ScriptReadWord(ctx);
+    u32 amount = VarGet(ScriptReadWord(ctx));
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
@@ -1758,7 +1761,7 @@ bool8 ScrCmd_removemoney(struct ScriptContext *ctx)
 
 bool8 ScrCmd_checkmoney(struct ScriptContext *ctx)
 {
-    u32 amount = ScriptReadWord(ctx);
+    u32 amount = VarGet(ScriptReadWord(ctx));
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
@@ -1875,10 +1878,10 @@ bool8 ScrCmd_cleartrainerflag(struct ScriptContext *ctx)
 bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 {
     u16 species = ScriptReadHalfword(ctx);
-    u8 level = ScriptReadByte(ctx);
+    u16 level = VarGet(ScriptReadHalfword(ctx));
     u16 item = ScriptReadHalfword(ctx);
     u16 species2 = ScriptReadHalfword(ctx);
-    u8 level2 = ScriptReadByte(ctx);
+    u16 level2 = VarGet(ScriptReadHalfword(ctx));
     u16 item2 = ScriptReadHalfword(ctx);
 
     if(species2 == SPECIES_NONE)
@@ -2334,4 +2337,41 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     DoSootopolisLegendWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
+}
+
+// Checks if player's party contains a certain species OR one of its forms that
+// shares the same national dex number
+bool8 ScrCmd_checkPartyHasSpecies(struct ScriptContext *ctx)
+{
+    u16 wantedSpecies = ScriptReadHalfword(ctx);
+    u16 partySpecies;
+    int i = 0;
+    u8 partyCount = CalculatePlayerPartyCount();
+    
+    gSpecialVar_Result = FALSE;
+
+    for (i = 0; i < partyCount; i++)
+    {
+        partySpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (gSpeciesToNationalPokedexNum[partySpecies - 1] == wantedSpecies)
+        {
+            gSpecialVar_Result = TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Checks if the species stored in gSpecialVar 0x8004 is a certain species OR one of its forms that
+// shares the same national dex number
+bool8 ScrCmd_isChosenMonSpecies(struct ScriptContext *ctx)
+{
+    u16 wantedSpecies = ScriptReadHalfword(ctx);
+    u16 chosenSpecies = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+
+    gSpecialVar_Result = FALSE;
+    if (gSpeciesToNationalPokedexNum[chosenSpecies - 1] == wantedSpecies)
+    {
+        gSpecialVar_Result = TRUE;
+    }
+    return FALSE;
 }

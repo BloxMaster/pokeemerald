@@ -42,7 +42,7 @@ static const u8 sText_FourQuestionMarks[] = _("????");
 static const u8 sText_UnusedEmpty[] = _("");
 static const u8 sText_IsThisTradeOkay[] = _("Is this trade okay?");
 static const u8 sText_Cancel[] = _("CANCEL");
-static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");
+static const u8 sText_ChooseAPkmn[] = _("Choose a Pokémon.");
 static const u8 sText_Summary[] = _("SUMMARY");
 static const u8 sText_Trade[] = _("TRADE");
 static const u8 sText_CancelTrade[] = _("Cancel trade?");
@@ -51,9 +51,9 @@ static const u8 sText_Summary2[] = _("SUMMARY");
 static const u8 sText_Trade2[] = _("TRADE");
 static const u8 sText_CommunicationStandby[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Communication standby…\nPlease wait.");
 static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}The trade has\nbeen canceled.");
-static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
+static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Waiting for your friend\nto finish…");
-static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
+static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade Pokémon.");
 
 static const struct OamData sTradeOamData_32x16 =
 {
@@ -1003,69 +1003,78 @@ static const union AffineAnimCmd *const sAffineAnims_CrossingMonPics[] =
 
 static const struct InGameTrade sIngameTrades[] =
 {
-    [INGAME_TRADE_SEEDOT] = 
+    [INGAME_TRADE_PAWNIARD] = 
     {
-        .nickname = _("DOTS"), 
-        .species = SPECIES_SEEDOT,
-        .ivs = {5, 4, 5, 4, 4, 4},
-        .abilityNum = 1, 
+        .nickname = _("Rook"), 
+        .species = SPECIES_PAWNIARD,
+        .ivs = {31, 31, 31, 15, 15, 15},
+        .abilityNum = 0, // Defiant
         .otId = 38726,
         .conditions = {30, 5, 5, 5, 5},
         .personality = 0x84,
-        .heldItem = ITEM_CHESTO_BERRY, 
+        .heldItem = ITEM_MOON_STONE, 
         .mailNum = -1,
-        .otName = _("KOBE"), 
+        .otName = _("Kobe"), 
         .otGender = MALE, 
         .sheen = 10,
-        .requestedSpecies = SPECIES_RALTS
+        .requestedSpecies = SPECIES_GOTHITA,
+        .nature = NATURE_ADAMANT,
+        .level = 15
+
     }, 
-    [INGAME_TRADE_PLUSLE] = 
+    [INGAME_TRADE_TROPIUS] = 
     {
-        .nickname = _("PLUSES"), 
-        .species = SPECIES_PLUSLE,
-        .ivs = {4, 4, 4, 5, 5, 4},
-        .abilityNum = 0, 
+        .nickname = _("Bananana"), 
+        .species = SPECIES_TROPIUS,
+        .ivs = {31, 15, 31, 15, 15, 31},
+        .abilityNum = 1, // Aerilate / Solar Power
         .otId = 73996,
         .conditions = {5, 5, 30, 5, 5},
         .personality = 0x6F,
-        .heldItem = ITEM_WOOD_MAIL, 
+        .heldItem = ITEM_MUSCLE_BAND, 
         .mailNum = 0,
-        .otName = _("ROMAN"), 
+        .otName = _("Roman"), 
         .otGender = MALE, 
         .sheen = 10,
-        .requestedSpecies = SPECIES_VOLBEAT
+        .requestedSpecies = SPECIES_CROAGUNK,
+        .nature = NATURE_JOLLY,
+        .level = 21
     }, 
-    [INGAME_TRADE_HORSEA] = 
+    [INGAME_TRADE_HAPPINY] = 
     {
-        .nickname = _("SEASOR"),
-        .species = SPECIES_HORSEA,
-        .ivs = {5, 4, 4, 4, 5, 4},
-        .abilityNum = 0, 
+        .nickname = _("Happy"),
+        .species = SPECIES_HAPPINY,
+        .ivs = {31, 15, 31, 15, 15, 31},
+        .abilityNum = 0, // Natural Cure
         .otId = 46285,
         .conditions = {5, 5, 5, 5, 30},
         .personality = 0x7F,
-        .heldItem = ITEM_WAVE_MAIL, 
+        .heldItem = ITEM_WISE_GLASSES, 
         .mailNum = 1,
-        .otName = _("SKYLAR"), 
+        .otName = _("Skylar"), 
         .otGender = MALE, 
         .sheen = 10,
-        .requestedSpecies = SPECIES_BAGON
+        .requestedSpecies = SPECIES_PYUKUMUKU,
+        .nature = NATURE_BOLD,
+        .level = 32
     }, 
-    [INGAME_TRADE_MEOWTH] = 
+    [INGAME_TRADE_KARRABLAST] = 
     {
-        .nickname = _("MEOWOW"),
-        .species = SPECIES_MEOWTH,
-        .ivs = {4, 5, 4, 5, 4, 4},
-        .abilityNum = 0, 
+        .nickname = _("Escarslow"),
+        .species = SPECIES_KARRABLAST,
+        .ivs = {31, 31, 31, 0, 15, 15},
+        .abilityNum = 2, // No Guard
         .otId = 91481,
         .conditions = {5, 5, 5, 30, 5},
         .personality = 0x8B,
-        .heldItem = ITEM_RETRO_MAIL, 
+        .heldItem = ITEM_FOCUS_SASH, 
         .mailNum = 2,
-        .otName = _("ISIS"), 
+        .otName = _("Isis"), 
         .otGender = FEMALE, 
         .sheen = 10,
-        .requestedSpecies = SPECIES_SKITTY
+        .requestedSpecies = SPECIES_SHELMET,
+        .nature = NATURE_BRAVE,
+        .level = 50
     }
 };
 

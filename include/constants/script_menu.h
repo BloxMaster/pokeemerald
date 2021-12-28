@@ -122,6 +122,19 @@
 #define MULTI_SLATEPORT_TENT_RULES         111
 #define MULTI_FALLARBOR_TENT_RULES         112
 #define MULTI_TAG_MATCH_TYPE               113
+#define MULTI_PKMN_CENTER_TUTOR_SETS       114
+#define MULTI_DEOXYS_FORMES                115
+#define MULTI_GRASS_FIRE_WATER             116   
+#define MULTI_FLAVORS                      117
+#define MULTI_SUPER_TRAINING_MENU          118
+#define MULTI_IV_MENU                      119
+#define MULTI_EV_MENU                      120
+#define MULTI_BASE_STATS                   121
+#define MULTI_HYPER_TRAINING_MENU          122
+#define MULTI_MOOMOO_MILK                  123
+#define MULTI_ROTOM_APPLIANCES             124
+#define MULTI_STARTER_MOVES                125
+#define MULTI_REMATCH_BATTLE_MODE          126
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
@@ -132,6 +145,17 @@
 #define SSTIDAL_SELECTION_FARAWAY_ISLAND   5
 #define SSTIDAL_SELECTION_EXIT             6
 #define SSTIDAL_SELECTION_COUNT            7
+
+// Pokemon Center Move Tutor Multichoice Selections
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_1       0
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_2       1
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_3       2
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_4       3
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_5       4
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_6       5
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_7       6
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_EXIT    7
+#define PKMNCENTER_MOVE_TUTOR_SELECTION_COUNT   8
 
 // Std String Ids
 #define STDSTRING_COOL             0
@@ -164,5 +188,8 @@
 #define STDSTRING_BATTLE_ARENA     27
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
+#define STDSTRING_MEDICINE         30
+#define STDSTRING_BATTLEITEMS      31
+#define STDSTRING_MEGASTONE        32
 
 #endif //GUARD_SCRIPT_MENU_CONSTANTS_H

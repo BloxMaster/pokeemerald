@@ -38,7 +38,7 @@
 #include "constants/easy_chat.h"
 
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer[];
-extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer[];
+extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_CourtneyTrainer[];
 
 // EWRAM vars.
 EWRAM_DATA const struct BattleFrontierTrainer *gFacilityTrainers = NULL;
@@ -135,7 +135,7 @@ const u16 gBattleFrontierHeldItems[] =
     ITEM_APICOT_BERRY,
     ITEM_STARF_BERRY,
     ITEM_LIECHI_BERRY,
-    ITEM_STICK,
+    ITEM_LEEK,
     ITEM_LAX_INCENSE,
     ITEM_AGUAV_BERRY,
     ITEM_FIGY_BERRY,
@@ -2131,7 +2131,7 @@ void DoSpecialTrainerBattle(void)
         gApproachingTrainerId = 0;
         BattleSetup_ConfigureTrainerBattle(MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer + 1);
         gApproachingTrainerId = 1;
-        BattleSetup_ConfigureTrainerBattle(MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer + 1);
+        BattleSetup_ConfigureTrainerBattle(MossdeepCity_SpaceCenter_2F_EventScript_CourtneyTrainer + 1);
         gPartnerTrainerId = TRAINER_STEVEN_PARTNER;
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
@@ -3078,9 +3078,30 @@ static void FillPartnerParty(u16 trainerId)
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.ItemCustomMoves;
 
-                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID);
+                level = GetHighestLevelInPlayerParty(); //+ partyData[i].lvl; Scaling not working as expected, but not needed anyway
+                if (level > 100)
+                {
+                    level = 100;
+                }
+                if (level < 1)
+                {
+                    level = 1;
+                }
 
+                CreateMon(&gPlayerParty[i + 3], partyData[i].species, level, 31, TRUE, j, TRUE, otID);
+
+                SetMonData(&gPlayerParty[i + 3], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
                 SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                SetMonData(&gPlayerParty[i + 3], MON_DATA_ABILITY_NUM, &partyData[i].ability);
+
+                // Set EVs and IVs from premade spreads
+                for (j = 0; j < 6; j++)
+                {
+                    SetMonData(&gPlayerParty[i + 3], MON_DATA_HP_EV + j, &gSets[partyData[i].spread].EVs[j]);
+                    SetMonData(&gPlayerParty[i + 3], MON_DATA_HP_IV + j, &gSets[partyData[i].spread].IVs[j]);
+                }
+
+                CalculateMonStats(&gPlayerParty[i + 3]); // called twice; fix in future
 
                 for (j = 0; j < 4; j++)
                 {
@@ -3090,6 +3111,13 @@ static void FillPartnerParty(u16 trainerId)
                 break;
             }
             }
+
+            for (j = 0; gTrainerBallTable[j].classId != 0xFF; j++)
+            {
+                if (gTrainerBallTable[j].classId == gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].trainerClass)
+                    break;
+            }
+            SetMonData(&gPlayerParty[i + 3], MON_DATA_POKEBALL, &gTrainerBallTable[j].Ball);
 
             StringCopy(trainerName, gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].trainerName);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);

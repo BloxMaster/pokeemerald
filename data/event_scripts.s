@@ -62,7 +62,7 @@
 @ 81DB67C
 	.include "data/script_cmd_table.inc"
 
-gSpecialVars::
+gSpecialVars:: @ 81DBA0C
 	.4byte gSpecialVar_0x8000
 	.4byte gSpecialVar_0x8001
 	.4byte gSpecialVar_0x8002
@@ -88,7 +88,7 @@ gSpecialVars::
 
 	.include "data/specials.inc"
 
-gStdScripts::
+gStdScripts:: @ 81DC2A0
 	.4byte Std_ObtainItem              @ STD_OBTAIN_ITEM
 	.4byte Std_FindItem                @ STD_FIND_ITEM
 	.4byte Std_MsgboxNPC               @ MSGBOX_NPC
@@ -100,8 +100,8 @@ gStdScripts::
 	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_10
-gStdScripts_End::
 
+gStdScripts_End::
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"
 	.include "data/maps/MauvilleCity/scripts.inc"
@@ -352,6 +352,8 @@ gStdScripts_End::
 	.include "data/maps/GraniteCave_B2F/scripts.inc"
 	.include "data/maps/GraniteCave_StevensRoom/scripts.inc"
 	.include "data/maps/PetalburgWoods/scripts.inc"
+	.include "data/maps/PetalburgWoods_2/scripts.inc"
+	.include "data/maps/PetalburgWoods_3/scripts.inc"
 	.include "data/maps/MtChimney/scripts.inc"
 	.include "data/maps/JaggedPass/scripts.inc"
 	.include "data/maps/FieryPath/scripts.inc"
@@ -571,18 +573,19 @@ gStdScripts_End::
 	.include "data/maps/Route119_WeatherInstitute_2F/scripts.inc"
 	.include "data/maps/Route119_House/scripts.inc"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc"
+	.include "data/maps/Seaspray_Cave/scripts.inc"
 
 	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
 
-EventScript_WhiteOut::
+EventScript_WhiteOut:: @ 8271857
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	goto EventScript_ResetMrBriney
 	end
 
-EventScript_ResetMrBriney::
+EventScript_ResetMrBriney:: @ 8271862
 	compare VAR_BRINEY_LOCATION, 1
 	goto_if_eq EventScript_MoveMrBrineyToHouse
 	compare VAR_BRINEY_LOCATION, 2
@@ -591,7 +594,7 @@ EventScript_ResetMrBriney::
 	goto_if_eq EventScript_MoveMrBrineyToRoute109
 	end
 
-EventScript_MoveMrBrineyToHouse::
+EventScript_MoveMrBrineyToHouse:: @ 8271884
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
@@ -601,7 +604,7 @@ EventScript_MoveMrBrineyToHouse::
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	end
 
-EventScript_MoveMrBrineyToDewford::
+EventScript_MoveMrBrineyToDewford:: @ 827189A
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
@@ -612,7 +615,7 @@ EventScript_MoveMrBrineyToDewford::
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	end
 
-EventScript_MoveMrBrineyToRoute109::
+EventScript_MoveMrBrineyToRoute109:: @ 82718B3
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
@@ -623,7 +626,7 @@ EventScript_MoveMrBrineyToRoute109::
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	end
 
-EverGrandeCity_HallOfFame_EventScript_ResetEliteFour::
+EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: @ 82718CC
 	clearflag FLAG_DEFEATED_ELITE_4_SIDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
@@ -631,7 +634,7 @@ EverGrandeCity_HallOfFame_EventScript_ResetEliteFour::
 	setvar VAR_ELITE_4_STATE, 0
 	return
 
-Common_EventScript_UpdateBrineyLocation::
+Common_EventScript_UpdateBrineyLocation:: @ 82718DE
 	goto_if_unset FLAG_RECEIVED_POKENAV, Common_EventScript_NopReturn
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_NopReturn
 	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, EventScript_SetBrineyLocation_House
@@ -639,15 +642,15 @@ Common_EventScript_UpdateBrineyLocation::
 	goto_if_unset FLAG_HIDE_ROUTE_109_MR_BRINEY, EventScript_SetBrineyLocation_Route109
 	return
 
-EventScript_SetBrineyLocation_House::
+EventScript_SetBrineyLocation_House:: @ 827190C
 	setvar VAR_BRINEY_LOCATION, 1
 	return
 
-EventScript_SetBrineyLocation_Dewford::
+EventScript_SetBrineyLocation_Dewford:: @ 8271912
 	setvar VAR_BRINEY_LOCATION, 2
 	return
 
-EventScript_SetBrineyLocation_Route109::
+EventScript_SetBrineyLocation_Route109:: @ 8271918
 	setvar VAR_BRINEY_LOCATION, 3
 	return
 
@@ -655,34 +658,37 @@ EventScript_SetBrineyLocation_Route109::
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/record_mix.inc"
 	.include "data/scripts/pc.inc"
+	.include "data/scripts/general_mart.inc"
+	.include "data/scripts/poke_mart.inc"
+	.include "data/scripts/pokemon_center_move_tutor.inc"
 
 @ scripts/notices.inc? signs.inc? See comment about text/notices.inc
-Common_EventScript_ShowPokemartSign::
+Common_EventScript_ShowPokemartSign:: @ 8271E6A
 	msgbox gText_PokemartSign, MSGBOX_SIGN
 	end
 
-Common_EventScript_ShowPokemonCenterSign::
+Common_EventScript_ShowPokemonCenterSign:: @ 8271E73
 	msgbox gText_PokemonCenterSign, MSGBOX_SIGN
 	end
 
-Common_ShowEasyChatScreen::
+Common_ShowEasyChatScreen:: @ 8271E7C
 	fadescreen FADE_TO_BLACK
 	special ShowEasyChatScreen
 	fadescreen FADE_FROM_BLACK
 	return
 
-Common_EventScript_ReadyPetalburgGymForBattle::
+Common_EventScript_ReadyPetalburgGymForBattle:: @ 8271E84
 	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-Common_EventScript_BufferTrendyPhrase::
+Common_EventScript_BufferTrendyPhrase:: @ 8271E8B
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return
 
-EventScript_BackupMrBrineyLocation::
+EventScript_BackupMrBrineyLocation:: @ 8271E95
 	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
 	setvar VAR_BRINEY_LOCATION, 0
 	return
@@ -691,34 +697,34 @@ EventScript_BackupMrBrineyLocation::
 	.include "data/scripts/rival_graphics.inc"
 	.include "data/scripts/set_gym_trainers.inc"
 
-Common_EventScript_ShowBagIsFull::
+Common_EventScript_ShowBagIsFull:: @ 8272054
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_BagIsFull::
+Common_EventScript_BagIsFull:: @ 827205E
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_ShowNoRoomForDecor::
+Common_EventScript_ShowNoRoomForDecor:: @ 8272067
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_NoRoomForDecor::
+Common_EventScript_NoRoomForDecor:: @ 8272071
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_SetAbnormalWeather::
+Common_EventScript_SetAbnormalWeather:: @ 827207A
 	setweather WEATHER_ABNORMAL
 	return
 
-Common_EventScript_PlayGymBadgeFanfare::
+Common_EventScript_PlayGymBadgeFanfare:: @ 827207E
 	playfanfare MUS_OBTAIN_BADGE
 	waitfanfare
 	return
 
-Common_EventScript_OutOfCenterPartyHeal::
+Common_EventScript_OutOfCenterPartyHeal:: @ 8272083
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_HEAL
 	waitfanfare
@@ -726,7 +732,7 @@ Common_EventScript_OutOfCenterPartyHeal::
 	fadescreen FADE_FROM_BLACK
 	return
 
-EventScript_RegionMap::
+EventScript_RegionMap:: @ 827208F
 	lockall
 	msgbox Common_Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
@@ -735,12 +741,12 @@ EventScript_RegionMap::
 	releaseall
 	end
 
-Common_EventScript_PlayBrineysBoatMusic::
+Common_EventScript_PlayBrineysBoatMusic:: @ 82720A0
 	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_SAILING, FALSE
 	return
 
-Common_EventScript_StopBrineysBoatMusic::
+Common_EventScript_StopBrineysBoatMusic:: @ 82720A8
 	clearflag FLAG_DONT_TRANSITION_MUSIC
 	fadedefaultbgm
 	return
@@ -748,13 +754,13 @@ Common_EventScript_StopBrineysBoatMusic::
 	.include "data/scripts/prof_birch.inc"
 
 @ Below could be split as ferry.inc aside from the Rusturf tunnel script
-Common_EventScript_FerryDepart::
+Common_EventScript_FerryDepart:: @ 82721E2
 	delay 60
 	applymovement VAR_0x8004, Movement_FerryDepart
 	waitmovement 0
 	return
 
-Movement_FerryDepart:
+Movement_FerryDepart: @ 82721F0
 	walk_slow_right
 	walk_slow_right
 	walk_slow_right
@@ -764,7 +770,7 @@ Movement_FerryDepart:
 	walk_right
 	step_end
 
-EventScript_HideMrBriney::
+EventScript_HideMrBriney:: @ 82721F8
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
@@ -776,7 +782,7 @@ EventScript_HideMrBriney::
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
-RusturfTunnel_EventScript_SetRusturfTunnelOpen::
+RusturfTunnel_EventScript_SetRusturfTunnelOpen:: @ 8272216
 	removeobject LOCALID_WANDAS_BF
 	removeobject LOCALID_WANDA
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDAS_BOYFRIEND
@@ -785,7 +791,7 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen::
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
-EventScript_UnusedBoardFerry::
+EventScript_UnusedBoardFerry:: @ 827222B
 	delay 30
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -796,11 +802,11 @@ EventScript_UnusedBoardFerry::
 	delay 30
 	return
 
-Movement_UnusedBoardFerry:
+Movement_UnusedBoardFerry: @ 827224E
 	walk_up
 	step_end
 
-Common_EventScript_FerryDepartIsland::
+Common_EventScript_FerryDepartIsland:: @ 8272250
 	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Ferry_EventScript_DepartIslandSouth
 	compare VAR_FACING, DIR_WEST
@@ -813,19 +819,30 @@ Common_EventScript_FerryDepartIsland::
 	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/kecleon.inc"
 
-Common_EventScript_NameReceivedPartyMon::
+Common_EventScript_NameReceivedPartyMon:: @ 82723DD
 	fadescreen FADE_TO_BLACK
 	special ChangePokemonNickname
 	waitstate
 	return
 
-Common_EventScript_PlayerHandedOverTheItem::
+Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
 	playfanfare MUS_OBTAIN_TMHM
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
 	removeitem VAR_0x8004
+	return
+
+Common_EventScript_RemoveOverworldAfterBattle:
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Common_EventScript_TryRemoveMon
+	end
+
+Common_EventScript_TryRemoveMon::
+	specialvar VAR_RESULT, GetBattleOutcome
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne Common_EventScript_NopReturn
+	removeobject VAR_LAST_TALKED
 	return
 
 	.include "data/scripts/elite_four.inc"
@@ -838,166 +855,166 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/text/obtain_item.inc"
 
 @ The below and surf.inc could be split into some text/notices.inc
-gText_PokemartSign::
+gText_PokemartSign:: @ 8272B6A
 	.string "“Selected items for your convenience!”\n"
-	.string "POKéMON MART$"
+	.string "Pokémon Mart$"
 
-gText_PokemonCenterSign::
+gText_PokemonCenterSign:: @ 8272B9E
 	.string "“Rejuvenate your tired partners!”\n"
-	.string "POKéMON CENTER$"
+	.string "Pokémon Center$"
 
-gText_MomOrDadMightLikeThisProgram::
+gText_MomOrDadMightLikeThisProgram:: @ 8272BCF
 	.string "{STR_VAR_1} might like this program.\n"
 	.string "… … … … … … … … … … … … … … … …\p"
 	.string "Better get going!$"
 
-gText_WhichFloorWouldYouLike::
-	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
+gText_WhichFloorWouldYouLike:: @ 8272C1D
+	.string "Welcome to Lilycove Department Store.\p"
 	.string "Which floor would you like?$"
 
-gText_SandstormIsVicious::
+gText_SandstormIsVicious:: @ 8272C5F
 	.string "The sandstorm is vicious.\n"
 	.string "It's impossible to keep going.$"
 
-gText_SelectWithoutRegisteredItem::
-	.string "An item in the BAG can be\n"
-	.string "registered to SELECT for easy use.$"
+gText_SelectWithoutRegisteredItem:: @ 8272C98
+	.string "An item in the Bag can be\n"
+	.string "registered to Select for easy use.$"
 
-gText_PokemonTrainerSchoolEmail::
-	.string "There's an e-mail from POKéMON TRAINER\n"
-	.string "SCHOOL.\p"
+gText_PokemonTrainerSchoolEmail:: @ 8272CD5
+	.string "There's an e-mail from Pokémon Trainer\n"
+	.string "School.\p"
 	.string "… … … … … …\p"
-	.string "A POKéMON may learn up to four moves.\p"
-	.string "A TRAINER's expertise is tested on the\n"
-	.string "move sets chosen for POKéMON.\p"
+	.string "A Pokémon may learn up to four moves.\p"
+	.string "A Trainer's expertise is tested on the\n"
+	.string "move sets chosen for Pokémon.\p"
 	.string "… … … … … …$"
 
-gText_PlayerHouseBootPC::
+gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
-gText_PokeblockLinkCanceled::
+gText_PokeblockLinkCanceled:: @ 8272D9C
 	.string "The link was canceled.$"
 
-gText_UnusedNicknameReceivedPokemon::
+gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
 	.string "Want to give a nickname to\n"
 	.string "the {STR_VAR_2} you received?$"
 
-gText_PlayerWhitedOut::
+gText_PlayerWhitedOut:: @ 8272DE3
 	.string "{PLAYER} is out of usable\n"
-	.string "POKéMON!\p{PLAYER} whited out!$"
+	.string "Pokémon!\p{PLAYER} blacked out!$"
 
-gText_RegisteredTrainerinPokeNav::
+gText_RegisteredTrainerinPokeNav:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"
-	.string "in the POKéNAV.$"
+	.string "in the PokéNav.$"
 
-gText_ComeBackWithSecretPower::
-	.string "Do you know the TM SECRET POWER?\p"
-	.string "Our group, we love the TM SECRET\n"
-	.string "POWER.\p"
+gText_ComeBackWithSecretPower:: @ 8272E30
+	.string "Do you know the TM Secret Power?\p"
+	.string "Our group, we love the TM Secret\n"
+	.string "Power.\p"
 	.string "One of our members will give it to you.\n"
 	.string "Come back and show me if you get it.\p"
 	.string "We'll accept you as a member and sell\n"
 	.string "you good stuff in secrecy.$"
 
-gText_PokerusExplanation::
-	.string "Your POKéMON may be infected with\n"
-	.string "POKéRUS.\p"
-	.string "Little is known about the POKéRUS\n"
+gText_PokerusExplanation:: @ 8272F07
+	.string "Your Pokémon may be infected with\n"
+	.string "Pokérus.\p"
+	.string "Little is known about the Pokérus\n"
 	.string "except that they are microscopic life-\l"
-	.string "forms that attach to POKéMON.\p"
-	.string "While infected, POKéMON are said to\n"
+	.string "forms that attach to Pokémon.\p"
+	.string "While infected, Pokémon are said to\n"
 	.string "grow exceptionally well.$"
 
 	.include "data/text/surf.inc"
 
-gText_DoorOpenedFarAway::
+gText_DoorOpenedFarAway:: @ 827301B
 	.string "It sounded as if a door opened\n"
 	.string "somewhere far away.$"
 
-gText_BigHoleInTheWall::
+gText_BigHoleInTheWall:: @ 827304E
 	.string "There is a big hole in the wall.$"
 
-gText_SorryWirelessClubAdjustments::
+gText_SorryWirelessClubAdjustments:: @ 827306F
 	.string "I'm terribly sorry.\n"
-	.string "The POKéMON WIRELESS CLUB is\l"
+	.string "The Pokémon Wireless Club is\l"
 	.string "undergoing adjustments now.$"
 
-gText_UndergoingAdjustments::
+gText_UndergoingAdjustments:: @ 82730BC
 	.string "It appears to be undergoing\n"
 	.string "adjustments…$"
 
 @ Unused
-gText_SorryTradeCenterInspections::
-	.string "I'm terribly sorry. The TRADE CENTER\n"
+gText_SorryTradeCenterInspections:: @ 82730E5
+	.string "I'm terribly sorry. The Trade Center\n"
 	.string "is undergoing inspections.$"
 
 @ Unused
-gText_SorryRecordCornerPreparation::
-	.string "I'm terribly sorry. The RECORD CORNER\n"
+gText_SorryRecordCornerPreparation:: @ 8273125
+	.string "I'm terribly sorry. The Record Corner\n"
 	.string "is under preparation.$"
 
-gText_PlayerHandedOverTheItem::
+gText_PlayerHandedOverTheItem:: @ 8273161
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-gText_ThankYouForAccessingMysteryGift::
+gText_ThankYouForAccessingMysteryGift:: @ 8273178
 	.string "Thank you for accessing the\n"
-	.string "MYSTERY GIFT System.$"
+	.string "Mystery Gift System.$"
 
-gText_PlayerFoundOneTMHM::
+gText_PlayerFoundOneTMHM:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
 
-gText_Sudowoodo_Attacked::
+gText_Sudowoodo_Attacked:: @ 82731BD
 	.string "The weird tree doesn't like the\n"
-	.string "WAILMER PAIL!\p"
+	.string "Wailmer Pail!\p"
 	.string "The weird tree attacked!$"
 
-gText_LegendaryFlewAway::
+gText_LegendaryFlewAway:: @ 8273204
 	.string "The {STR_VAR_1} flew away!$"
 
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/mevent.inc"
 	.include "data/text/abnormal_weather.inc"
 
-EventScript_SelectWithoutRegisteredItem::
+EventScript_SelectWithoutRegisteredItem:: @ 82736B3
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
 	.include "data/scripts/field_poison.inc"
 
-Common_EventScript_NopReturn::
+Common_EventScript_NopReturn:: @ 827374E
 	return
 
 @ Unused
-EventScript_CableClub_SetVarResult1::
+EventScript_CableClub_SetVarResult1:: @ 827374F
 	setvar VAR_RESULT, 1
 	return
 
-EventScript_CableClub_SetVarResult0::
+EventScript_CableClub_SetVarResult0:: @ 8273755
 	setvar VAR_RESULT, 0
 	return
 
-Common_EventScript_UnionRoomAttendant::
+Common_EventScript_UnionRoomAttendant:: @ 827375B
 	call CableClub_EventScript_UnionRoomAttendant
 	end
 
-Common_EventScript_WirelessClubAttendant::
+Common_EventScript_WirelessClubAttendant:: @ 8273761
 	call CableClub_EventScript_WirelessClubAttendant
 	end
 
-Common_EventScript_DirectCornerAttendant::
+Common_EventScript_DirectCornerAttendant:: @ 8273767
 	call CableClub_EventScript_DirectCornerAttendant
 	end
 
-Common_EventScript_RemoveStaticPokemon::
+Common_EventScript_RemoveStaticPokemon:: @ 827376D
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Common_EventScript_LegendaryFlewAway::
+Common_EventScript_LegendaryFlewAway:: @ 8273776
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
@@ -1055,9 +1072,33 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/battle_tent.inc"
 	.include "data/text/event_ticket_2.inc"
 	.include "data/text/move_tutors.inc"
-	.include "data/scripts/move_tutors.inc"
 	.include "data/scripts/trainer_hill.inc"
 	.include "data/scripts/test_signpost.inc"
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+	.include "data/maps/Seaspray_Cave_B1F/scripts.inc"
+	.include "data/maps/EmberPath/scripts.inc"
+	.include "data/maps/AshenWoods/scripts.inc"
+	.include "data/maps/MirageTower_B1F/scripts.inc"
+	.include "data/maps/SandstrewnRuins/scripts.inc"
+	.include "data/scripts/rotom.inc"
+	.include "data/maps/Route111_RuinsExterior/scripts.inc"
+	.include "data/maps/SandstrewnRuins_B1F/scripts.inc"
+	.include "data/maps/SandstrewnRuins_2F/scripts.inc"
+	.include "data/maps/SandstrewnRuins_3F/scripts.inc"
+	.include "data/maps/ScorchedSlab_B1F/scripts.inc"
+	.include "data/maps/ScorchedSlab_B2F/scripts.inc"
+	.include "data/maps/ScorchedSlab_HeatransRoom/scripts.inc"
+	.include "data/maps/DewfordMeadow/scripts.inc"
+	.include "data/maps/DewfordManor_1F/scripts.inc"
+	.include "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc"
+	.include "data/maps/MeteorFalls_JirachisRoom/scripts.inc"
+	.include "data/maps/VerdanturfMeadow/scripts.inc"
+	.include "data/scripts/eevee.inc"
+	.include "data/scripts/furfrou.inc"
+	.include "data/scripts/honey.inc"
+
+	.include "data/maps/AlteringCave_1F/scripts.inc"
+
+	.include "data/maps/AlteringCave_B1F/scripts.inc"

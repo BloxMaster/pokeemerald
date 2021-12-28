@@ -60,6 +60,10 @@ gSpecials::
 	def_special ObjectEventInteractionPickBerryTree
 	def_special ObjectEventInteractionRemoveBerryTree
 	def_special ObjectEventInteractionWaterBerryTree
+	def_special ObjectEventInteractionBerryTreePokemonEncounter
+	def_special SetBerryEncounters
+	def_special GetBerryEncounter
+	def_special DoBerryEncounter
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special GetTrainerBattleMode
@@ -535,4 +539,42 @@ gSpecials::
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
+	def_special ChangePokemonNature
+	def_special BufferChosenMonNature
+	def_special ChangeChosenMonIVs
+	def_special IncreaseChosenMonEVs
+	def_special BufferChosenMonIV
+	def_special BufferChosenMonEV
+	def_special BufferChosenMonAllIVs
+	def_special BufferChosenMonAllEVs
+	def_special ResetChosenMonEVs
+	def_special ChangeChosenMonHiddenPower
+	def_special CheckChosenMonCanGainEVs
+	def_special ScriptMenu_CreatePKMNCenterMoveTutorMultichoice
+	def_special GetPKMNCenterMoveListMultichoice
+	def_special AreChosenMonEVsMaxedOut
+	def_special Bag_ChooseItem
+	def_special Bag_ChoosePokeBall
+	def_special FossilToSpecies
+	def_special IsItemFossil
+	def_special DoesPlayerHaveFossil
+	def_special CountRotomInParty
+	def_special GetRotomState
+	def_special RotomForgetSpecialMove
+	def_special ChangeMonSpecies
+	def_special TeachRotomMove
+	def_special DoesRotomKnowSpecialMove
+	def_special GetRotomNewSpecialMove
+	def_special SetSpeciesAndEggMove
+	def_special SetGiftEggMove
+	def_special ChangePokeBall
+	def_special GetDiancieFriendshipScore
+	def_special CheckMagikarpBattle
+	def_special BattleSetup_StartLegendaryBattle
+	def_special GetHighestLevelInPlayerParty
+	def_special CheckSpeciesInParty
 	def_special SetTotemBoost
+	def_special IsSelectedMonEeveelution
+	def_special HoneyWildEncounter
+	def_special GetStaticEncounterLevel
+	def_special GetMysteryGiftSpecies

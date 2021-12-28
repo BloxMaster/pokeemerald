@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-#define TEXT_BUFF_ARRAY_COUNT   16
+#define TEXT_BUFF_ARRAY_COUNT   17
 
 // for 0xFD
 #define B_TXT_BUFF1 0x0
@@ -310,6 +310,5 @@ extern const u8 gText_BattleTourney[];
 
 extern const u16 gMissStringIds[];
 extern const u16 gStatUpStringIds[];
-extern const u16 gTrappingMoves[];
 
 #endif // GUARD_BATTLE_MESSAGE_H

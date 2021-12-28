@@ -543,7 +543,7 @@
 	.macro check_ability battler:req, ability:req
 	.byte 0x60
 	.byte \battler
-	.byte \ability
+	.2byte \ability
 	.endm
 
 	.macro if_flash_fired battler:req, param1:req
@@ -689,7 +689,37 @@
 	.byte \value
 	.4byte \ptr
 	.endm
-	
+
+	.macro if_type_effectiveness_on_ally param0:req, ptr:req
+	.byte 0x7A
+	.byte \param0
+	.4byte \ptr
+	.endm
+
+	.macro if_effect_chance param0:req, ptr:req
+	.byte 0x7B
+	.byte \param0
+	.4byte \ptr
+	.endm
+
+	.macro if_move_priority_greater_than param0:req, ptr:req
+	.byte 0x7C
+	.byte \param0
+	.4byte \ptr
+	.endm
+
+	.macro if_species battler:req, species:req, ptr:req
+	.byte 0x7D
+	.byte \battler
+	.2byte \species
+	.4byte \ptr
+	.endm
+
+	.macro if_target_can_go_down ptr:req
+	.byte 0x7E
+	.4byte \ptr
+	.endm
+
 @ useful script macros
 	.macro if_has_physical_move battler:req, ptr:req
 	if_has_move_with_split \battler, SPLIT_PHYSICAL, \ptr

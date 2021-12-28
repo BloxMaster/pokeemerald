@@ -1,659 +1,899 @@
-Route102_EventScript_ItemPotion::
+Route102_EventScript_ItemPotion:: @ 8290CD8
 	finditem ITEM_POTION
 	end
 
-Route103_EventScript_ItemGuardSpec::
-	finditem ITEM_GUARD_SPEC
+Route103_EventScript_ItemTM40AerialAce:: @ 8290CE5
+	finditem ITEM_TM40_AERIAL_ACE
 	end
 
-Route103_EventScript_ItemPPUp::
+Route103_EventScript_ItemPPUp:: @ 8290CF2
 	finditem ITEM_PP_UP
 	end
 
-Route104_EventScript_ItemPPUp::
+Route104_EventScript_ItemPPUp:: @ 8290CFF
 	finditem ITEM_PP_UP
 	end
 
-Route104_EventScript_ItemPokeBall::
-	finditem ITEM_POKE_BALL
+Route104_EventScript_ItemFriendBall:: @ 8290D0C
+	finditem ITEM_FRIEND_BALL
 	end
 
-Route104_EventScript_ItemXAccuracy::
-	finditem ITEM_X_ACCURACY
+Route104_EventScript_ItemAudinite:: @ 8290D19
+	finditem ITEM_AUDINITE
 	end
 
-Route104_EventScript_ItemPotion::
-	finditem ITEM_POTION
+Route104_EventScript_ItemSootheBell:: @ 8290D26
+	finditem ITEM_SOOTHE_BELL
 	end
 
-Route105_EventScript_ItemIron::
-	finditem ITEM_IRON
+Route105_EventScript_ItemAbilityPatch:: @ 8290D33
+	finditem ITEM_ABILITY_PATCH
 	end
 
-Route106_EventScript_ItemProtein::
-	finditem ITEM_PROTEIN
+Route106_EventScript_ItemKinglerite:: @ 8290D40
+	finditem ITEM_KINGLERITE
 	end
 
-Route108_EventScript_ItemStarPiece::
+Route108_EventScript_ItemStarPiece:: @ 8290D4D
 	finditem ITEM_STAR_PIECE
 	end
 
-Route109_EventScript_ItemPPUp::
+Route109_EventScript_ItemPPUp:: @ 8290D5A
 	finditem ITEM_PP_UP
 	end
 
-Route109_EventScript_ItemPotion::
-	finditem ITEM_POTION
+Route109_EventScript_ItemZoomLens:: @ 8290D67
+	finditem ITEM_ZOOM_LENS
 	end
 
-Route110_EventScript_ItemRareCandy::
+Route110_EventScript_ItemRareCandy:: @ 8290D74
 	finditem ITEM_RARE_CANDY
 	end
 
-Route110_EventScript_ItemDireHit::
-	finditem ITEM_DIRE_HIT
+Route110_EventScript_ItemManectite:: @ 8290D81
+	finditem ITEM_MANECTITE
 	end
 
-Route110_EventScript_ItemElixir::
+Route110_EventScript_ItemElixir:: @ 8290D8E
 	finditem ITEM_ELIXIR
 	end
 
-Route111_EventScript_ItemTM37::
-	finditem ITEM_TM37
+Route111_EventScript_ItemTM37:: @ 8290D9B
+	finditem ITEM_TM37_SANDSTORM
 	end
 
-Route111_EventScript_ItemStardust::
-	finditem ITEM_STARDUST
+Route111_EventScript_ItemStarPiece:: @ 8290DA8
+	finditem ITEM_STAR_PIECE
 	end
 
-Route111_EventScript_ItemHPUp::
-	finditem ITEM_HP_UP
+Route111_EventScript_ItemTM63RockSlide:: @ 8290DB5
+	finditem ITEM_TM63_ROCK_SLIDE
 	end
 
-Route111_EventScript_ItemElixir::
+Route111_EventScript_ItemElixir:: @ 8290DC2
 	finditem ITEM_ELIXIR
 	end
 
-Route112_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+Route112_EventScript_ItemHoundoominite:: @ 8290DCF
+	finditem ITEM_HOUNDOOMINITE
 	end
 
-Route113_EventScript_ItemMaxEther::
+Route113_EventScript_ItemMaxEther:: @ 8290DDC
 	finditem ITEM_MAX_ETHER
 	end
 
-Route113_EventScript_ItemSuperRepel::
-	finditem ITEM_SUPER_REPEL
+Route113_EventScript_ItemShinyStone:: @ 8290DE9
+	finditem ITEM_SHINY_STONE
 	end
 
-Route113_EventScript_ItemHyperPotion::
+Route113_EventScript_ItemHyperPotion:: @ 8290DF6
 	finditem ITEM_HYPER_POTION
 	end
 
-Route114_EventScript_ItemRareCandy::
+Route114_EventScript_ItemRareCandy:: @ 8290E03
 	finditem ITEM_RARE_CANDY
 	end
 
-Route114_EventScript_ItemProtein::
-	finditem ITEM_PROTEIN
+Route114_EventScript_ItemTM54Psyshock:: @ 8290E10
+	finditem ITEM_TM54_PSYSHOCK
 	end
 
-Route114_EventScript_ItemEnergyPowder::
-	finditem ITEM_ENERGY_POWDER
+Route114_EventScript_ItemProtectivePads:: @ 8290E1D
+	finditem ITEM_PROTECTIVE_PADS
 	end
 
-Route115_EventScript_ItemSuperPotion::
+Route115_EventScript_ItemSuperPotion:: @ 8290E2A
 	finditem ITEM_SUPER_POTION
 	end
 
-Route115_EventScript_ItemTM01::
-	finditem ITEM_TM01
+Route115_EventScript_ItemTM01:: @ 8290E37
+	finditem ITEM_TM01_FOCUS_PUNCH
 	end
 
-Route115_EventScript_ItemIron::
-	finditem ITEM_IRON
+Route115_EventScript_ItemMoonBall:: @ 8290E44
+	finditem ITEM_MOON_BALL
 	end
 
-Route115_EventScript_ItemGreatBall::
+Route115_EventScript_ItemGreatBall:: @ 8290E51
 	finditem ITEM_GREAT_BALL
 	end
 
-Route115_EventScript_ItemHealPowder::
-	finditem ITEM_HEAL_POWDER
+Route115_EventScript_ItemHeracronite:: @ 8290E5E
+	finditem ITEM_HERACRONITE
 	end
 
-Route115_EventScript_ItemPPUp::
+Route115_EventScript_ItemPPUp:: @ 8290E6B
 	finditem ITEM_PP_UP
 	end
 
-Route116_EventScript_ItemXSpecial::
-	finditem ITEM_X_SP_ATK
+Route116_EventScript_TM77StruggleBug:: @ 8290E78
+	finditem ITEM_TM77_STRUGGLE_BUG
 	end
 
-Route116_EventScript_ItemEther::
+Route116_EventScript_ItemEther:: @ 8290E85
 	finditem ITEM_ETHER
 	end
 
-Route116_EventScript_ItemRepel::
+Route116_EventScript_ItemRepel:: @ 8290E92
 	finditem ITEM_REPEL
 	end
 
-Route116_EventScript_ItemHPUp::
+Route116_EventScript_ItemHPUp:: @ 8290E9F
 	finditem ITEM_HP_UP
 	end
 
-Route116_EventScript_ItemPotion::
-	finditem ITEM_POTION
+Route116_EventScript_ItemBindingBand:: @ 8290EAC
+	finditem ITEM_BINDING_BAND
 	end
 
-Route117_EventScript_ItemGreatBall::
+Route117_EventScript_ItemGreatBall:: @ 8290EB9
 	finditem ITEM_GREAT_BALL
 	end
 
-Route117_EventScript_ItemRevive::
+Route117_EventScript_ItemRevive:: @ 8290EC6
 	finditem ITEM_REVIVE
 	end
 
-Route118_EventScript_ItemHyperPotion::
+Route118_EventScript_ItemHyperPotion:: @ 8290ED3
 	finditem ITEM_HYPER_POTION
 	end
 
-Route119_EventScript_ItemSuperRepel::
-	finditem ITEM_SUPER_REPEL
+Route119_EventScript_ItemToxicOrb:: @ 8290EE0
+	finditem ITEM_TOXIC_ORB
 	end
 
-Route119_EventScript_ItemZinc::
-	finditem ITEM_ZINC
+Route119_EventScript_ItemScizorite:: @ 8290EED
+	finditem ITEM_SCIZORITE
 	end
 
-Route119_EventScript_ItemElixir::
+Route119_EventScript_ItemElixir:: @ 8290EFA
 	finditem ITEM_ELIXIR
 	end
 
-Route119_EventScript_ItemLeafStone::
-	finditem ITEM_LEAF_STONE
+Route119_EventScript_ItemTM84_Poison_Jab:: @ 8290F07
+	finditem ITEM_TM84_POISON_JAB
 	end
 
-Route119_EventScript_ItemRareCandy::
+Route119_EventScript_ItemRareCandy:: @ 8290F14
 	finditem ITEM_RARE_CANDY
 	end
 
-Route119_EventScript_ItemHyperPotion::
+Route119_EventScript_ItemHyperPotion:: @ 8290F21
 	finditem ITEM_HYPER_POTION
 	end
 
-Route119_EventScript_ItemHyperPotion2::
+Route119_EventScript_ItemHyperPotion2:: @ 8290F2E
 	finditem ITEM_HYPER_POTION
 	end
 
-Route119_EventScript_ItemElixir2::
+Route119_EventScript_ItemElixir2:: @ 8290F3B
 	finditem ITEM_ELIXIR
 	end
 
-Route120_EventScript_ItemNugget::
+Route120_EventScript_ItemNugget:: @ 8290F48
 	finditem ITEM_NUGGET
 	end
 
-Route120_EventScript_ItemFullHeal::
-	finditem ITEM_FULL_HEAL
+Route120_EventScript_ItemPidgeotite:: @ 8290F55
+	finditem ITEM_PIDGEOTITE
 	end
 
-Route120_EventScript_ItemHyperPotion::
+Route120_EventScript_ItemHyperPotion:: @ 8290F62
 	finditem ITEM_HYPER_POTION
 	end
 
-Route120_EventScript_ItemNestBall::
+Route120_EventScript_ItemNestBall:: @ 8290F6F
 	finditem ITEM_NEST_BALL
 	end
 
-Route120_EventScript_ItemRevive::
+Route120_EventScript_ItemRevive:: @ 8290F7C
 	finditem ITEM_REVIVE
 	end
 
-Route121_EventScript_ItemCarbos::
+Route121_EventScript_ItemCarbos:: @ 8290F89
 	finditem ITEM_CARBOS
 	end
 
-Route121_EventScript_ItemRevive::
+Route121_EventScript_ItemRevive:: @ 8290F96
 	finditem ITEM_REVIVE
 	end
 
-Route121_EventScript_ItemZinc::
-	finditem ITEM_ZINC
+Route121_EventScript_ItemMachampite:: @ 8290FA3
+	finditem ITEM_MACHAMPITE
 	end
 
-Route123_EventScript_ItemCalcium::
-	finditem ITEM_CALCIUM
+Route123_EventScript_ItemWideLens:: @ 8290FB0
+	finditem ITEM_WIDE_LENS
 	end
 
-Route123_EventScript_ItemUltraBall::
-	finditem ITEM_ULTRA_BALL
+Route123_EventScript_ItemMeadowPlate:: @ 8290FBD
+	finditem ITEM_MEADOW_PLATE
 	end
 
-Route123_EventScript_ItemElixir::
+Route123_EventScript_ItemElixir:: @ 8290FCA
 	finditem ITEM_ELIXIR
 	end
 
-Route123_EventScript_ItemPPUp::
+Route123_EventScript_ItemPPUp:: @ 8290FD7
 	finditem ITEM_PP_UP
 	end
 
-Route123_EventScript_ItemRevivalHerb::
-	finditem ITEM_REVIVAL_HERB
+Route123_EventScript_ItemTM99DazzlingGleam:: @ 8290FE4
+	finditem ITEM_TM99_DAZZLING_GLEAM
 	end
 
-Route124_EventScript_ItemRedShard::
+Route124_EventScript_ItemRedShard:: @ 8290FF1
 	finditem ITEM_RED_SHARD
 	end
 
-Route124_EventScript_ItemBlueShard::
+Route124_EventScript_ItemBlueShard:: @ 8290FFE
 	finditem ITEM_BLUE_SHARD
 	end
 
-Route124_EventScript_ItemYellowShard::
+Route124_EventScript_ItemYellowShard:: @ 829100B
 	finditem ITEM_YELLOW_SHARD
 	end
 
-Route125_EventScript_ItemBigPearl::
+Route125_EventScript_ItemBigPearl:: @ 8291018
 	finditem ITEM_BIG_PEARL
 	end
 
-Route126_EventScript_ItemGreenShard::
+Route126_EventScript_ItemGreenShard:: @ 8291025
 	finditem ITEM_GREEN_SHARD
 	end
 
-Route127_EventScript_ItemZinc::
+Route127_EventScript_ItemZinc:: @ 8291032
 	finditem ITEM_ZINC
 	end
 
-Route127_EventScript_ItemCarbos::
-	finditem ITEM_CARBOS
+Route127_EventScript_ItemLaprasite:: @ 829103F
+	finditem ITEM_LAPRASITE
 	end
 
-Route127_EventScript_ItemRareCandy::
+Route127_EventScript_ItemRareCandy:: @ 829104C
 	finditem ITEM_RARE_CANDY
 	end
 
-Route132_EventScript_ItemRareCandy::
+Route132_EventScript_ItemRareCandy:: @ 8291059
 	finditem ITEM_RARE_CANDY
 	end
 
-Route132_EventScript_ItemProtein::
+Route132_EventScript_ItemProtein:: @ 8291066
 	finditem ITEM_PROTEIN
 	end
 
-Route133_EventScript_ItemBigPearl::
-	finditem ITEM_BIG_PEARL
+Route133_EventScript_ItemPearlString:: @ 8291073
+	finditem ITEM_PEARL_STRING
 	end
 
-Route133_EventScript_ItemStarPiece::
-	finditem ITEM_STAR_PIECE
+Route133_EventScript_ItemCometShard:: @ 8291080
+	finditem ITEM_COMET_SHARD
 	end
 
-Route133_EventScript_ItemMaxRevive::
+Route133_EventScript_ItemMaxRevive:: @ 829108D
 	finditem ITEM_MAX_REVIVE
 	end
 
-Route134_EventScript_ItemCarbos::
+Route134_EventScript_ItemCarbos:: @ 829109A
 	finditem ITEM_CARBOS
 	end
 
-Route134_EventScript_ItemStarPiece::
-	finditem ITEM_STAR_PIECE
+Route134_EventScript_ItemCometShard:: @ 82910A7
+	finditem ITEM_COMET_SHARD
 	end
 
-PetalburgCity_EventScript_ItemMaxRevive::
+PetalburgCity_EventScript_ItemMaxRevive:: @ 82910B4
 	finditem ITEM_MAX_REVIVE
 	end
 
-PetalburgCity_EventScript_ItemEther::
-	finditem ITEM_ETHER
+PetalburgCity_EventScript_ItemVenusaurite:: @ 82910C1
+	finditem ITEM_VENUSAURITE
 	end
 
-MauvilleCity_EventScript_ItemXSpeed::
+MauvilleCity_EventScript_ItemXSpeed:: @ 82910CE
 	finditem ITEM_X_SPEED
 	end
 
-RustboroCity_EventScript_ItemXDefend::
-	finditem ITEM_X_DEFENSE
+RustboroCity_EventScript_ItemAbilityCapsule:: @ 82910DB
+	finditem ITEM_ABILITY_CAPSULE
 	end
 
-LilycoveCity_EventScript_ItemMaxRepel::
-	finditem ITEM_MAX_REPEL
+LilycoveCity_EventScript_ItemLightClay:: @ 82910E8
+	finditem ITEM_LIGHT_CLAY
 	end
 
-MossdeepCity_EventScript_ItemNetBall::
-	finditem ITEM_NET_BALL
+MossdeepCity_EventScript_ItemMiloticite:: @ 82910F5
+	finditem ITEM_MILOTICITE
 	end
 
-PetalburgWoods_EventScript_ItemXAttack::
+PetalburgWoods_EventScript_ItemXAttack:: @ 8291102
 	finditem ITEM_X_ATTACK
 	end
 
-PetalburgWoods_EventScript_ItemGreatBall::
+PetalburgWoods_EventScript_ItemGreatBall:: @ 829110F
 	finditem ITEM_GREAT_BALL
 	end
 
-PetalburgWoods_EventScript_ItemEther::
+PetalburgWoods_EventScript_ItemEther:: @ 829111C
 	finditem ITEM_ETHER
 	end
 
-PetalburgWoods_EventScript_ItemParalyzeHeal::
+PetalburgWoods_EventScript_ItemParalyzeHeal:: @ 8291129
 	finditem ITEM_PARALYZE_HEAL
 	end
 
-RusturfTunnel_EventScript_ItemPokeBall::
+RusturfTunnel_EventScript_ItemPokeBall:: @ 8291136
 	finditem ITEM_POKE_BALL
 	end
 
-RusturfTunnel_EventScript_ItemMaxEther::
-	finditem ITEM_MAX_ETHER
+RusturfTunnel_EventScript_ItemSablenite:: @ 8291143
+	finditem ITEM_SABLENITE
 	end
 
-GraniteCave_1F_EventScript_ItemEscapeRope::
+GraniteCave_1F_EventScript_ItemEscapeRope:: @ 8291150
 	finditem ITEM_ESCAPE_ROPE
 	end
 
-GraniteCave_B1F_EventScript_ItemPokeBall::
+GraniteCave_B1F_EventScript_ItemPokeBall:: @ 829115D
 	finditem ITEM_POKE_BALL
 	end
 
-GraniteCave_B2F_EventScript_ItemRepel::
-	finditem ITEM_REPEL
+GraniteCave_B2F_EventScript_ItemSteelixite:: @ 829116A
+	finditem ITEM_STEELIXITE
 	end
 
-GraniteCave_B2F_EventScript_ItemRareCandy::
+GraniteCave_B2F_EventScript_ItemRareCandy:: @ 8291177
 	finditem ITEM_RARE_CANDY
 	end
 
-JaggedPass_EventScript_ItemBurnHeal::
-	finditem ITEM_BURN_HEAL
+JaggedPass_EventScript_ItemTM69RockPolish:: @ 8291184
+	finditem ITEM_TM69_ROCK_POLISH
 	end
 
-FieryPath_EventScript_ItemFireStone::
-	finditem ITEM_FIRE_STONE
+FieryPath_EventScript_ItemCharizarditeX::
+	finditem ITEM_CHARIZARDITE_X
 	end
 
-FieryPath_EventScript_ItemTM06::
-	finditem ITEM_TM06
+FieryPath_EventScript_ItemTM06:: @ 829119E
+	finditem ITEM_TM06_TOXIC
 	end
 
-MeteorFalls_1F_1R_EventScript_ItemTM23::
-	finditem ITEM_TM23
+MeteorFalls_1F_1R_EventScript_ItemTM23:: @ 82911AB
+	finditem ITEM_TM23_IRON_TAIL
 	end
 
-MeteorFalls_1F_1R_EventScript_ItemFullHeal::
-	finditem ITEM_FULL_HEAL
+MeteorFalls_1F_1R_EventScript_ItemCometShard:: @ 82911B8
+	finditem ITEM_COMET_SHARD
 	end
 
-MeteorFalls_1F_1R_EventScript_ItemMoonStone::
-	finditem ITEM_MOON_STONE
+MeteorFalls_1F_1R_EventScript_ItemTM59DragonPulse:: @ 82911C5
+	finditem ITEM_TM59_DRAGON_PULSE
 	end
 
-MeteorFalls_1F_1R_EventScript_ItemPPUP::
+MeteorFalls_1F_1R_EventScript_ItemPPUP:: @ 82911D2
 	finditem ITEM_PP_UP
 	end
 
-MeteorFalls_B1F_2R_EventScript_ItemTM02::
-	finditem ITEM_TM02
+MeteorFalls_B1F_2R_EventScript_ItemTM02:: @ 82911DF
+	finditem ITEM_TM02_DRAGON_CLAW
 	end
 
-NewMauville_Inside_EventScript_ItemUltraBall::
-	finditem ITEM_ULTRA_BALL
+NewMauville_Inside_EventScript_ItemFastBall:: @ 82911EC
+	finditem ITEM_FAST_BALL
 	end
 
-NewMauville_Inside_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+NewMauville_Inside_EventScript_ItemDuskBall:: @ 82911F9
+	finditem ITEM_DUSK_BALL
 	end
 
-NewMauville_Inside_EventScript_ItemThunderStone::
-	finditem ITEM_THUNDER_STONE
+NewMauville_Inside_EventScript_ItemAmpharosite:: @ 8291206
+	finditem ITEM_AMPHAROSITE
 	end
 
-NewMauville_Inside_EventScript_ItemFullHeal::
+NewMauville_Inside_EventScript_ItemFullHeal:: @ 8291213
 	finditem ITEM_FULL_HEAL
 	end
 
-NewMauville_Inside_EventScript_ItemParalyzeHeal::
-	finditem ITEM_PARALYZE_HEAL
+NewMauville_Inside_EventScript_ItemElectirizer:: @ 8291220
+	finditem ITEM_ELECTIRIZER
 	end
 
-AbandonedShip_Rooms_1F_EventScript_ItemHarborMail::
-	finditem ITEM_HARBOR_MAIL
+AbandonedShip_Rooms_1F_EventScript_ItemLopunnite:: @ 829122D
+	finditem ITEM_LOPUNNITE
 	end
 
-AbandonedShip_Rooms_B1F_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+AbandonedShip_Rooms_B1F_EventScript_ItemBigNugget:: @ 829123A
+	finditem ITEM_BIG_NUGGET
 	end
 
-AbandonedShip_Rooms2_B1F_EventScript_ItemDiveBall::
-	finditem ITEM_DIVE_BALL
+AbandonedShip_Rooms2_B1F_EventScript_ItemLevelBall:: @ 8291247
+	finditem ITEM_LEVEL_BALL
 	end
 
-AbandonedShip_Room_B1F_EventScript_ItemTM13::
-	finditem ITEM_TM13
+AbandonedShip_Room_B1F_EventScript_ItemTM13:: @ 8291254
+	finditem ITEM_TM13_ICE_BEAM
 	end
 
-AbandonedShip_Rooms2_1F_EventScript_ItemRevive::
+AbandonedShip_Rooms2_1F_EventScript_ItemRevive:: @ 8291261
 	finditem ITEM_REVIVE
 	end
 
-AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey::
+AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey:: @ 829126E
 	finditem ITEM_STORAGE_KEY
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall::
+AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall:: @ 829127B
 	finditem ITEM_LUXURY_BALL
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner::
+AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner:: @ 8291288
 	finditem ITEM_SCANNER
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemWaterStone::
-	finditem ITEM_WATER_STONE
+AbandonedShip_HiddenFloorRooms_EventScript_ItemLucarionite:: @ 8291295
+	finditem ITEM_LUCARIONITE
 	end
 
-AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18::
-	finditem ITEM_TM18
+AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18:: @ 82912A2
+	finditem ITEM_TM18_RAIN_DANCE
 	end
 
-ScorchedSlab_EventScript_ItemTM11::
-	finditem ITEM_TM11
+ScorchedSlab_EventScript_ItemTM11:: @ 82912AF
+	finditem ITEM_TM11_SUNNY_DAY
 	end
 
-SafariZone_Northwest_EventScript_ItemTM22::
-	finditem ITEM_TM22
+SafariZone_Northwest_EventScript_ItemTM22:: @ 82912BC
+	finditem ITEM_TM22_SOLARBEAM
 	end
 
-SafariZone_North_EventScript_ItemCalcium::
-	finditem ITEM_CALCIUM
+SafariZone_North_EventScript_ItemAbsolite:: @ 82912C9
+	finditem ITEM_ABSOLITE
 	end
 
-SafariZone_Southwest_EventScript_ItemMaxRevive::
+SafariZone_Southwest_EventScript_ItemMaxRevive:: @ 82912D6
 	finditem ITEM_MAX_REVIVE
 	end
 
-SafariZone_Northeast_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+SafariZone_Northeast_EventScript_ItemKangaskhanite:: @ 82912E3
+	finditem ITEM_KANGASKHANITE
 	end
 
-SafariZone_Southeast_EventScript_ItemBigPearl::
-	finditem ITEM_BIG_PEARL
+SafariZone_Southeast_EventScript_ItemTM53EnergyBall:: @ 82912F0
+	finditem ITEM_TM53_ENERGY_BALL
 	end
 
-MtPyre_2F_EventScript_ItemUltraBall::
+MtPyre_2F_EventScript_ItemUltraBall:: @ 82912FD
 	finditem ITEM_ULTRA_BALL
 	end
 
-MtPyre_3F_EventScript_ItemSuperRepel::
+MtPyre_3F_EventScript_ItemSuperRepel:: @ 829130A
 	finditem ITEM_SUPER_REPEL
 	end
 
-MtPyre_4F_EventScript_ItemSeaIncense::
+MtPyre_4F_EventScript_ItemSeaIncense:: @ 8291317
 	finditem ITEM_SEA_INCENSE
 	end
 
-MtPyre_5F_EventScript_ItemLaxIncense::
+MtPyre_5F_EventScript_ItemLaxIncense:: @ 8291324
 	finditem ITEM_LAX_INCENSE
 	end
 
-MtPyre_6F_EventScript_ItemTM30::
-	finditem ITEM_TM30
+MtPyre_6F_EventScript_ItemTM30:: @ 8291331
+	finditem ITEM_TM30_SHADOW_BALL
 	end
 
-MtPyre_Exterior_EventScript_ItemMaxPotion::
-	finditem ITEM_MAX_POTION
+MtPyre_Exterior_EventScript_ItemGengarite:: @ 829133E
+	finditem ITEM_GENGARITE
 	end
 
-MtPyre_Exterior_EventScript_ItemTM48::
-	finditem ITEM_TM48
+MtPyre_Exterior_EventScript_ItemTM48:: @ 829134B
+	finditem ITEM_TM48_SKILL_SWAP
 	end
 
-AquaHideout_B1F_EventScript_ItemMasterBall::
+AquaHideout_B1F_EventScript_ItemMasterBall:: @ 8291358
 	finditem ITEM_MASTER_BALL
 	end
 
-AquaHideout_B1F_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+AquaHideout_B1F_EventScript_ItemSharpedonite:: @ 8291365
+	finditem ITEM_SHARPEDONITE
 	end
 
-AquaHideout_B1F_EventScript_ItemMaxElixir::
+AquaHideout_B1F_EventScript_ItemMaxElixir:: @ 8291372
 	finditem ITEM_MAX_ELIXIR
 	end
 
-AquaHideout_B2F_EventScript_ItemNestBall::
+AquaHideout_B2F_EventScript_ItemNestBall:: @ 829137F
 	finditem ITEM_NEST_BALL
 	end
 
-AquaHideout_B2F_EventScript_ItemMasterBall::
+AquaHideout_B2F_EventScript_ItemMasterBall:: @ 829138C
 	finditem ITEM_MASTER_BALL      // Unused
 	end
 
-Route119_EventScript_ItemNugget::
+Route119_EventScript_ItemNugget:: @ 8291399
 	finditem ITEM_NUGGET
 	end
 
-Route119_EventScript_ItemMaxElixir::
+Route119_EventScript_ItemMaxElixir:: @ 82913A6
 	finditem ITEM_MAX_ELIXIR
 	end
 
-Route119_EventScript_ItemNestBall::
+Route119_EventScript_ItemNestBall:: @ 82913B3
 	finditem ITEM_NEST_BALL
 	end
 
-ShoalCave_LowTideEntranceRoom_EventScript_ItemBigPearl::
+ShoalCave_LowTideEntranceRoom_EventScript_ItemBigPearl:: @ 82913C0
 	finditem ITEM_BIG_PEARL
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy::
+ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy:: @ 82913CD
 	finditem ITEM_RARE_CANDY
 	end
 
-ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal::
-	finditem ITEM_ICE_HEAL
+ShoalCave_LowTideStairsRoom_EventScript_ItemTM70AuroraVeil::
+	finditem ITEM_TM70_AURORA_VEIL
 	end
 
-ShoalCave_LowTideIceRoom_EventScript_ItemTM07::
-	finditem ITEM_TM07
+ShoalCave_LowTideIceRoom_EventScript_ItemTM07:: @ 82913E7
+	finditem ITEM_TM07_HAIL
 	end
 
-ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce::
+ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce:: @ 82913F4
 	finditem ITEM_NEVER_MELT_ICE
 	end
 
-SeafloorCavern_Room9_EventScript_ItemTM26::
-	finditem ITEM_TM26
+SeafloorCavern_Room9_EventScript_ItemTM26:: @ 8291401
+	finditem ITEM_TM26_EARTHQUAKE
 	end
 
-Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail::
-	finditem ITEM_ORANGE_MAIL
+Route110_TrickHousePuzzle1_EventScript_ItemDawnStone::
+	finditem ITEM_DAWN_STONE
 	end
 
-Route110_TrickHousePuzzle2_EventScript_ItemHarborMail::
-	finditem ITEM_HARBOR_MAIL
+Route110_TrickHousePuzzle2_EventScript_ItemDuskStone:: @ 829141B
+	finditem ITEM_DUSK_STONE
 	end
 
-Route110_TrickHousePuzzle2_EventScript_ItemWaveMail::
-	finditem ITEM_WAVE_MAIL
+Route110_TrickHousePuzzle2_EventScript_ItemHeavyBall:: @ 8291428
+	finditem ITEM_HEAVY_BALL
 	end
 
-Route110_TrickHousePuzzle3_EventScript_ItemShadowMail::
-	finditem ITEM_SHADOW_MAIL
+Route110_TrickHousePuzzle3_EventScript_ItemBigNugget:: @ 8291435
+	finditem ITEM_BIG_NUGGET
 	end
 
-Route110_TrickHousePuzzle3_EventScript_ItemWoodMail::
-	finditem ITEM_WOOD_MAIL
+Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt:: @ 8291442
+	finditem ITEM_EXPERT_BELT
 	end
 
-Route110_TrickHousePuzzle4_EventScript_ItemMechMail::
-	finditem ITEM_MECH_MAIL
+Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest:: @ 829144F
+	finditem ITEM_ASSAULT_VEST
 	end
 
-Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail::
-	finditem ITEM_GLITTER_MAIL
+Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
+	finditem ITEM_MEWTWONITE_X
 	end
 
-Route110_TrickHousePuzzle7_EventScript_ItemTropicMail::
-	finditem ITEM_TROPIC_MAIL
+Route110_TrickHousePuzzle7_EventScript_ItemLuckyEgg:: @ 8291469
+	finditem ITEM_LUCKY_EGG
 	end
 
-Route110_TrickHousePuzzle8_EventScript_ItemBeadMail::
-	finditem ITEM_BEAD_MAIL
+Route110_TrickHousePuzzle8_EventScript_ItemDestinyKnot:: @ 8291476
+	finditem ITEM_DESTINY_KNOT
 	end
 
-VictoryRoad_1F_EventScript_ItemMaxElixir::
+VictoryRoad_1F_EventScript_ItemMaxElixir:: @ 8291483
 	finditem ITEM_MAX_ELIXIR
 	end
 
-VictoryRoad_1F_EventScript_ItemPPUp::
-	finditem ITEM_PP_UP
+VictoryRoad_1F_EventScript_ItemMetagrossite:: @ 8291490
+	finditem ITEM_METAGROSSITE
 	end
 
-VictoryRoad_B1F_EventScript_ItemTM29::
-	finditem ITEM_TM29
+VictoryRoad_B1F_EventScript_ItemTM29:: @ 829149D
+	finditem ITEM_TM29_PSYCHIC
 	end
 
-VictoryRoad_B1F_EventScript_ItemFullRestore::
+VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
 	finditem ITEM_FULL_RESTORE
 	end
 
-VictoryRoad_B2F_EventScript_ItemFullHeal::
+VictoryRoad_B2F_EventScript_ItemFullHeal:: @ 82914B7
 	finditem ITEM_FULL_HEAL
 	end
 
-ArtisanCave_B1F_EventScript_ItemHPUp::
+ArtisanCave_B1F_EventScript_ItemHPUp:: @ 82914C4
 	finditem ITEM_HP_UP
 	end
 
-ArtisanCave_1F_EventScript_ItemCarbos::
+ArtisanCave_1F_EventScript_ItemCarbos:: @ 82914D1
 	finditem ITEM_CARBOS
 	end
 
-MagmaHideout_1F_EventScript_ItemRareCandy::
+MagmaHideout_1F_EventScript_ItemRareCandy:: @ 82914DE
 	finditem ITEM_RARE_CANDY
 	end
 
-MagmaHideout_2F_2R_EventScript_ItemMaxElixir::
+MagmaHideout_2F_2R_EventScript_ItemMaxElixir:: @ 82914EB
 	finditem ITEM_MAX_ELIXIR
 	end
 
-MagmaHideout_2F_2R_EventScript_ItemFullRestore::
+MagmaHideout_2F_2R_EventScript_ItemFullRestore:: @ 82914F8
 	finditem ITEM_FULL_RESTORE
 	end
 
-MagmaHideout_3F_1R_EventScript_ItemNugget::
-	finditem ITEM_NUGGET
+MagmaHideout_3F_1R_EventScript_ItemCameruptite:: @ 8291505
+	finditem ITEM_CAMERUPTITE
 	end
 
-MagmaHideout_3F_2R_EventScript_ItemPPMax::
+MagmaHideout_3F_2R_EventScript_ItemPPMax:: @ 8291512
 	finditem ITEM_PP_MAX
 	end
 
-MagmaHideout_4F_EventScript_ItemMaxRevive::
+MagmaHideout_4F_EventScript_ItemMaxRevive:: @ 829151F
 	finditem ITEM_MAX_REVIVE
 	end
 
-MagmaHideout_3F_3R_EventScript_ItemEscapeRope::
-	finditem ITEM_ESCAPE_ROPE
+MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower:: @ 829152C
+	finditem ITEM_TM35_FLAMETHROWER
+	end
+
+PetalburgWoods_2_Item_TM80Venoshock::
+	finditem ITEM_TM80_VENOSHOCK
+	end
+
+PetalburgWoods_2_Item_SunStone::
+	finditem ITEM_SUN_STONE
+	end
+
+PetalburgWoods_3_TM86_GrassKnot::
+	finditem ITEM_TM86_GRASS_KNOT
+	end
+
+PetalburgWoods_3_TM34_SludgeWave::
+	finditem ITEM_TM34_SLUDGE_WAVE
+	end
+
+PetalburgWoods_3_Beedrillite::
+	finditem ITEM_BEEDRILLITE
+	end
+
+Seaspray_Cave_Lure_Ball::
+	finditem ITEM_LURE_BALL
+	end
+
+Seaspray_Cave_Stealth_Rock::
+	finditem ITEM_TM76_STEALTH_ROCK
+	end
+
+Seaspray_Cave_Water_Pulse::
+	finditem ITEM_TM03_WATER_PULSE
+	end
+
+Seaspray_Cave_Blastoisinite::
+	finditem ITEM_BLASTOISINITE
+	end
+
+Seaspray_Cave_ItemStoneEdge::
+	finditem ITEM_TM71_STONE_EDGE
+	end
+
+Seaspray_Cave_B1F_ItemFreezeDry::
+	finditem ITEM_TM79_FREEZE_DRY
+	end
+
+Seaspray_Cave_B1F_ItemAbomasite::
+	finditem ITEM_ABOMASITE
+	end
+
+Seaspray_Cave_B1F_ItemRevive::
+	finditem ITEM_REVIVE
+	end
+
+Seaspray_Cave_B1F_ItemKingsRock::
+	finditem ITEM_KINGS_ROCK
+	end
+
+Granite_Cave_B2F_TM31_Brick_Break::
+	finditem ITEM_TM31_BRICK_BREAK
+	end
+
+Ember_Path_ItemSmack_Down::
+	finditem ITEM_TM87_SMACK_DOWN
+	end
+
+Ember_Path_ItemCharizarditeY::
+	finditem ITEM_CHARIZARDITE_Y
+	end
+
+Ashen_Woods_ItemFlame_Orb::
+	finditem ITEM_FLAME_ORB
+	end
+
+Ashen_Woods_ItemU_Turn::
+	finditem ITEM_TM89_U_TURN
+	end
+
+Ashen_Woods_ItemPinsirite::
+	finditem ITEM_PINSIRITE
+	end
+
+Sandstrewn_Ruins_ItemGarchompite::
+	finditem ITEM_GARCHOMPITE
+	end
+
+Sandstrewn_Ruins_ItemLeechLife::
+	finditem ITEM_TM56_LEECH_LIFE
+	end
+
+Sandstrewn_Ruins_ItemDomeFossil::
+	finditem ITEM_DOME_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemHelixFossil::
+	finditem ITEM_HELIX_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemOldAmber::
+	finditem ITEM_OLD_AMBER
+	end
+
+Sandstrewn_Ruins_ItemSkullFossil::
+	finditem ITEM_SKULL_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemArmorFossil::
+	finditem ITEM_ARMOR_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemCoverFossil::
+	finditem ITEM_COVER_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemPlumeFossil::
+	finditem ITEM_PLUME_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemSailFossil::
+	finditem ITEM_SAIL_FOSSIL
+	end
+
+Sandstrewn_Ruins_ItemJawFossil::
+	finditem ITEM_JAW_FOSSIL
+	end
+
+Slateport_City_ItemAlakazite::
+	finditem ITEM_ALAKAZITE
+	end
+
+NewMauville_Inside_EventScript_ItemTM91FlashCannon::
+	finditem ITEM_TM91_FLASH_CANNON
+	end
+
+Route119_EventScript_ItemTM62_Acrobatics::
+	finditem ITEM_TM62_ACROBATICS
+	end
+
+MtPyre_Summit_EventScript_ItemTM61_WillOWisp::
+	finditem ITEM_TM61_WILL_O_WISP
+	end
+
+Route111_RuinsExterior_EventScript_ItemMedichamite::
+	finditem ITEM_MEDICHAMITE
+	end
+
+ShoalCave_LowTideIceRoom_EventScript_ItemGlalitite::
+	finditem ITEM_GLALITITE
+	end
+
+Route124_EventScript_TM85DreamEater::
+	finditem ITEM_TM85_DREAM_EATER
+	end
+
+AquaHideout_B1F_EventScript_ItemTM97DarkPulse::
+	finditem ITEM_TM97_DARK_PULSE
+	end
+
+SafariZone_South_EventScript_ItemTM93WildCharge::
+	finditem ITEM_TM93_WILD_CHARGE
+	end
+
+Route131_EventScript_SplashPlate::
+	finditem ITEM_SPLASH_PLATE
+	end
+
+ScorchedSlab_EventScript_ItemTyranitarite::
+	finditem ITEM_TYRANITARITE
+	end
+
+GraniteCave_B1F_EventScript_ItemTM65ShadowClaw::
+	finditem ITEM_TM65_SHADOW_CLAW
+	end
+
+Route117_EventScript_Mawilite::
+	finditem ITEM_MAWILITE
+	end
+
+Meteor_Falls1F_2R_EventScript_Salamencite::
+	finditem ITEM_SALAMENCITE
+	end
+
+Mirage_Tower_4F_EventScript_Aerodactylite::
+	finditem ITEM_AERODACTYLITE
+	end
+
+TrickHouse5_EventScript_TerrainExtender::
+	finditem ITEM_TERRAIN_EXTENDER
+	end
+
+DewfordMeadow_EventScript_TM95Snarl::
+	finditem ITEM_TM95_SNARL
+	end
+
+DewfordMeadow_EventScript_RingTarget::
+	finditem ITEM_RING_TARGET
+	end
+
+DewfordManor_EventScript_TM100Curse::
+	finditem ITEM_TM100_CURSE
+	end
+
+DewfordManor_EventScript_Banettite::
+	finditem ITEM_BANETTITE
+	end
+
+VerdanturfMeadow_EventScript_TM21::
+	finditem ITEM_TM21_FRUSTRATION
+	end
+
+MagmaHideout_2F_2R_EventScript_ItemMagmaStone::
+	finditem ITEM_MAGMA_STONE
+	end
+
+EverGrandeCity_EventScript_ItemMewtwoniteY::
+	finditem ITEM_MEWTWONITE_Y
+	end
+
+DewfordMeadow_EventScript_Butterfrenite::
+	finditem ITEM_BUTTERFRENITE
+	end
+
+DesertUnderpass_EventScript_Flygonite::
+	finditem ITEM_FLYGONITE
+	end
+
+SeafloorCavern_Room6_EventScript_Kingdranite::
+	finditem ITEM_KINGDRANITE
+	end
+
+Altering_Cave_EventScript_MasterBall1::
+	finditem ITEM_MASTER_BALL
+	end
+
+Altering_Cave_EventScript_MasterBall2::
+	finditem ITEM_MASTER_BALL
+	end
+
+Altering_Cave_EventScript_CometShard::
+	finditem ITEM_COMET_SHARD
 	end

@@ -224,7 +224,7 @@ static const struct MenuAction sItemStorage_MenuActions[] =
 
 static const struct ItemSlot sNewGamePCItems[] =
 {
-    { ITEM_POTION, 1 },
+    { ITEM_POTION, 10 },
     { ITEM_NONE, 0 }
 };
 
@@ -662,14 +662,7 @@ static void ItemStorage_EraseMainMenu(u8 taskId)
 
 static u8 GetMailboxMailCount(void)
 {
-    u8 mailInPC, i;
-
-    // Count mail in PC (by first skipping over mail in party)
-    for (mailInPC = 0, i = PARTY_SIZE; i < MAIL_COUNT; i++)
-        if (gSaveBlock1Ptr->mail[i].itemId != ITEM_NONE)
-            mailInPC++;
-
-    return mailInPC;
+    return 0;
 }
 
 static void Mailbox_CompactMailList(void)
@@ -677,7 +670,7 @@ static void Mailbox_CompactMailList(void)
     struct MailStruct temp;
     u8 i, j;
 
-    for (i = PARTY_SIZE; i < MAIL_COUNT - 1; i++)
+    if (gSaveBlock1Ptr->mail[0].itemId == 0)
     {
         for (j = i + 1; j < MAIL_COUNT; j++)
         {

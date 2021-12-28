@@ -7,6 +7,12 @@ struct TrainerMoney
     u8 value;
 };
 
+struct TrainerBall
+{
+    u8 classId;
+    u8 Ball;
+};
+
 struct UnknownPokemonStruct4
 {
     /*0x00*/ u16 species;
@@ -70,6 +76,7 @@ void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
+s32 GetHighestLevelInPlayerParty(void);
 
 extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
 
@@ -78,6 +85,7 @@ extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
 extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];
 extern const struct TrainerMoney gTrainerMoneyTable[];
+extern const struct TrainerBall gTrainerBallTable[];
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 extern const u8 *const gAbilityDescriptionPointers[];
 

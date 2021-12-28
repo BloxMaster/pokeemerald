@@ -1271,6 +1271,14 @@ gCryTable::
 	@ Calyrex
 	cry_uncomp Cry_CalyrexIceRider
 	cry_uncomp Cry_CalyrexShadowRider
+	@ Custom Megas
+	cry_uncomp Cry_Milotic_Mega
+	cry_uncomp Cry_Butterfree_Mega
+	cry_uncomp Cry_Machamp_Mega
+	cry_uncomp Cry_Kingler_Mega
+	cry_uncomp Cry_Lapras_Mega
+	cry_uncomp Cry_Flygon_Mega
+	cry_uncomp Cry_Kingdra_Mega
 
 	.align 2
 gCryTable2::
@@ -2545,3 +2553,11 @@ gCryTable2::
 	@ Calyrex
 	cry2_uncomp Cry_CalyrexIceRider
 	cry2_uncomp Cry_CalyrexShadowRider
+	@ Custom Megas
+	cry2_uncomp Cry_Milotic_Mega
+	cry2_uncomp Cry_Butterfree_Mega
+	cry2_uncomp Cry_Machamp_Mega
+	cry2_uncomp Cry_Kingler_Mega
+	cry2_uncomp Cry_Lapras_Mega
+	cry2_uncomp Cry_Flygon_Mega
+	cry2_uncomp Cry_Kingdra_Mega

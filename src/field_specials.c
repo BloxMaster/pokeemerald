@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
+#include "battle_main.h"
 #include "cable_club.h"
 #include "data.h"
 #include "decoration.h"
@@ -18,6 +19,7 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "item_menu.h"
 #include "item_icon.h"
 #include "link.h"
 #include "list_menu.h"
@@ -91,7 +93,7 @@ void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
 
 static void RecordCyclingRoadResults(u32, u8);
-static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
+static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum);
 static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId);
 static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId);
 static void Task_PCTurnOnEffect(u8);
@@ -534,7 +536,7 @@ void SpawnLinkPartnerObjectEvent(void)
     };
     u8 myLinkPlayerNumber;
     u8 playerFacingDirection;
-    u8 linkSpriteId;
+    u16 linkSpriteId;
     u8 i;
 
     myLinkPlayerNumber = GetMultiplayerId();
@@ -597,7 +599,7 @@ void SpawnLinkPartnerObjectEvent(void)
     }
 }
 
-static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum)
+static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum)
 {
     u8 adjustedPaletteNum;
     // Note: This temp var is necessary; paletteNum += 6 doesn't match.
@@ -1311,7 +1313,7 @@ void RemoveCameraObject(void)
 
 u8 GetPokeblockNameByMonNature(void)
 {
-    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
+    return CopyMonFavoritePokeblockName(GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)
@@ -1448,7 +1450,7 @@ void SetShoalItemFlag(u16 unused)
 void PutZigzagoonInPlayerParty(void)
 {
     u16 monData;
-    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
     monData = TRUE;
     SetMonData(&gPlayerParty[0], MON_DATA_ABILITY_NUM, &monData);
     monData = MOVE_TACKLE;
@@ -1672,9 +1674,9 @@ u16 GetMysteryEventCardVal(void)
 
 bool8 BufferTMHMMoveName(void)
 {
-    if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
+    if (gSpecialVar_0x8004 >= ITEM_TM01_FOCUS_PUNCH && gSpecialVar_0x8004 <= ITEM_HM08_DIVE)
     {
-        StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
+        StringCopy(gStringVar2, gMoveNamesLong[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
         return TRUE;
     }
 
@@ -2422,6 +2424,112 @@ void ShowScrollableMultichoice(void)
             task->tKeepOpenAfterSelect = FALSE;
             task->tTaskId = taskId;
             break;
+        case SCROLL_MULTI_PC_TUTOR_SET_1:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 21;
+            task->tLeft = 17;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_2:
+        case SCROLL_MULTI_PC_TUTOR_SET_3:
+        case SCROLL_MULTI_PC_TUTOR_SET_4:
+        case SCROLL_MULTI_PC_TUTOR_SET_5:
+        case SCROLL_MULTI_PC_TUTOR_SET_6:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 19;
+            task->tLeft = 17;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_7:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 16;
+            task->tLeft = 17;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_SELECT:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 8;
+            task->tLeft = 19;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_GAMECORNER_POKEMON:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 12;
+            task->tLeft = 19;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_GAMECORNER_GRASS_STARTERS:
+        case SCROLL_MULTI_GAMECORNER_FIRE_STARTERS:
+        case SCROLL_MULTI_GAMECORNER_WATER_STARTERS:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 8;
+            task->tLeft = 19;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_REGION_NAMES:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 7;
+            task->tLeft = 22;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_FURFROU_TRIMS:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 11;
+            task->tLeft = 22;
+            task->tTop = 1;
+            task->tWidth = 12;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_POKE_CENTER_TUTOR:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 7;
+            task->tLeft = 20;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_HIDDEN_POWER:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 17;
+            task->tLeft = 20;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
         default:
             gSpecialVar_Result = MULTI_B_PRESSED;
             DestroyTask(taskId);
@@ -2581,6 +2689,274 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_PokemonMoves,
         gText_Underpowered,
         gText_WhenInDanger,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_1] = 
+    {
+        gText_FuryCutter,
+        gText_Rollout,
+        gText_SeismicToss,
+        gText_Covet,
+        gText_VacuumWave,
+        gText_ShockWave,
+        gText_BugBite,
+        gText_AirCutter,
+        gText_Swift,
+        gText_Snatch,
+        gText_Mimic,
+        gText_MudSlap,
+        gText_Metronome,
+        gText_OminousWind,
+        gText_SuperFang,
+        gText_HoneClaws,
+        gText_PsychUp,
+        gText_FocusEnergy,
+        gText_Spikes,
+        gText_Infestation,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_2] = 
+    {
+        gText_Counter,
+        gText_Endeavor,
+        gText_WorrySeed,
+        gText_DefenseCurl,
+        gText_Defog,
+        gText_MagicCoat,
+        gText_Uproar,
+        gText_Hex,
+        gText_GastroAcid,
+        gText_Synthesis,
+        gText_PainSplit,
+        gText_LowKick,
+        gText_IronDefense,
+        gText_MagnetRise,
+        gText_Swagger,
+        gText_PinMissile,
+        gText_MudShot,
+        gText_Agility,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_3] = 
+    {
+        gText_SignalBeam,
+        gText_Gravity,
+        gText_SeedBomb,
+        gText_PsychoCut,
+        gText_IcyWind,
+        gText_Electroweb,
+        gText_ThunderFang,
+        gText_FireFang,
+        gText_IceFang,
+        gText_Brine,
+        gText_RazorShell,
+        gText_Revenge,
+        gText_DrainingKiss,
+        gText_LeafBlade,
+        gText_RockBlast,
+        gText_SoftBoiled,
+        gText_AuroraBeam,
+        gText_Teleport,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_4] = 
+    {
+        gText_ThunderPunch,
+        gText_FirePunch,
+        gText_IcePunch,
+        gText_Tailwind,
+        gText_ZenHeadbutt,
+        gText_BodySlam,
+        gText_IcicleSpear,
+        gText_DualChop,
+        gText_Reversal,
+        gText_BugBuzz,
+        gText_LastResort,
+        gText_RolePlay,
+        gText_DrillRun,
+        gText_BlazeKick,
+        gText_CrossPoison,
+        gText_WeatherBall,
+        gText_AirSlash,
+        gText_StompingTantrum,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_5] = 
+    {
+        gText_IronHead,
+        gText_AquaTail,
+        gText_PowerGem,
+        gText_Bounce,
+        gText_HealBell,
+        gText_Superpower,
+        gText_Crunch,
+        gText_MysticalFire,
+        gText_GunkShot,
+        gText_HyperVoice,
+        gText_SkyAttack,
+        gText_HeatCrash,
+        gText_StoredPower,
+        gText_Trick,
+        gText_DynamicPunch,
+        gText_HelpingHand,
+        gText_ToxicSpikes,
+        gText_HighHorsepower,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_6] = 
+    {
+        gText_Megahorn,
+        gText_AuraSphere,
+        gText_ThroatChop,
+        gText_EarthPower,
+        gText_HeatWave,
+        gText_Liquidation,
+        gText_BatonPass,
+        gText_FoulPlay,
+        gText_SolarBlade,
+        gText_PhantomForce,
+        gText_MeteorMash,
+        gText_PsychicFangs,
+        gText_Encore,
+        gText_GrassyTerrain,
+        gText_ElectricTerrain,
+        gText_MistyTerrain,
+        gText_PsychicTerrain,
+        gText_PowerUpPunch,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_7] = 
+    {
+        gText_DoubleEdge,
+        gText_PlayRough,
+        gText_NastyPlot,
+        gText_SelfDestruct,
+        gText_CloseCombat,
+        gText_FlareBlitz,
+        gText_BraveBird,
+        gText_LeafStorm,
+        gText_PowerWhip,
+        gText_Hurricane,
+        gText_HydroPump,
+        gText_DragonDance,
+        gText_Outrage,
+        gText_KnockOff,
+        gText_QuiverDance,
+        gText_Exit
+    },
+    [SCROLL_MULTI_PC_TUTOR_SET_SELECT] =
+    {
+        gText_TutorMoveSet1,
+        gText_TutorMoveSet2,
+        gText_TutorMoveSet3,
+        gText_TutorMoveSet4,
+        gText_TutorMoveSet5,
+        gText_TutorMoveSet6,
+        gText_TutorMoveSet7,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_POKEMON] =
+    {
+        gText_GameCornerPorygon,
+        gText_GameCornerMunchlax,
+        gText_GameCornerVulpix,
+        gText_GameCornerSandshrew,
+        gText_GameCornerRattata,
+        gText_GameCornerMeowth,
+        gText_GameCornerGrimer,
+        gText_GameCornerDiglett,
+        gText_GameCornerGeodude,
+        gText_GameCornerRaichu,
+        gText_GameCornerMarowak,
+        gText_GameCornerExeggutor,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
+    {
+        gText_GameCornerBulbasaur,
+        gText_GameCornerChikorita,
+        gText_GameCornerTreecko,
+        gText_GameCornerTurtwig,
+        gText_GameCornerSnivy,
+        gText_GameCornerChespin,
+        gText_GameCornerRowlet,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
+    {
+        gText_GameCornerCharmander,
+        gText_GameCornerCyndaquil,
+        gText_GameCornerTorchic,
+        gText_GameCornerChimchar,
+        gText_GameCornerTepig,
+        gText_GameCornerFennekin,
+        gText_GameCornerLitten,
+        gText_Exit
+    },
+    [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
+    {
+        gText_GameCornerSquirtle,
+        gText_GameCornerTotodile,
+        gText_GameCornerMudkip,
+        gText_GameCornerPiplup,
+        gText_GameCornerOshawott,
+        gText_GameCornerFroakie,
+        gText_GameCornerPopplio,
+        gText_Exit
+    },
+    [SCROLL_MULTI_REGION_NAMES] = 
+    {
+        gText_Kanto,
+        gText_Johto,
+        gText_Hoenn,
+        gText_Sinnoh,
+        gText_Unova,
+        gText_Kalos,
+        gText_Alola,
+        // gText_Galar,
+    },
+    [SCROLL_MULTI_FURFROU_TRIMS] = 
+    {
+        gText_HeartTrim,
+        gText_StarTrim,
+        gText_DiamondTrim,
+        gText_DebutanteTrim,
+        gText_MatronTrim,
+        gText_DandyTrim, 
+        gText_LaReineTrim,
+        gText_KabukiTrim,
+        gText_PharaohTrim,
+        gText_BackToNatural,
+        gText_Exit
+    },
+    [SCROLL_MULTI_POKE_CENTER_TUTOR] = 
+    {
+        gText_RememberAMove,
+        gText_ForgetAMove,
+        gText_LearnANewMove,
+        gText_RateANickname,
+        gText_MysteryGift,
+        gText_ResetEvents,
+        gText_Exit
+    },
+    [SCROLL_MULTI_HIDDEN_POWER] = 
+    {
+        gText_HPFighting,
+        gText_HPFlying,
+        gText_HPPoison,
+        gText_HPGround,
+        gText_HPRock,
+        gText_HPBug,
+        gText_HPGhost,
+        gText_HPSteel,
+        gText_HPFire,
+        gText_HPWater,
+        gText_HPGrass,
+        gText_HPElectric,
+        gText_HPPsychic,
+        gText_HPIce,
+        gText_HPDragon,
+        gText_HPDark,
         gText_Exit
     }
 };
@@ -2883,7 +3259,7 @@ void ShowNatureGirlMessage(void)
         gSpecialVar_0x8004 = 0;
     }
 
-    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
+    nature = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE);
     ShowFieldMessage(sNatureGirlMessages[nature]);
 }
 
@@ -3139,43 +3515,184 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
     }
 }
 
-static const u16 sBattleFrontier_TutorMoves1[] =
-{ 
-    MOVE_SOFT_BOILED, 
-    MOVE_SEISMIC_TOSS, 
-    MOVE_DREAM_EATER, 
-    MOVE_MEGA_PUNCH, 
-    MOVE_MEGA_KICK, 
-    MOVE_BODY_SLAM, 
-    MOVE_ROCK_SLIDE, 
-    MOVE_COUNTER, 
-    MOVE_THUNDER_WAVE, 
-    MOVE_SWORDS_DANCE 
+static const u16 sPokemonCenter_TutorMoves1[] =
+{
+	MOVE_FURY_CUTTER,
+	MOVE_ROLLOUT,
+	MOVE_SEISMIC_TOSS,
+	MOVE_COVET,
+	MOVE_VACUUM_WAVE,
+	MOVE_SHOCK_WAVE,
+	MOVE_BUG_BITE,
+	MOVE_AIR_CUTTER,
+	MOVE_SWIFT,
+	MOVE_SNATCH,
+	MOVE_MIMIC,
+	MOVE_MUD_SLAP,
+	MOVE_METRONOME,
+	MOVE_OMINOUS_WIND,
+	MOVE_SUPER_FANG,
+	MOVE_HONE_CLAWS,
+	MOVE_PSYCH_UP,
+    MOVE_FOCUS_ENERGY,
+    MOVE_SPIKES,
+    MOVE_INFESTATION
 };
 
-static const u16 sBattleFrontier_TutorMoves2[] =
-{ 
-    MOVE_DEFENSE_CURL, 
-    MOVE_SNORE, 
-    MOVE_MUD_SLAP, 
-    MOVE_SWIFT, 
-    MOVE_ICY_WIND, 
-    MOVE_ENDURE, 
-    MOVE_PSYCH_UP, 
-    MOVE_ICE_PUNCH, 
-    MOVE_THUNDER_PUNCH, 
-    MOVE_FIRE_PUNCH 
+static const u16 sPokemonCenter_TutorMoves2[] =
+{
+	MOVE_COUNTER,
+	MOVE_ENDEAVOR,
+	MOVE_WORRY_SEED,
+	MOVE_DEFENSE_CURL,
+	MOVE_DEFOG,
+	MOVE_MAGIC_COAT,
+	MOVE_UPROAR,
+	MOVE_HEX,
+	MOVE_GASTRO_ACID,
+	MOVE_SYNTHESIS,
+	MOVE_PAIN_SPLIT,
+	MOVE_LOW_KICK,
+	MOVE_IRON_DEFENSE,
+	MOVE_MAGNET_RISE,
+	MOVE_SWAGGER,
+	MOVE_PIN_MISSILE,
+	MOVE_MUD_SHOT,
+    MOVE_AGILITY
+};
+
+static const u16 sPokemonCenter_TutorMoves3[] =
+{
+	MOVE_SIGNAL_BEAM,
+	MOVE_GRAVITY,
+	MOVE_SEED_BOMB,
+	MOVE_PSYCHO_CUT,
+	MOVE_ICY_WIND,
+	MOVE_ELECTROWEB,
+	MOVE_THUNDER_FANG,
+	MOVE_FIRE_FANG,
+	MOVE_ICE_FANG,
+	MOVE_BRINE,
+	MOVE_RAZOR_SHELL,
+	MOVE_REVENGE,
+	MOVE_DRAINING_KISS,
+	MOVE_LEAF_BLADE,
+	MOVE_ROCK_BLAST,
+	MOVE_SOFT_BOILED,
+	MOVE_AURORA_BEAM,
+    MOVE_TELEPORT
+};
+
+static const u16 sPokemonCenter_TutorMoves4[] =
+{
+	MOVE_THUNDER_PUNCH,
+	MOVE_FIRE_PUNCH,
+	MOVE_ICE_PUNCH,
+	MOVE_TAILWIND,
+	MOVE_ZEN_HEADBUTT,
+	MOVE_BODY_SLAM,
+	MOVE_ICICLE_SPEAR,
+	MOVE_DUAL_CHOP,
+	MOVE_REVERSAL,
+	MOVE_BUG_BUZZ,
+	MOVE_LAST_RESORT,
+	MOVE_ROLE_PLAY,
+	MOVE_DRILL_RUN,
+	MOVE_BLAZE_KICK,
+	MOVE_CROSS_POISON,
+	MOVE_WEATHER_BALL,
+	MOVE_AIR_SLASH,
+    MOVE_STOMPING_TANTRUM
+};
+
+static const u16 sPokemonCenter_TutorMoves5[] =
+{
+	MOVE_IRON_HEAD,
+	MOVE_AQUA_TAIL,
+	MOVE_POWER_GEM,
+	MOVE_BOUNCE,
+	MOVE_HEAL_BELL,
+	MOVE_SUPERPOWER,
+	MOVE_CRUNCH,
+	MOVE_MYSTICAL_FIRE,
+	MOVE_GUNK_SHOT,
+	MOVE_HYPER_VOICE,
+	MOVE_SKY_ATTACK,
+	MOVE_HEAT_CRASH,
+	MOVE_STORED_POWER,
+	MOVE_TRICK,
+	MOVE_DYNAMIC_PUNCH,
+	MOVE_HELPING_HAND,
+	MOVE_TOXIC_SPIKES,
+    MOVE_HIGH_HORSEPOWER
+};
+
+static const u16 sPokemonCenter_TutorMoves6[] =
+{
+	MOVE_MEGAHORN,
+	MOVE_AURA_SPHERE,
+	MOVE_THROAT_CHOP,
+	MOVE_EARTH_POWER,
+	MOVE_HEAT_WAVE,
+	MOVE_LIQUIDATION,
+	MOVE_BATON_PASS,
+	MOVE_FOUL_PLAY,
+	MOVE_SOLAR_BLADE,
+	MOVE_PHANTOM_FORCE,
+	MOVE_METEOR_MASH,
+	MOVE_PSYCHIC_FANGS,
+	MOVE_ENCORE,
+	MOVE_GRASSY_TERRAIN,
+	MOVE_ELECTRIC_TERRAIN,
+	MOVE_MISTY_TERRAIN,
+	MOVE_PSYCHIC_TERRAIN,
+    MOVE_POWER_UP_PUNCH
+};
+
+static const u16 sPokemonCenter_TutorMoves7[] =
+{
+	MOVE_DOUBLE_EDGE,
+	MOVE_PLAY_ROUGH,
+	MOVE_NASTY_PLOT,
+	MOVE_SELF_DESTRUCT,
+	MOVE_CLOSE_COMBAT,
+	MOVE_FLARE_BLITZ,
+	MOVE_BRAVE_BIRD,
+	MOVE_LEAF_STORM,
+	MOVE_POWER_WHIP,
+	MOVE_HURRICANE,
+	MOVE_HYDRO_PUMP,
+	MOVE_DRAGON_DANCE,
+	MOVE_OUTRAGE,
+	MOVE_KNOCK_OFF,
+	MOVE_QUIVER_DANCE
 };
 
 void BufferBattleFrontierTutorMoveName(void)
 {
-    if (gSpecialVar_0x8005 != 0)
+    switch (gSpecialVar_0x8005)
     {
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves2[gSpecialVar_0x8004]]);
-    }
-    else
-    {
-        StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
+    case 0:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves1[gSpecialVar_0x8004]]);
+        break;
+    case 1:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves2[gSpecialVar_0x8004]]);
+        break;
+    case 2:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves3[gSpecialVar_0x8004]]);
+        break;
+    case 3:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves4[gSpecialVar_0x8004]]);
+        break;
+    case 4:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves5[gSpecialVar_0x8004]]);
+        break;
+    case 5:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves6[gSpecialVar_0x8004]]);
+        break;
+    case 6:
+        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves7[gSpecialVar_0x8004]]);
+        break;
     }
 }
 
@@ -3192,7 +3709,7 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
         .baseBlock = 28,
     };
 
-    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+    if ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
     {
         if (gSpecialVar_0x8006 == 0)
         {
@@ -3205,46 +3722,192 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 
 static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
-    static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] = 
-    {
-        BattleFrontier_Lounge7_Text_SoftboiledDesc,
-        BattleFrontier_Lounge7_Text_SeismicTossDesc,
-        BattleFrontier_Lounge7_Text_DreamEaterDesc,
-        BattleFrontier_Lounge7_Text_MegaPunchDesc,
-        BattleFrontier_Lounge7_Text_MegaKickDesc,
-        BattleFrontier_Lounge7_Text_BodySlamDesc,
-        BattleFrontier_Lounge7_Text_RockSlideDesc,
-        BattleFrontier_Lounge7_Text_CounterDesc,
-        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
-        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions1[] = 
+    {        
+		PokemonCenterMoveTutor_Text_FuryCutterDesc,
+        PokemonCenterMoveTutor_Text_RolloutDesc,
+        PokemonCenterMoveTutor_Text_SeismicTossDesc,
+        PokemonCenterMoveTutor_Text_CovetDesc,
+        PokemonCenterMoveTutor_Text_VacuumWaveDesc,
+        PokemonCenterMoveTutor_Text_ShockWaveDesc,
+        PokemonCenterMoveTutor_Text_BugBiteDesc,
+        PokemonCenterMoveTutor_Text_AirCutterDesc,
+        PokemonCenterMoveTutor_Text_SwiftDesc,
+        PokemonCenterMoveTutor_Text_SnatchDesc,
+        PokemonCenterMoveTutor_Text_MimicDesc,
+        PokemonCenterMoveTutor_Text_MudSlapDesc,
+        PokemonCenterMoveTutor_Text_MetronomeDesc,
+        PokemonCenterMoveTutor_Text_OminousWindDesc,
+        PokemonCenterMoveTutor_Text_SuperFangDesc,
+        PokemonCenterMoveTutor_Text_HoneClawsDesc,
+        PokemonCenterMoveTutor_Text_PsychUpDesc,
+        PokemonCenterMoveTutor_Text_FocusEnergyDesc,
+        PokemonCenterMoveTutor_Text_SpikesDesc,
+        PokemonCenterMoveTutor_Text_InfestationDesc,
         gText_Exit,
-    };
-
-    static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] = 
-    {
-        BattleFrontier_Lounge7_Text_DefenseCurlDesc,
-        BattleFrontier_Lounge7_Text_SnoreDesc,
-        BattleFrontier_Lounge7_Text_MudSlapDesc,
-        BattleFrontier_Lounge7_Text_SwiftDesc,
-        BattleFrontier_Lounge7_Text_IcyWindDesc,
-        BattleFrontier_Lounge7_Text_EndureDesc,
-        BattleFrontier_Lounge7_Text_PsychUpDesc,
-        BattleFrontier_Lounge7_Text_IcePunchDesc,
-        BattleFrontier_Lounge7_Text_ThunderPunchDesc,
-        BattleFrontier_Lounge7_Text_FirePunchDesc,
+	};
+	
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions2[] = 
+    {        
+		PokemonCenterMoveTutor_Text_CounterDesc,
+        PokemonCenterMoveTutor_Text_EndeavorDesc,
+        PokemonCenterMoveTutor_Text_WorrySeedDesc,
+        PokemonCenterMoveTutor_Text_DefenseCurlDesc,
+        PokemonCenterMoveTutor_Text_DefogDesc,
+        PokemonCenterMoveTutor_Text_MagicCoatDesc,
+        PokemonCenterMoveTutor_Text_UproarDesc,
+        PokemonCenterMoveTutor_Text_HexDesc,
+        PokemonCenterMoveTutor_Text_GastroAcidDesc,
+        PokemonCenterMoveTutor_Text_SynthesisDesc,
+        PokemonCenterMoveTutor_Text_PainSplitDesc,
+        PokemonCenterMoveTutor_Text_LowKickDesc,
+        PokemonCenterMoveTutor_Text_IronDefenseDesc,
+        PokemonCenterMoveTutor_Text_MagnetRiseDesc,
+        PokemonCenterMoveTutor_Text_SwaggerDesc,
+        PokemonCenterMoveTutor_Text_PinMissileDesc,
+        PokemonCenterMoveTutor_Text_MudShotDesc,
+        PokemonCenterMoveTutor_Text_AgilityDesc,
         gText_Exit,
-    };
+	};
+	
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions3[] = 
+    {        
+		PokemonCenterMoveTutor_Text_SignalBeamDesc,
+        PokemonCenterMoveTutor_Text_GravityDesc,
+        PokemonCenterMoveTutor_Text_SeedBombDesc,
+        PokemonCenterMoveTutor_Text_PsychoCutDesc,
+        PokemonCenterMoveTutor_Text_IcyWindDesc,
+        PokemonCenterMoveTutor_Text_ElectroWebDesc,
+        PokemonCenterMoveTutor_Text_ThunderFangDesc,
+        PokemonCenterMoveTutor_Text_FireFangDesc,
+        PokemonCenterMoveTutor_Text_IceFangDesc,
+        PokemonCenterMoveTutor_Text_BrineDesc,
+        PokemonCenterMoveTutor_Text_RazorShellDesc,
+        PokemonCenterMoveTutor_Text_RevengeDesc,
+        PokemonCenterMoveTutor_Text_DrainingKissDesc,
+        PokemonCenterMoveTutor_Text_LeafBladeDesc,
+        PokemonCenterMoveTutor_Text_RockBlastDesc,
+        PokemonCenterMoveTutor_Text_SoftBoiledDesc,
+        PokemonCenterMoveTutor_Text_AuroraBeamDesc,
+        PokemonCenterMoveTutor_Text_TeleportDesc,
+        gText_Exit,
+	};
+	
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions4[] = 
+    {        
+        PokemonCenterMoveTutor_Text_ThunderPunchDesc,
+        PokemonCenterMoveTutor_Text_FirePunchDesc,
+        PokemonCenterMoveTutor_Text_IcePunchDesc,
+        PokemonCenterMoveTutor_Text_TailwindDesc,
+        PokemonCenterMoveTutor_Text_ZenHeadbuttDesc,
+        PokemonCenterMoveTutor_Text_BodySlamDesc,
+        PokemonCenterMoveTutor_Text_IcicleSpearDesc,
+        PokemonCenterMoveTutor_Text_DualChopDesc,
+        PokemonCenterMoveTutor_Text_ReversalDesc,
+        PokemonCenterMoveTutor_Text_BugBuzzDesc,
+        PokemonCenterMoveTutor_Text_LastResortDesc,
+        PokemonCenterMoveTutor_Text_RolePlayDesc,
+        PokemonCenterMoveTutor_Text_DrillRunDesc,
+        PokemonCenterMoveTutor_Text_BlazeKickDesc,
+        PokemonCenterMoveTutor_Text_CrossPoisonDesc,
+        PokemonCenterMoveTutor_Text_WeatherBallDesc,
+        PokemonCenterMoveTutor_Text_AirSlashDesc,
+        PokemonCenterMoveTutor_Text_StompingTantrumDesc,
+        gText_Exit,
+	};
+	
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions5[] = 
+    {        
+        PokemonCenterMoveTutor_Text_IronHeadDesc,
+        PokemonCenterMoveTutor_Text_AquaTailDesc,
+        PokemonCenterMoveTutor_Text_PowerGemDesc,
+        PokemonCenterMoveTutor_Text_BounceDesc,
+        PokemonCenterMoveTutor_Text_HealBellDesc,
+        PokemonCenterMoveTutor_Text_SuperpowerDesc,
+        PokemonCenterMoveTutor_Text_CrunchDesc,
+        PokemonCenterMoveTutor_Text_MysticalFireDesc,
+        PokemonCenterMoveTutor_Text_GunkShotDesc,
+        PokemonCenterMoveTutor_Text_HyperVoiceDesc,
+        PokemonCenterMoveTutor_Text_SkyAttackDesc,
+        PokemonCenterMoveTutor_Text_HeatCrashDesc,
+        PokemonCenterMoveTutor_Text_StoredPowerDesc,
+        PokemonCenterMoveTutor_Text_TrickDesc,
+        PokemonCenterMoveTutor_Text_DynamicPunchDesc,
+        PokemonCenterMoveTutor_Text_HelpingHandDesc,
+        PokemonCenterMoveTutor_Text_ToxicSpikesDesc,
+        PokemonCenterMoveTutor_Text_HighHorsepowerDesc,
+        gText_Exit,
+	};
+	
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions6[] = 
+    {        
+        PokemonCenterMoveTutor_Text_MegahornDesc,
+        PokemonCenterMoveTutor_Text_AuraSphereDesc,
+        PokemonCenterMoveTutor_Text_ThroatChopDesc,
+        PokemonCenterMoveTutor_Text_EarthPowerDesc,
+        PokemonCenterMoveTutor_Text_HeatWaveDesc,
+        PokemonCenterMoveTutor_Text_LiquidationDesc,
+        PokemonCenterMoveTutor_Text_BatonPassDesc,
+        PokemonCenterMoveTutor_Text_FoulPlayDesc,
+        PokemonCenterMoveTutor_Text_SolarBladeDesc,
+        PokemonCenterMoveTutor_Text_PhantomForceDesc,
+        PokemonCenterMoveTutor_Text_MeteorMashDesc,
+        PokemonCenterMoveTutor_Text_PsychicFangsDesc,
+        PokemonCenterMoveTutor_Text_EncoreDesc,
+        PokemonCenterMoveTutor_Text_GrassyTerrainDesc,
+        PokemonCenterMoveTutor_Text_ElectricTerrainDesc,
+        PokemonCenterMoveTutor_Text_MistyTerrainDesc,
+        PokemonCenterMoveTutor_Text_PsychicTerrainDesc,
+        PokemonCenterMoveTutor_Text_PowerUpPunchDesc,
+        gText_Exit,
+	};
+	
+	static const u8 *const sPokemonCenter_TutorMoveDescriptions7[] = 
+    {        
+        PokemonCenterMoveTutor_Text_DoubleEdgeDesc,
+        PokemonCenterMoveTutor_Text_PlayRoughDesc,
+        PokemonCenterMoveTutor_Text_NastyPlotDesc,
+        PokemonCenterMoveTutor_Text_SelfDestructDesc,
+        PokemonCenterMoveTutor_Text_CloseCombatDesc,
+        PokemonCenterMoveTutor_Text_FlareBlitzDesc,
+        PokemonCenterMoveTutor_Text_BraveBirdDesc,
+        PokemonCenterMoveTutor_Text_LeafStormDesc,
+        PokemonCenterMoveTutor_Text_PowerWhipDesc,
+        PokemonCenterMoveTutor_Text_HurricaneDesc,
+        PokemonCenterMoveTutor_Text_HydroPumpDesc,
+        PokemonCenterMoveTutor_Text_DragonDanceDesc,
+        PokemonCenterMoveTutor_Text_OutrageDesc,
+        PokemonCenterMoveTutor_Text_KnockOffDesc,
+        PokemonCenterMoveTutor_Text_QuiverDanceDesc,
+        gText_Exit,
+	};
 
-    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+    if  ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
     {
-        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
-        if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 120, 48);                                                            
+        switch (menu)
         {
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
-        }
-        else
-        {
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
+            case SCROLL_MULTI_PC_TUTOR_SET_1:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
+                break;
+            case SCROLL_MULTI_PC_TUTOR_SET_2:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
+                break;
+            case SCROLL_MULTI_PC_TUTOR_SET_3:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions3[selection], 0, 1, 0, NULL);
+                break;
+            case SCROLL_MULTI_PC_TUTOR_SET_4:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions4[selection], 0, 1, 0, NULL);
+                break;
+            case SCROLL_MULTI_PC_TUTOR_SET_5:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions5[selection], 0, 1, 0, NULL);
+                break;
+            case SCROLL_MULTI_PC_TUTOR_SET_6:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions6[selection], 0, 1, 0, NULL);
+                break;
+            case SCROLL_MULTI_PC_TUTOR_SET_7:
+                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions7[selection], 0, 1, 0, NULL);
+                break;        
         }
     }
 }
@@ -3288,31 +3951,92 @@ void GetBattleFrontierTutorMoveIndex(void)
     moveTutor = VarGet(VAR_TEMP_E);
     moveIndex = VarGet(VAR_TEMP_D);
 
-    if (moveTutor != 0)
+    switch (moveTutor)
     {
-        i = 0;
-        do
-        {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves2[moveIndex])
+        case 0:
+            i = 0;
+            do
             {
-                gSpecialVar_0x8005 = i;
-                break;
-            }
-            i++;
-        } while (i < TUTOR_MOVE_COUNT);
-    }
-    else
-    {
-        i = 0;
-        do
-        {
-            if (gTutorMoves[i] == sBattleFrontier_TutorMoves1[moveIndex])
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves1[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
+        case 1:
+            i = 0;
+            do
             {
-                gSpecialVar_0x8005 = i;
-                break;
-            }
-            i++;
-        } while (i < TUTOR_MOVE_COUNT);
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves2[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
+        case 2:
+            i = 0;
+            do
+            {
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves3[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
+        case 3:
+            i = 0;
+            do
+            {
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves4[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
+        case 4:
+            i = 0;
+            do
+            {
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves5[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
+        case 5:
+            i = 0;
+            do
+            {
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves6[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
+        case 6:
+            i = 0;
+            do
+            {
+                if (gTutorMoves[i] == sPokemonCenter_TutorMoves7[moveIndex])
+                {
+                    gSpecialVar_0x8005 = i;
+                    break;
+                }
+                i++;
+            } while (i < TUTOR_MOVE_COUNT);
+            break;
     }
 }
 
@@ -4375,3 +5099,734 @@ u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
+
+// Changes the selected Pokemon's nature.
+// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose nature should be changed
+// Set gSpecialVar_0x8005 to the stat to icrease, and gSpecialVar_0x8006 to the stat to decrease
+void ChangePokemonNature (void)
+{
+    u8 newNature = 0;
+
+    newNature = (gSpecialVar_0x8005 * (NUM_STATS - 1)) + gSpecialVar_0x8006;
+	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE, &newNature);
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
+}
+
+// Buffers the nature of a Pokemon chosen by the player.
+// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
+void BufferChosenMonNature (void)
+{
+    u8 nature = 0;
+
+    nature = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE, NULL);
+    StringCopy (gStringVar2, gNatureNamePointers[nature]);
+}
+
+// Changes one of the selected Pokemon's IVs.
+// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose IVs should be changed
+// gSpecialVar_0x8005 must be set to the index of the IV to be changed (0 for HP, 1 for Attack, etc.)
+// gSpecialVar_0x8006 must be set to the value to change the IV to
+void ChangeChosenMonIVs (void)
+{
+    u8 statToChange = gSpecialVar_0x8005;
+    u8 newIV = gSpecialVar_0x8006;
+
+    switch (statToChange)
+    {
+    case STAT_HP: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV, &newIV);
+        break;
+    case STAT_ATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV, &newIV);
+        break;
+    case STAT_DEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV, &newIV);
+        break;
+    case STAT_SPEED: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV, &newIV);
+        break;
+    case STAT_SPATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV, &newIV);
+        break;
+    case STAT_SPDEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV, &newIV);
+        break;
+    }
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
+}
+
+// Adds EVs to one of the selected Pokemon's stats.
+// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose EVs should be increased
+// gSpecialVar_0x8005 must be set to the index of the EV to be changed (0 for HP, 1 for Attack, etc.)
+// gSpecialVar_0x8006 must be set to the number of EVs to add to that stat
+// Stores the new sum of the EVs in that stat in gSpecialVar_0x8007
+void IncreaseChosenMonEVs (void)
+{
+    u8 statToChange = gSpecialVar_0x8005;
+    u8 increment = gSpecialVar_0x8006;
+    u8 oldEV;
+    u8 newEV;
+
+    // Get the number of EVs currently in the chosen stat
+    switch (statToChange)
+    {
+    case STAT_HP: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, NULL);
+        break;
+    case STAT_ATK: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, NULL);
+       break;
+    case STAT_DEF: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, NULL);
+       break;
+    case STAT_SPEED: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, NULL);
+       break;
+    case STAT_SPATK: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, NULL);
+       break;
+    case STAT_SPDEF: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, NULL);
+       break;
+    }
+
+    // Should replace 252 here with symbol for max EVs in a stat
+    if ((oldEV + increment) > 252)
+    {
+        newEV = 252;
+    }
+    else
+    {
+        newEV = oldEV + increment;
+    }
+    
+    switch (statToChange)
+    {
+    case STAT_HP: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, &newEV);
+       break;
+    case STAT_ATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, &newEV);
+       break;
+    case STAT_DEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, &newEV);
+       break;
+    case STAT_SPEED: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, &newEV);
+       break;
+    case STAT_SPATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, &newEV);
+       break;
+    case STAT_SPDEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, &newEV);
+       break;
+    }   
+
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
+
+    // Store new EV value in variable so it can be reported to the player
+    gSpecialVar_0x8007 = newEV;
+}
+
+// Buffers the IV of a Pokemon's stat chosen by the player.
+// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
+// gSpecialVar_0x8005 must be set to the index of the IV to be shown (0 for HP, 1 for Attack, etc.)
+// Result is stored in gSpecialVar_0x8006
+void BufferChosenMonIV (void)
+{
+    u8 statToRead = gSpecialVar_0x8005;
+
+    switch (statToRead)
+    {
+    case STAT_HP: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV, NULL);
+       break;
+    case STAT_ATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV, NULL);
+       break;
+    case STAT_DEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV, NULL);
+       break;
+    case STAT_SPEED: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV, NULL);
+       break;
+    case STAT_SPATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV, NULL);
+       break;
+    case STAT_SPDEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV, NULL);
+       break;
+    }
+}
+
+// Buffers the EVs of a Pokemon's stat chosen by the player.
+// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
+// gSpecialVar_0x8005 must be set to the index of the EV to be shown (0 for HP, 1 for Attack, etc.)
+// Result is stored in gSpecialVar_0x8006
+void BufferChosenMonEV (void)
+{
+    u8 statToRead = gSpecialVar_0x8005;
+
+    switch (statToRead)
+    {
+    case STAT_HP: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, NULL);
+       break;
+    case STAT_ATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, NULL);
+       break;
+    case STAT_DEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, NULL);
+       break;
+    case STAT_SPEED: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, NULL);
+       break;
+    case STAT_SPATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, NULL);
+       break;
+    case STAT_SPDEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, NULL);
+       break;
+    }
+}
+
+void BufferChosenMonAllEVs (void)
+{
+    u32 i;
+    u8 EV[NUM_STATS] = {0};
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        EV[i] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV + i, NULL);
+    }
+
+    ConvertIntToDecimalStringN(gStringVar1, EV[0], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, EV[1], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, EV[2], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gExtraStringVar1, EV[3], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gExtraStringVar2, EV[4], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gExtraStringVar3, EV[5], STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+void BufferChosenMonAllIVs (void)
+{
+    u32 i;
+    u8 IV[NUM_STATS] = {0};
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        IV[i] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + i, NULL);
+    }
+
+    ConvertIntToDecimalStringN(gStringVar1, IV[0], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, IV[1], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, IV[2], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gExtraStringVar1, IV[3], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gExtraStringVar2, IV[4], STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gExtraStringVar3, IV[5], STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+// Removes all of a chosen Pokemon's EVs
+void ResetChosenMonEVs (void)
+{
+    u8 i;
+    u8 clearEVs = 0;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        SetMonData(&gPlayerParty[gSpecialVar_0x8004], (MON_DATA_HP_EV + i), &clearEVs);
+    }
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
+}
+
+/* Changes a Pokemon's Hidden Power to a specified type.
+ * gSpecialVar_0x800A must be set to the party slot of the chosen Pokemon
+ * gSpecialVar_0x8007 must be set to the type of Hidden Power to change to (see table below,
+ * or search ChangeChosenMonHiddenPower for a usage example)
+ */
+void ChangeChosenMonHiddenPower (void) 
+{
+    int i;
+    u8 hiddenPowerType = gSpecialVar_0x8007;
+
+    static const u8 hiddenPowerSpreads[NUMBER_OF_MON_TYPES - 3][NUM_STATS] = {
+    //   HP  Atk Def Spe SpA SpD
+        {31,  0, 30, 30, 30, 30}, // TYPE_FIGHTING
+        {30,  0, 30, 31, 30, 30}, // TYPE_FLYING
+        {30,  1, 30, 31, 30, 30}, // TYPE_POISON
+        {31,  1, 31, 31, 30, 30}, // TYPE_GROUND
+        {31,  1, 30, 30, 31, 30}, // TYPE_ROCK
+        {31,  0, 30, 31, 31, 30}, // TYPE_BUG
+        {31,  1, 30, 31, 31, 30}, // TYPE_GHOST
+        {31,  1, 31, 31, 31, 30}, // TYPE_STEEL
+        {31,  0, 31, 30, 30, 31}, // TYPE_FIRE
+        {31,  1, 31, 30, 30, 31}, // TYPE_WATER
+        {31,  0, 31, 31, 30, 31}, // TYPE_GRASS
+        {31,  1, 31, 31, 30, 31}, // TYPE_ELECTRIC
+        {31,  0, 31, 30, 31, 31}, // TYPE_PSYCHIC
+        {31,  0, 30, 31, 31, 31}, // TYPE_ICE
+        {31,  0, 31, 31, 31, 31}, // TYPE_DRAGON
+        {31, 31, 31, 31, 31, 31}, // TYPE_DARK
+    };
+  
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        SetMonData(&gPlayerParty[gSpecialVar_0x800A], MON_DATA_HP_IV + i, &hiddenPowerSpreads[hiddenPowerType][i]);
+    }
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x800A]);
+}
+
+// Used for the Super Training NPC; checks that the requested
+// number of EVS to add won't exceed the 510 EV limit
+// Sets VAR_RESULT to 1 if the addition is OK, or 0 if it isn't
+// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
+// gSpecialVar_0x8006 must be set to the number of EVs to add to that stat
+void CheckChosenMonCanGainEVs (void)
+{
+    u8 i = 0;
+    u8 increment = gSpecialVar_0x8006;
+    u16 sumEVs = 0;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        sumEVs = sumEVs + GetMonData(&gPlayerParty[gSpecialVar_0x8004], (MON_DATA_HP_EV + i), NULL);
+    }
+
+    if ((sumEVs + increment) > 510 )
+    {
+        gSpecialVar_Result = 0;
+    }
+    else
+    {
+        gSpecialVar_Result = 1;
+    }
+    // Store total EVs in a variable so it can be reported to the player
+    gSpecialVar_0x8008 = sumEVs;
+}
+
+bool8 AreChosenMonEVsMaxedOut(void)
+{
+    if (GetMonEVCount(&gPlayerParty[gSpecialVar_0x8004]) >= 510)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// Lets player select an item from the items pocket
+// Chosen item ID is stored in gSpecialVar_Result
+void Bag_ChooseItem(void)
+{
+    SetMainCallback2(CB2_ChooseItem);
+}
+
+// Lets player select a ball from the Poke Balls pocket
+// Chosen item ID is stored in gSpecialVar_Result
+void Bag_ChoosePokeBall(void)
+{
+    SetMainCallback2(CB2_ChoosePokeBall);
+}
+
+// Gets a fossil item from gSpecialVar_0x8008 and stores the species it becomes in gSpecialVar_0x8006
+void FossilToSpecies(void)
+{
+    u16 species = SPECIES_NONE;
+    u16 item = gSpecialVar_0x8008;
+
+    switch (item)
+    {
+        case ITEM_HELIX_FOSSIL:
+            species = SPECIES_OMANYTE;
+            break;
+        case ITEM_DOME_FOSSIL:
+            species = SPECIES_KABUTO;
+            break;
+        case ITEM_OLD_AMBER:
+            species = SPECIES_AERODACTYL;
+            break;
+        case ITEM_ROOT_FOSSIL:
+            species = SPECIES_LILEEP;
+            break;
+        case ITEM_CLAW_FOSSIL:
+            species = SPECIES_ANORITH;
+            break;
+        case ITEM_ARMOR_FOSSIL:
+            species = SPECIES_SHIELDON;
+            break;
+        case ITEM_SKULL_FOSSIL:
+            species = SPECIES_CRANIDOS;
+            break;
+        case ITEM_COVER_FOSSIL:
+            species = SPECIES_TIRTOUGA;
+            break;
+        case ITEM_PLUME_FOSSIL:
+            species = SPECIES_ARCHEN;
+            break;
+        case ITEM_SAIL_FOSSIL:
+            species = SPECIES_AMAURA;
+            break;
+        case ITEM_JAW_FOSSIL:
+            species = SPECIES_TYRUNT;
+            break;
+    }
+
+    if (species != SPECIES_NONE)
+    {
+        gSpecialVar_0x8006 = species;
+    }
+    return;
+}
+
+// Checks if player chose a Fossil using Bag_ChooseItem
+bool8 IsItemFossil (void)
+{
+    u16 item = gSpecialVar_ItemId;
+    if ((item >= ITEM_ARMOR_FOSSIL && item <= ITEM_CLAW_FOSSIL) || item == ITEM_OLD_AMBER)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// Checks player's bag for a fossil item. Better than 12 "checkItem" lines in a script!
+bool8 DoesPlayerHaveFossil (void)
+{
+    u16 fossil = ITEM_ARMOR_FOSSIL;
+
+    for (fossil = ITEM_ARMOR_FOSSIL; fossil < (ITEM_CLAW_FOSSIL + 1); fossil++)
+    {
+        if (CheckBagHasItem(fossil, 1))
+        {
+            return TRUE;
+        }
+    }
+    if (CheckBagHasItem(ITEM_OLD_AMBER, 1))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// Checks how many Rotom player has with them
+// Stores the party position of the last Rotom found in gSpecialVar_0x8004
+// (Useful if there's only one Rotom in the party)
+u8 CountRotomInParty (void)
+{
+    u8 partyCount, rotomCount = 0;
+    u16 i;
+    u32 species;
+
+    partyCount = CalculatePlayerPartyCount();
+    
+    for (i = 0; i < partyCount; i++)
+    {
+        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (gSpeciesToNationalPokedexNum[species - 1] == SPECIES_ROTOM)
+        {
+            gSpecialVar_0x8004 = i;
+            rotomCount++;
+        }
+    }
+    return rotomCount;
+}
+
+// Rotom form change specials
+// Vars used:
+// gSpecialVar_0x8004: set to the party slot of the chosen Rotom, or the first Rotom found if there's only one
+// gSpecialVar_0x8005: set to the form to change Rotom to (e.g. SPECIES_ROTOM_WASH)
+// gSpecialVar_0x8006: special move learned by Rotom after form change (set by GetRotomNewSpecialMove)
+// gSpecialVar_0x8007: Rotom's initial form
+// gSpecialVar_0x8008: Rotom's initial special move (set by RotomForgetSpecialMove)
+
+// Takes a Rotom form as input and returns its special move
+u16 RotomFormToMove (u16 species)
+{
+    u16 move;
+
+    switch (species)
+    {
+        case SPECIES_ROTOM_HEAT:
+            move = MOVE_OVERHEAT;
+            break;
+        case SPECIES_ROTOM_WASH:
+            move = MOVE_HYDRO_PUMP;
+            break;
+        case SPECIES_ROTOM_FROST:
+            move = MOVE_FREEZE_DRY;
+            break;
+        case SPECIES_ROTOM_FAN:
+            move = MOVE_HURRICANE;
+            break;
+        case SPECIES_ROTOM_MOW:
+            move = MOVE_LEAF_STORM;
+            break;
+        case SPECIES_ROTOM:
+            move = MOVE_THUNDER_SHOCK;
+            break;
+    }
+    return move;
+}
+
+// Stores the special move of the Rotom form in gSpecialVar_0x8005 in gSpecialVar_0x8006
+void GetRotomNewSpecialMove (void)
+{
+    gSpecialVar_0x8006 = RotomFormToMove(gSpecialVar_0x8005);
+}
+
+// Gets Rotom's current form and the matching move, stores them in gSpecialVar_0x8007 and gSpecialVar_0x8008
+void GetRotomState (void)
+{
+    gSpecialVar_0x8007 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+    gSpecialVar_0x8008 = RotomFormToMove(gSpecialVar_0x8007);
+}
+
+// If Rotom is an appliance form, delete its special move
+// Rotom's initial form must be loaded into gSpecialVar_0x8007 before use.
+// Returns TRUE if the moove was forgotten, false if not
+void RotomForgetSpecialMove (void)
+{
+    u8 i, forgotSpecialMove = 0;
+    u16 currentMove;
+    u16 moveNone = MOVE_NONE;
+
+    currentMove = RotomFormToMove(gSpecialVar_0x8007);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i, NULL) == currentMove)
+        {
+            RemoveMonPPBonus (&gPlayerParty[gSpecialVar_0x8004], i);
+            SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i, &moveNone);
+            forgotSpecialMove = TRUE;
+            break;
+        }
+    }
+}
+
+// Changes the chosen party mon's species to the one stored in gSpecialVar_0x8005
+void ChangeMonSpecies (void)
+{
+    u16 newSpecies;
+    
+    newSpecies = gSpecialVar_0x8005;
+
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, &newSpecies);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, &newSpecies);
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
+}
+
+// Teaches Rotom's forms their special moves
+// Rotom MUST have an empty moveslot first
+// Move to teach must be stored in gSpecialVar_0x8006
+void TeachRotomMove (void)
+{
+    GiveMoveToMon(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8006);
+}
+
+// Checks if Rotom knows its special move
+bool8 DoesRotomKnowSpecialMove (void)
+{
+    u16 initialMove, initialSpecies;
+
+    initialSpecies = gSpecialVar_0x8007;
+    initialMove = RotomFormToMove(initialSpecies);
+    return MonKnowsMove(&gPlayerParty[gSpecialVar_0x8004], initialMove);
+}
+
+// Used to generate a random egg with a special move
+// gSpecialVar_0x8004: Species to give
+// gSpecialVar_0x8005: Move to give the egg
+void SetSpeciesAndEggMove (void)
+{
+    static const u16 eggMoves[][4] = {
+        {SPECIES_BAGON, MOVE_DRAGON_DANCE, MOVE_DRAGON_RUSH, MOVE_THRASH},
+        {SPECIES_SHUPPET, MOVE_GUNK_SHOT, MOVE_DESTINY_BOND, MOVE_PHANTOM_FORCE},
+        {SPECIES_SNEASEL, MOVE_FAKE_OUT, MOVE_ICICLE_CRASH, MOVE_BITE},
+        {SPECIES_CORPHISH, MOVE_DRAGON_DANCE, MOVE_AQUA_JET, MOVE_BODY_SLAM},
+        {SPECIES_MARILL, MOVE_BELLY_DRUM, MOVE_AQUA_JET, MOVE_PERISH_SONG},
+        {SPECIES_EMOLGA, MOVE_ROOST, MOVE_AIR_SLASH, MOVE_BATON_PASS},
+        {SPECIES_GOOMY, MOVE_ACID_ARMOR, MOVE_POISON_TAIL, MOVE_IRON_TAIL},
+        {SPECIES_RHYHORN, MOVE_CRUNCH, MOVE_METAL_BURST, MOVE_DRAGON_RUSH},
+        {SPECIES_GASTLY, MOVE_PERISH_SONG, MOVE_DISABLE, MOVE_CLEAR_SMOG},
+        {SPECIES_PICHU, MOVE_SURF, MOVE_FLY, MOVE_EXTREME_SPEED},
+        {SPECIES_WIMPOD, MOVE_SPIKES, MOVE_AQUA_JET, MOVE_METAL_CLAW},
+        {SPECIES_PONYTA, MOVE_HYPNOSIS, MOVE_MORNING_SUN, MOVE_HIGH_HORSEPOWER},
+        {SPECIES_SNOVER, MOVE_LEECH_SEED, MOVE_AVALANCHE, MOVE_SEED_BOMB},
+        {SPECIES_FERROSEED, MOVE_SPIKES, MOVE_LEECH_SEED, MOVE_ACID_SPRAY},
+        {SPECIES_TAILLOW, MOVE_BOOMBURST, MOVE_BOOMBURST, MOVE_BOOMBURST},
+        {SPECIES_DRATINI, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED},
+        {SPECIES_FEEBAS, MOVE_HAZE, MOVE_HYPNOSIS, MOVE_MIRROR_COAT}
+    };
+    u8 numEggSpecies = ARRAY_COUNT(eggMoves);
+    u8 randSpecies, randEggMove;
+
+    randSpecies = Random() % numEggSpecies;
+    randEggMove = (Random() % 3) + 1; // Random number between 1 and 3
+
+    gSpecialVar_0x8004 = eggMoves[randSpecies][0];
+    gSpecialVar_0x8005 = eggMoves[randSpecies][randEggMove];
+}
+
+// Gives a mon in the party a move
+// gSpecialVar_0x8005: Move to give
+// gSpecialVar_0x8006: Party slot
+void SetGiftEggMove (void)
+{
+    if (MonKnowsMove(&gPlayerParty[gSpecialVar_0x8006], MOVE_NONE))
+    {
+        GiveMoveToMon(&gPlayerParty[gSpecialVar_0x8006], gSpecialVar_0x8005);
+    }
+    else
+    {
+        SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8006], gSpecialVar_0x8005, 0);
+    }
+}
+
+// Changes a chosen mon's Poke Ball to another one in the player's bag
+// gSpecialVar_0x8004: Party slot of chosen mon
+// gSpecialVar_0x8005: Ball to change to
+// gSpecialVar_0x8006: Previous Poke Ball
+void ChangePokeBall (void)
+{
+    u16 pokeball = gSpecialVar_0x8005;
+    // gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_POKEBALL, NULL);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_POKEBALL, &pokeball);
+}
+
+// Returns TRUE if the player has a Diancie with maximum friendship, FALSE otherwise
+bool8 GetDiancieFriendshipScore (void)
+{
+    u8 i = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_DIANCIE)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Returns TRUE if the player's party contains six Magikarp, FALSE otherwise
+bool8 CheckMagikarpBattle (void)
+{
+    u32 i = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_MAGIKARP)
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+// Makes any hidden items using these flags reappear daily
+void ResetDailyHiddenItemFlags(void)
+{
+    u16 *specVar = &gSpecialVar_0x8004;
+    u16 flag;
+    u32 i = 0;
+    static const u16 dailyItemflags[] = 
+    {
+        FLAG_HIDDEN_ITEM_ASHEN_WOODS_BALM_MUSHROOM_1,
+        FLAG_HIDDEN_ITEM_ASHEN_WOODS_BALM_MUSHROOM_2,
+        FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_1,
+        FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_2,
+        FLAG_HIDDEN_ITEM_RED_NECTAR,
+        FLAG_HIDDEN_ITEM_PINK_NECTAR,
+        FLAG_HIDDEN_ITEM_PURPLE_NECTAR,
+        FLAG_HIDDEN_ITEM_YELLOW_NECTAR,
+        FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP1,
+        FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP2,
+        0xFFFF
+    };
+
+    while (dailyItemflags[i] != 0xFFFF)
+    {
+        flag = dailyItemflags[i];
+        *specVar = flag;
+        FlagClear(flag);
+        i++;
+    }
+}
+
+// Checks the player's party for up to three different Pokemon. Useful for Legendary events.
+// gSpecialVar_0x8004: set to first species to check for
+// gSpecialVar_0x8005: set to second species to check for
+// gSpecialVar_0x8006: set to third species to check for
+// gSpecialVar_0x8007: set to number of species to check for
+// Returns TRUE if all species are found, FALSE if not
+bool8 CheckSpeciesInParty (void)
+{
+    u16 species1 = gSpecialVar_0x8004;
+    u16 species2 = gSpecialVar_0x8005;
+    u16 species3 = gSpecialVar_0x8006;
+    u32 numSpecies = gSpecialVar_0x8007;
+    u32 i;
+    u32 speciesFound = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == species1)
+        {
+            speciesFound++;
+        }
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == species2)
+        {
+            speciesFound++;
+        }
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == species3)
+        {
+            speciesFound++;
+        }
+    }
+
+    if (speciesFound == numSpecies){
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// Checks if the species stored in gSpecialVar_0x8004 is an Eeveelution
+bool8 IsSelectedMonEeveelution (void)
+{
+    u32 species;
+
+    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+
+    if (species == SPECIES_VAPOREON || species == SPECIES_JOLTEON || species == SPECIES_FLAREON
+       || species == SPECIES_ESPEON || species == SPECIES_UMBREON || species == SPECIES_LEAFEON
+       || species == SPECIES_GLACEON || species == SPECIES_SYLVEON)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// Calculates level for gift mons and static encounters that can still evolve.
+// Sets that level to highest level - 3 and stores it in gSpecialVar_0x800A.
+void GetStaticEncounterLevel (void)
+{
+    gSpecialVar_0x800A = GetHighestLevelInPlayerParty();
+
+    if (gSpecialVar_0x800A - 3 < 1)
+    {
+        gSpecialVar_0x800A = 1;
+    }
+    else
+    {
+        gSpecialVar_0x800A -= 3;
+    }
+}
+
+#define MYSTERY_GIFT_SPECIES       0
+#define MYSTERY_GIFT_ITEM          1
+#define MYSTERY_GIFT_RECEIVED_FLAG 2
+#define MYSTERY_GIFT_REQ_FLAG      3
+
+// Loops through array of mystery gift mons and checks requirements for the player to receive them.
+// If the requirements for a gift species are met, the gift's item is stored in gSpecialVar_0x8009 and that species is returned.
+// If no valid species is found, returns FALSE.
+u16 GetMysteryGiftSpecies (void)
+{
+    static const u16 mysteryGiftData[][4] =
+    {
+        // Species, held item, flag set when received, flag needed to receive
+        {SPECIES_GRENINJA_BATTLE_BOND, ITEM_COMET_SHARD, FLAG_RECEIVED_ASH_GRENINJA, FLAG_BADGE04_GET},
+        {SPECIES_MAGEARNA, ITEM_MASTER_BALL, FLAG_RECEIVED_MAGEARNA, FLAG_SYS_GAME_CLEAR},
+        {SPECIES_MELOETTA, ITEM_RELIC_STATUE, FLAG_RECEIVED_MELOETTA, FLAG_BADGE05_GET}
+    };
+
+    int i;
+    u8 numMysteryGifts = ARRAY_COUNT(mysteryGiftData);
+
+    for (i = 0; i < numMysteryGifts; i++)
+    {
+        if (!FlagGet(mysteryGiftData[i][MYSTERY_GIFT_RECEIVED_FLAG]) && FlagGet(mysteryGiftData[i][MYSTERY_GIFT_REQ_FLAG]))
+        {
+            gSpecialVar_0x8009 =  mysteryGiftData[i][MYSTERY_GIFT_ITEM];
+            return mysteryGiftData[i][MYSTERY_GIFT_SPECIES];
+        }
+    }
+
+    return FALSE;
+}
+
+#undef MYSTERY_GIFT_SPECIES
+#undef MYSTERY_GIFT_RECEIVED_FLAG
+#undef MYSTERY_GIFT_REQ_FLAG
+#undef MYSTERY_GIFT_ITEM

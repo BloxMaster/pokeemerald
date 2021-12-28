@@ -60,6 +60,9 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task);
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task);
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task);
+void ItemUseCB_Nectar(u8 taskId, TaskFunc task);
+void ItemUseCB_FormChange(u8 taskId, TaskFunc task);
+void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task);
 u8 GetItemEffectType(u16 item);
 void CB2_PartyMenuFromStartMenu(void);
 void CB2_ChooseMonToGiveItem(void);
@@ -90,5 +93,8 @@ void MoveDeleterForgetMove(void);
 void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
+void DoItemFormChange (u16 newSpecies);
+
+bool32 CanLearnTutorMove(u16, u8);
 
 #endif // GUARD_PARTY_MENU_H

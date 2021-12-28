@@ -1,0 +1,72 @@
+{
+  "id": "MAP_SANDSTREWN_RUINS_B1F",
+  "name": "SandstrewnRuins_B1F",
+  "layout": "LAYOUT_SANDSTREWN_RUINS_B1F",
+  "music": "MUS_MT_CHIMNEY",
+  "region_map_section": "MAPSEC_SANDSTREWN_RUINS",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_SANDSTREWN_RUINS",
+      "dest_warp_id": 23
+    },
+    {
+      "x": 36,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_SANDSTREWN_RUINS_2F",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_RED_SHARD",
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_RED_SHARD"
+    },
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 6,
+      "elevation": 3,
+      "item": "ITEM_GREEN_SHARD",
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_GREEN_SHARD"
+    },
+    {
+      "type": "hidden_item",
+      "x": 22,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_BLUE_SHARD",
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BLUE_SHARD"
+    },
+    {
+      "type": "hidden_item",
+      "x": 31,
+      "y": 7,
+      "elevation": 3,
+      "item": "ITEM_YELLOW_SHARD",
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_YELLOW_SHARD"
+    }
+  ]
+}

@@ -948,7 +948,7 @@
 	.macro givemon species:req, level:req, item:req
 	.byte 0x79
 	.2byte \species
-	.byte \level
+	.2byte \level
 	.2byte \item
 	.4byte 0x0
 	.4byte 0x0
@@ -1265,7 +1265,7 @@
 
 	.macro createvobject sprite:req, byte2:req, x:req, y:req, elevation, direction
 	.byte 0xaa
-	.byte \sprite
+	.2byte \sprite
 	.byte \byte2
 	.2byte \x
 	.2byte \y
@@ -1349,10 +1349,10 @@
 	.macro setwildbattle species:req, level:req, item:req, species2=SPECIES_NONE, level2=0, item2=ITEM_NONE
 	.byte 0xb6
 	.2byte \species
-	.byte \level
+	.2byte \level
 	.2byte \item
 	.2byte \species2
-	.byte \level2
+	.2byte \level2
 	.2byte \item2
 	.endm
 
@@ -1634,6 +1634,15 @@
 	.2byte \quantity
 	.endm
 
+	.macro checkPartyHasSpecies species:req
+	.byte 0xe3
+	.2byte \species
+	.endm
+
+	.macro isChosenMonSpecies species:req
+	.byte 0xe4
+	.2byte \species
+	.endm
 
 @ Supplementary
 
@@ -1791,6 +1800,16 @@
 	setorcopyvar VAR_0x8000, \trainer
 	callstd STD_REGISTER_MATCH_CALL
 	.endm
+	
+	.macro scrollingmultichoice id:req, x:req, y:req, show:req, b:req
+	setvar VAR_0x8004, \id,
+	setvar VAR_0x8005, \x,
+	setvar VAR_0x8006, \y,
+	setvar VAR_0x8007, \show,
+	setvar VAR_0x8008, \b,
+	callnative ScriptMenu_ScrollingMultichoice
+	waitstate
+	.endm
 
 	.macro dofieldeffectsparkle x:req, y:req, priority:req
 	setfieldeffectargument 0, \x
@@ -1859,4 +1878,3 @@
 	.macro totemboost_evas2 battler:req
 	settotemboost \battler, 0, 0, 0, 0, 0, 0, 2
 	.endm
-

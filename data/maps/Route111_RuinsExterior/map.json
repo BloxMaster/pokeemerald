@@ -1,0 +1,61 @@
+{
+  "id": "MAP_ROUTE111_RUINS_EXTERIOR",
+  "name": "Route111_RuinsExterior",
+  "layout": "LAYOUT_ROUTE111_RUINS_EXTERIOR",
+  "music": "MUS_ROUTE111",
+  "region_map_section": "MAPSEC_ROUTE_111",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 10,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route111_RuinsExterior_EventScript_ItemMedichamite",
+      "flag": "FLAG_ITEM_ROUTE_111_MEDICHAMITE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_SANDSTREWN_RUINS_3F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 8,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_1"
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_2"
+    }
+  ]
+}

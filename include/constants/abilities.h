@@ -290,8 +290,23 @@
 #define ABILITY_AS_ONE_ICE_RIDER 266
 #define ABILITY_AS_ONE_SHADOW_RIDER 267
 
-#define ABILITIES_COUNT_GEN8 268
+#define ABILITIES_COUNT_LATEST_GEN 268
 
-#define ABILITIES_COUNT ABILITIES_COUNT_GEN8
+// Custom Abilities
+
+#define ABILITY_CHLOROPLAST     (ABILITIES_COUNT_LATEST_GEN) // Moves function as if it's sunny, regardless of weather
+#define ABILITY_WHITEOUT        (ABILITIES_COUNT_LATEST_GEN + 1) // Boosts the power of Ice attacks in Hail by 50%
+#define ABILITY_PYROMANCY       (ABILITIES_COUNT_LATEST_GEN + 2) // Fire attacks are 5x more likely to inflict a burn
+#define ABILITY_KEEN_EDGE       (ABILITIES_COUNT_LATEST_GEN + 3) // Cutting moves do 30% more damage
+#define ABILITY_PRISM_SCALES    (ABILITIES_COUNT_LATEST_GEN + 4) // Reduces special damage taken by 30%
+#define ABILITY_POWER_FISTS     (ABILITIES_COUNT_LATEST_GEN + 5) // Punching moves do special damage
+#define ABILITY_SAND_SONG       (ABILITIES_COUNT_LATEST_GEN + 6) // Sound moves become Ground type. No damage boost.
+#define ABILITY_RAMPAGE         (ABILITIES_COUNT_LATEST_GEN + 7) // If a recharge move KOs the foe, it doesn't need to recharge.
+#define ABILITY_VENGEANCE       (ABILITIES_COUNT_LATEST_GEN + 8) // Overgrow for Ghost moves.
+#define ABILITY_BLITZ_BOXER     (ABILITIES_COUNT_LATEST_GEN + 9) // Punching moves go first
+
+#define ABILITIES_COUNT_CUSTOM (ABILITY_BLITZ_BOXER + 1)
+
+#define ABILITIES_COUNT ABILITIES_COUNT_CUSTOM
 
 #endif  // GUARD_CONSTANTS_ABILITIES_H

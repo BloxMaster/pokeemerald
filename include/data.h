@@ -44,10 +44,11 @@ struct TrainerMonNoItemCustomMoves
 
 struct TrainerMonItemCustomMoves
 {
-    u16 iv;
-    u8 lvl;
+    s8 lvl;
     u16 species;
     u16 heldItem;
+    u8 ability;
+    u8 spread;
     u16 moves[MAX_MON_MOVES];
 };
 
@@ -124,5 +125,6 @@ extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];
+extern const u8 gMoveNamesLong[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1];
 
 #endif // GUARD_DATA_H

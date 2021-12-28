@@ -1,0 +1,41 @@
+{
+  "id": "MAP_MIRAGE_TOWER_B1F",
+  "name": "MirageTower_B1F",
+  "layout": "LAYOUT_MIRAGE_TOWER_B1F",
+  "music": "MUS_MT_CHIMNEY",
+  "region_map_section": "MAPSEC_MIRAGE_TOWER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_MIRAGE_TOWER_1F",
+      "dest_warp_id": 2
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "elevation": 3,
+      "dest_map": "MAP_SANDSTREWN_RUINS",
+      "dest_warp_id": 0
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

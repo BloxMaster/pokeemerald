@@ -91,14 +91,35 @@ static const union AnimCmd sSpriteAnim_Bag_Berries[] =
     ANIMCMD_END
 };
 
+static const union AnimCmd sSpriteAnim_Bag_Medicine[] =
+{
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_Bag_Battle[] =
+{
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_Bag_MegaStones[] =
+{
+    ANIMCMD_FRAME(64, 4),
+    ANIMCMD_END
+};
+
 static const union AnimCmd *const sBagSpriteAnimTable[] =
 {
     sSpriteAnim_Bag_Closed,
     sSpriteAnim_Bag_Items,
-    sSpriteAnim_Bag_Pokeballs,
+    sSpriteAnim_Bag_Medicine,
+    sSpriteAnim_Bag_Battle,
     sSpriteAnim_Bag_TMsHMs,
     sSpriteAnim_Bag_Berries,
-    sSpriteAnim_Bag_KeyItems
+    sSpriteAnim_Bag_Pokeballs,
+    sSpriteAnim_Bag_KeyItems,
+    sSpriteAnim_Bag_MegaStones
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_BagNormal[] =
@@ -356,14 +377,6 @@ static const struct CompressedTilesPal sBerryPicTable[] =
     [ITEM_TO_BERRY(ITEM_WATMEL_BERRY) - 1] = {gBerryPic_Watmel, gBerryPalette_Watmel},
     [ITEM_TO_BERRY(ITEM_DURIN_BERRY)  - 1] = {gBerryPic_Durin,  gBerryPalette_Durin},
     [ITEM_TO_BERRY(ITEM_BELUE_BERRY)  - 1] = {gBerryPic_Belue,  gBerryPalette_Belue},
-    [ITEM_TO_BERRY(ITEM_LIECHI_BERRY) - 1] = {gBerryPic_Liechi, gBerryPalette_Liechi},
-    [ITEM_TO_BERRY(ITEM_GANLON_BERRY) - 1] = {gBerryPic_Ganlon, gBerryPalette_Ganlon},
-    [ITEM_TO_BERRY(ITEM_SALAC_BERRY)  - 1] = {gBerryPic_Salac,  gBerryPalette_Salac},
-    [ITEM_TO_BERRY(ITEM_PETAYA_BERRY) - 1] = {gBerryPic_Petaya, gBerryPalette_Petaya},
-    [ITEM_TO_BERRY(ITEM_APICOT_BERRY) - 1] = {gBerryPic_Apicot, gBerryPalette_Apicot},
-    [ITEM_TO_BERRY(ITEM_LANSAT_BERRY) - 1] = {gBerryPic_Lansat, gBerryPalette_Lansat},
-    [ITEM_TO_BERRY(ITEM_STARF_BERRY)  - 1] = {gBerryPic_Starf,  gBerryPalette_Starf},
-    [ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1] = {gBerryPic_Enigma, gBerryPalette_Enigma},
     [ITEM_TO_BERRY(ITEM_OCCA_BERRY)   - 1] = {gBerryPic_Occa, gBerryPalette_Occa},
     [ITEM_TO_BERRY(ITEM_PASSHO_BERRY) - 1] = {gBerryPic_Passho, gBerryPalette_Passho},
     [ITEM_TO_BERRY(ITEM_WACAN_BERRY)  - 1] = {gBerryPic_Wacan, gBerryPalette_Wacan},
@@ -382,12 +395,20 @@ static const struct CompressedTilesPal sBerryPicTable[] =
     [ITEM_TO_BERRY(ITEM_BABIRI_BERRY) - 1] = {gBerryPic_Babiri, gBerryPalette_Babiri},
     [ITEM_TO_BERRY(ITEM_CHILAN_BERRY) - 1] = {gBerryPic_Chilan, gBerryPalette_Chilan},
     [ITEM_TO_BERRY(ITEM_ROSELI_BERRY) - 1] = {gBerryPic_Roseli, gBerryPalette_Roseli},
-    [ITEM_TO_BERRY(ITEM_MICLE_BERRY)  - 1] = {},
-    [ITEM_TO_BERRY(ITEM_CUSTAP_BERRY) - 1] = {},
-    [ITEM_TO_BERRY(ITEM_JABOCA_BERRY) - 1] = {},
-    [ITEM_TO_BERRY(ITEM_ROWAP_BERRY)  - 1] = {},
-    [ITEM_TO_BERRY(ITEM_KEE_BERRY)    - 1] = {},
-    [ITEM_TO_BERRY(ITEM_MARANGA_BERRY)- 1] = {},
+    [ITEM_TO_BERRY(ITEM_LIECHI_BERRY) - 1] = {gBerryPic_Liechi, gBerryPalette_Liechi},
+    [ITEM_TO_BERRY(ITEM_GANLON_BERRY) - 1] = {gBerryPic_Ganlon, gBerryPalette_Ganlon},
+    [ITEM_TO_BERRY(ITEM_SALAC_BERRY)  - 1] = {gBerryPic_Salac,  gBerryPalette_Salac},
+    [ITEM_TO_BERRY(ITEM_PETAYA_BERRY) - 1] = {gBerryPic_Petaya, gBerryPalette_Petaya},
+    [ITEM_TO_BERRY(ITEM_APICOT_BERRY) - 1] = {gBerryPic_Apicot, gBerryPalette_Apicot},
+    [ITEM_TO_BERRY(ITEM_LANSAT_BERRY) - 1] = {gBerryPic_Lansat, gBerryPalette_Lansat},
+    [ITEM_TO_BERRY(ITEM_STARF_BERRY)  - 1] = {gBerryPic_Starf,  gBerryPalette_Starf},
+    [ITEM_TO_BERRY(ITEM_MICLE_BERRY)  - 1] = {gBerryPic_Micle, gBerryPalette_Micle},
+    [ITEM_TO_BERRY(ITEM_CUSTAP_BERRY) - 1] = {gBerryPic_Custap, gBerryPalette_Custap},
+    [ITEM_TO_BERRY(ITEM_JABOCA_BERRY) - 1] = {gBerryPic_Jaboca, gBerryPalette_Jaboca},
+    [ITEM_TO_BERRY(ITEM_ROWAP_BERRY)  - 1] = {gBerryPic_Rowap, gBerryPalette_Rowap},
+    [ITEM_TO_BERRY(ITEM_KEE_BERRY)    - 1] = {gBerryPic_Kee, gBerryPalette_Kee},
+    [ITEM_TO_BERRY(ITEM_MARANGA_BERRY)- 1] = {gBerryPic_Maranga, gBerryPalette_Maranga},
+    [ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1] = {gBerryPic_Enigma, gBerryPalette_Enigma},
 };
 
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =

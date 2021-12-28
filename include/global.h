@@ -128,6 +128,15 @@
     f;                       \
 })
 
+// Branch defines: Used by other branches to detect each other.
+// Each define must be here for each of RHH's branch you have pulled.
+// e.g. If you have both the battle_engine and pokemon_expansion branch,
+//      then both BATTLE_ENGINE and POKEMON_EXPANSION must be defined here.
+#define BATTLE_ENGINE
+#define POKEMON_EXPANSION
+#define ITEM_EXPANSION
+#define REBALANCED_VERSION
+
 #define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
 
 #define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER))
@@ -483,8 +492,11 @@ struct SaveBlock2
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
+             u16 gameDifficulty:4; // Which difficulty the player chose (Normal/Hard/Challenge/Insanity, with Normal being 0)
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 filler_90[0x8];
+    /*0x90*/ u8 filler_90[0x6];
+             u8 levelCaps; // Various options for level caps
+             bool8 autoRun;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
@@ -913,6 +925,7 @@ struct MysteryEventStruct
     /*0x344 0x3570*/ u32 unk_344[2][5];
 }; // 0x36C 0x3598
 
+// Ignore addresses, struct has been modified and they weren't updated
 // For external event data storage. The majority of these may have never been used.
 // In Emerald, the only known used fields are the PokeCoupon and BoxRS ones, but hacking the distribution discs allows Emerald to receive events and set the others
 struct ExternalEventData
@@ -984,8 +997,10 @@ struct SaveBlock1
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    /*0x650*/ struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
+    /*0x690*/ struct ItemSlot bagPocket_Battle[BAG_BATTLE_COUNT];
+    /*0x790*/ struct ItemSlot bagPocket_MegaStones[BAG_MEGASTONES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 field_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
@@ -1048,6 +1063,9 @@ struct SaveBlock1
     /*0x3???*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3???*/ struct SaveTrainerHill trainerHill;
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
+    /*0x3???*/ struct BoxPokemon kyuremFusedMon;
+    /*0x3???*/ struct BoxPokemon necrozmaFusedMon;
+    /*0x3???*/ struct BoxPokemon calyrexFusedMon;
     // sizeof: 0x3???
 };
 
