@@ -12,9 +12,11 @@
 #include "text.h"
 #include "text_window.h"
 #include "international_string_util.h"
+#include "sound.h"
 #include "strings.h"
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
 
 // Task data
 enum
@@ -407,7 +409,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 {
     if (JOY_NEW(DPAD_RIGHT))
     {
-        if (selection <= 1)
+        if (selection <= 2)
             selection++;
         else
             selection = 0;
@@ -419,7 +421,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
         if (selection != 0)
             selection--;
         else
-            selection = 2;
+            selection = 3;
 
         sArrowPressed = TRUE;
     }
@@ -429,24 +431,27 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 static void TextSpeed_DrawChoices(u8 selection)
 {
     u8 styles[3];
-    s32 widthSlow, widthMid, widthFast, xMid;
+    s32 widthSlow, widthMid, widthFast, widthInstant, spacing;
 
     styles[0] = 0;
     styles[1] = 0;
     styles[2] = 0;
+    styles[3] = 0;
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
+    DrawOptionMenuChoice(gText_TextSpeedSlow, 92, YPOS_TEXTSPEED, styles[0]);
 
-    widthSlow = GetStringWidth(1, gText_TextSpeedSlow, 0);
-    widthMid = GetStringWidth(1, gText_TextSpeedMid, 0);
-    widthFast = GetStringWidth(1, gText_TextSpeedFast, 0);
+    spacing = 4;
+    widthSlow = GetStringWidth(1, gText_TextSpeedSlow, 0)+92+spacing;
+    widthMid = GetStringWidth(1, gText_TextSpeedMid, 0)+widthSlow+spacing;
+    widthFast = GetStringWidth(1, gText_TextSpeedFast, 0)+widthMid+spacing;
+    widthInstant = GetStringWidth(1, gText_TextSpeedInstant, 0)+widthFast+spacing;
 
-    widthMid -= 94;
-    xMid = (widthSlow - widthMid - widthFast) / 2 + 104;
-    DrawOptionMenuChoice(gText_TextSpeedMid, xMid, YPOS_TEXTSPEED, styles[1]);
 
-    DrawOptionMenuChoice(gText_TextSpeedFast, GetStringRightAlignXOffset(1, gText_TextSpeedFast, 198), YPOS_TEXTSPEED, styles[2]);
+    DrawOptionMenuChoice(gText_TextSpeedMid, widthMid, YPOS_TEXTSPEED, styles[1]);
+
+    DrawOptionMenuChoice(gText_TextSpeedFast, widthFast, YPOS_TEXTSPEED, styles[2]);
+    DrawOptionMenuChoice(gText_TextSpeedInstant, widthInstant, YPOS_TEXTSPEED, styles[3]);
 }
 
 static u8 BattleScene_ProcessInput(u8 selection)
@@ -475,10 +480,17 @@ static void BattleScene_DrawChoices(u8 selection)
 static u8 BattleStyle_ProcessInput(u8 selection)
 {
     // Shift mode disabled on Challenge and above
-    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT) && gSaveBlock2Ptr->gameDifficulty < DIFFICULTY_CHALLENGE)
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
+      if (gSaveBlock2Ptr->gameDifficulty < DIFFICULTY_CHALLENGE)
+      {
         selection ^= 1;
         sArrowPressed = TRUE;
+      }
+      else
+      {
+        PlaySE(SE_FAILURE);
+      }
     }
 
     return selection;

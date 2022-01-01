@@ -487,20 +487,22 @@ struct SaveBlock2
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
-             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+    /*0x13*/ u8 optionsButtonMode:2;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+             u8 filler_13:6;
+    /*0x14*/ u16 optionsTextSpeed:2; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
+             u16 optionsWindowFrameType:6; // Specifies one of the decorative borders for text boxes
     /*0x15*/ u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
-             u16 gameDifficulty:4; // Which difficulty the player chose (Normal/Hard/Challenge/Insanity, with Normal being 0)
+             u16 gameDifficulty:3; // Which difficulty the player chose (Normal/Hard/Challenge/Insanity, with Normal being 0)
     /*0x16*/ u16 twentyFourHourClock:1; //whether time is in 12hr or 24hr
              u16 battleAnimSpeed:2; //whether intro slide is disabled and HP bar drops fast
              u16 autoRun:1; // Automatically running by default?
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 filler_90[0x6];
-             u8 levelCaps; // Various options for level caps
+    /*0x90*/ u8 filler_90[0x7];
+             u8 levelCaps:3; // Various options for level caps
+             u8 filler_levelcaps:5;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
