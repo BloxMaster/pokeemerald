@@ -485,7 +485,7 @@ u8 GetPlayerTextSpeedDelay(void)
 {
     u32 speed;
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_INSTANT)
-        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
     speed = GetPlayerTextSpeed();
     return sTextSpeedFrameDelays[speed];
 }
